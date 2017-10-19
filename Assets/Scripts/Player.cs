@@ -7,17 +7,18 @@ public class Player : MonoBehaviour {
 	[SerializeField]
 	private GameObject player;
 	private SpriteRenderer playerSprite;
-	
 	[SerializeField]
-	private Sprite[] sprites = new Sprite[4];
+	private Animator playerAnimator;
 
 	private Vector2 playerPos;
+	private Quaternion playerRot;
 
 	// Use this for initialization
 	void Start () {
 		player = GameObject.Find("Player");
 		playerSprite = GetComponent<SpriteRenderer>();
 		playerPos = transform.position;
+		playerRot = transform.rotation;
 	}
 	
 	// Update is called once per frame
@@ -31,12 +32,12 @@ public class Player : MonoBehaviour {
 
 		if (Input.GetKey("left"))
 		{
-			playerPos += Vector2.left * 0.1f;
+			playerPos += Vector2.left * 0.05f;
 			i = -1;
 		}
 		else if (Input.GetKey("right"))
 		{
-			playerPos += Vector2.right * 0.1f;
+			playerPos += Vector2.right * 0.05f;
 			i = 1;
 		}
 
@@ -53,31 +54,28 @@ public class Player : MonoBehaviour {
 
 	int MoveAnimation(int i)
 	{
-		int frameCount;
-
 		switch (i)
 		{
 
 			case 0:
-				playerSprite.sprite = sprites[0];
+				playerAnimator.Play("playerStop");
 
 				break;
 			case -1:
-				playerSprite.sprite = sprites[1];
-				playerSprite.sprite = sprites[3];
-				
+				playerAnimator.Play("playerMove");
+				playerRot.y = -180;
+
 				break;
 			case 1:
-				playerSprite.sprite = sprites[2];
+				playerAnimator.Play("playerMove");
+				if(playerRot.y < 0)
+				{
+					playerRot.y = 0;
+				}
+					
 				break;
 			
-		};
-
-		while(i != 0)
-		{
-
-		}
-			
+		};transform.rotation = playerRot;
 		
 		return 0;
 	}
