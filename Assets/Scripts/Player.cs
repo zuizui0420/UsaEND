@@ -17,6 +17,7 @@ public class Player : MonoBehaviour {
 	private bool specialAction = false;
 	private float animationTime;
 	private bool isGround = true;
+	private float posY;
 
 	// Use this for initialization
 	void Start () {
@@ -24,19 +25,21 @@ public class Player : MonoBehaviour {
 		//playerSprite = GetComponent<SpriteRenderer>();
 		playerPos = transform.position;
 		playerRot = transform.rotation;
+		posY = transform.position.y;
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
+		animationTime = playerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+
 		if(specialAction == false)
 		{
 			Move();			
 		}
 
 		else if(specialAction == true)
-		{
-			animationTime = playerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+		{		
 			if(animationTime >= 1.0f)
 			{
 				specialAction = false;
@@ -45,10 +48,10 @@ public class Player : MonoBehaviour {
 
 		Jump();
 
-		if(isGround == false)
-		{
-			//playerPos.y -= 0.1f;
-		}
+		//if(isGround == false)
+		//{
+		//	playerPos.y -= 0.1f;
+		//}
 
 		transform.position = playerPos;
 	}
@@ -60,12 +63,12 @@ public class Player : MonoBehaviour {
 
 		if (Input.GetKey("left"))
 		{
-			playerPos += Vector2.left * 0.05f;
+			playerPos += Vector2.left * 0.06f;
 			animaNom = -1;
 		}
 		else if (Input.GetKey("right"))
 		{
-			playerPos += Vector2.right * 0.05f;
+			playerPos += Vector2.right * 0.06f;
 			animaNom = 1;
 		}
 
@@ -81,22 +84,38 @@ public class Player : MonoBehaviour {
 
 	void Jump()
 	{
-
-		float posY = transform.position.y;
 		
 		if (Input.GetKeyDown("up")&&isGround == true)
 		{
 			specialAction = true;
-			Animation(2);
-			posY = transform.position.y + 3.0f;
-			//playerPos.y += 3;
+			animaNom = 2;
+			Animation(animaNom);
+			posY = playerPos.y + 4.0f;
+			
+		}
+		if (animationTime<=0.5 && animaNom == 2)
+		{
+			playerPos.y = Mathf.Lerp(playerPos.y, posY, 0.1f);
+
 		}
 
-		while (playerPos.y <= posY)
+		if (isGround == false)
 		{
-			playerPos.y = Mathf.Lerp(transform.position.y, posY, 0.1f);
+			if (animationTime > 0.5)
+			{
+				playerPos.y -= 0.15f;
+			}
+
+
+			if (Input.GetKey("left"))
+			{
+				playerPos += Vector2.left * 0.03f;
+			}
+			else if (Input.GetKey("right"))
+			{
+				playerPos += Vector2.right * 0.03f;
+			}
 		}
-		
 	}
 
 	//プレイヤーアニメーション
