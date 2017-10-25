@@ -16,7 +16,7 @@ public class Player : MonoBehaviour {
 	private int animaNom;
 	private bool specialAction = false;
 	private float animationTime;
-	private bool isGround = true;
+	private bool isGround = false;
 	private float posY;
 
 	// Use this for initialization
@@ -59,7 +59,6 @@ public class Player : MonoBehaviour {
 	//プレイヤー移動
 	int Move()
 	{
-		//int i = 0;
 
 		if (Input.GetKey("left"))
 		{
@@ -101,10 +100,11 @@ public class Player : MonoBehaviour {
 
 		if (isGround == false)
 		{
-			if (animationTime > 0.5)
-			{
-				playerPos.y -= 0.15f;
-			}
+			playerPos.y -= 0.1f;
+			//if (animationTime > 0.5)
+			//{
+			//	playerPos.y -= 0.15f;
+			//}
 
 
 			if (Input.GetKey("left"))
@@ -158,19 +158,25 @@ public class Player : MonoBehaviour {
 		return 0;
 	}
 
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		
+	}
+
 	private void OnTriggerStay2D(Collider2D collision)
 	{
-		if (collision.gameObject.name == "Stage")
+		if (collision.gameObject.tag == "Stage")
 		{
-			isGround = true;
+			isGround = true; Debug.Log("S");
 		}
 	}
 
 	private void OnTriggerExit2D(Collider2D collision)
 	{
-		if (collision.gameObject.name == "Stage")
+		if (collision.gameObject.tag == "Stage")
 		{
-			isGround = false;
+			isGround = false;Debug.Log("E");
 		}
 	}
 
