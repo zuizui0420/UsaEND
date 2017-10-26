@@ -161,15 +161,15 @@ public class Player : MonoBehaviour {
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		
-	}
-
-	private void OnTriggerStay2D(Collider2D collision)
-	{
 		if (collision.gameObject.tag == "Stage")
 		{
 			isGround = true; Debug.Log("S");
 		}
+	}
+
+	private void OnTriggerStay2D(Collider2D collision)
+	{
+		
 	}
 
 	private void OnTriggerExit2D(Collider2D collision)
