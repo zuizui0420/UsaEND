@@ -4,12 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
+
 	[SerializeField]
 	private GameObject player;	
 	[SerializeField]
 	private Animator playerAnimator;
-
-	//private SpriteRenderer playerSprite;
 
 	private Vector2 playerPos;
 	private Quaternion playerRot;
@@ -18,11 +17,11 @@ public class Player : MonoBehaviour {
 	private float animationTime;
 	private bool isGround = false;
 	private float posY;
+	private int jumpCount = 0;
 
 	// Use this for initialization
 	void Start () {
 		player = GameObject.Find("Player");
-		//playerSprite = GetComponent<SpriteRenderer>();
 		playerPos = transform.position;
 		playerRot = transform.rotation;
 		posY = transform.position.y;
@@ -47,11 +46,6 @@ public class Player : MonoBehaviour {
 		}
 
 		Jump();
-
-		//if(isGround == false)
-		//{
-		//	playerPos.y -= 0.1f;
-		//}
 
 		transform.position = playerPos;
 	}
@@ -81,32 +75,27 @@ public class Player : MonoBehaviour {
 		return 0;
 	}
 
-	void Jump()
+	int Jump()
 	{
-		
-		if (Input.GetKeyDown("up")&&isGround == true)
+		if (Input.GetKeyDown("up") && isGround == true)
 		{
 			specialAction = true;
 			animaNom = 2;
 			Animation(animaNom);
 			posY = playerPos.y + 4.0f;
-			
+
 		}
-		if (animationTime<=0.5 && animaNom == 2)
+		if (animationTime <= 0.5 && animaNom == 2)
 		{
 			playerPos.y = Mathf.Lerp(playerPos.y, posY, 0.1f);
 
 		}
 
+
 		if (isGround == false)
 		{
 			playerPos.y -= 0.1f;
-			//if (animationTime > 0.5)
-			//{
-			//	playerPos.y -= 0.15f;
-			//}
-
-
+		
 			if (Input.GetKey("left"))
 			{
 				playerPos += Vector2.left * 0.03f;
@@ -116,6 +105,8 @@ public class Player : MonoBehaviour {
 				playerPos += Vector2.right * 0.03f;
 			}
 		}
+
+		return 0;
 	}
 
 	//プレイヤーアニメーション
@@ -161,22 +152,22 @@ public class Player : MonoBehaviour {
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.gameObject.tag == "Stage")
-		{
-			isGround = true; Debug.Log("S");
-		}
+		
 	}
 
 	private void OnTriggerStay2D(Collider2D collision)
 	{
-		
+		if (collision.gameObject.tag == "Stage")
+		{
+			isGround = true;
+		}
 	}
 
 	private void OnTriggerExit2D(Collider2D collision)
 	{
 		if (collision.gameObject.tag == "Stage")
 		{
-			isGround = false;Debug.Log("E");
+			isGround = false;
 		}
 	}
 
