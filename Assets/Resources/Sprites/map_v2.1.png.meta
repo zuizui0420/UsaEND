@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 3ed2e05afea95f949a884622539f3757
-timeCreated: 1509929097
+timeCreated: 1510284328
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -67,7 +67,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 138
+  spritePixelsToUnits: 136
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -116,12 +116,12 @@ TextureImporter:
       name: map_v2.1_0
       rect:
         serializedVersion: 2
-        x: 81
-        y: 531
-        width: 138
-        height: 138
+        x: 82
+        y: 532
+        width: 136
+        height: 136
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -129,12 +129,12 @@ TextureImporter:
       name: map_v2.1_1
       rect:
         serializedVersion: 2
-        x: 231
-        y: 531
-        width: 138
-        height: 138
+        x: 232
+        y: 532
+        width: 136
+        height: 136
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -142,12 +142,12 @@ TextureImporter:
       name: map_v2.1_2
       rect:
         serializedVersion: 2
-        x: 381
-        y: 532
-        width: 138
-        height: 138
+        x: 382
+        y: 533
+        width: 136
+        height: 136
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -155,12 +155,12 @@ TextureImporter:
       name: map_v2.1_3
       rect:
         serializedVersion: 2
-        x: 531
-        y: 531
-        width: 138
-        height: 138
+        x: 532
+        y: 532
+        width: 136
+        height: 136
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -168,12 +168,12 @@ TextureImporter:
       name: map_v2.1_4
       rect:
         serializedVersion: 2
-        x: 681
-        y: 531
-        width: 138
-        height: 158
+        x: 682
+        y: 532
+        width: 136
+        height: 156
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -186,7 +186,7 @@ TextureImporter:
         width: 42
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -199,7 +199,7 @@ TextureImporter:
         width: 42
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -212,7 +212,7 @@ TextureImporter:
         width: 43
         height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -225,7 +225,7 @@ TextureImporter:
         width: 37
         height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -238,7 +238,7 @@ TextureImporter:
         width: 31
         height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -251,7 +251,7 @@ TextureImporter:
         width: 31
         height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -259,12 +259,12 @@ TextureImporter:
       name: map_v2.1_11
       rect:
         serializedVersion: 2
-        x: 81
-        y: 331
-        width: 138
-        height: 138
+        x: 82
+        y: 332
+        width: 136
+        height: 136
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -272,12 +272,12 @@ TextureImporter:
       name: map_v2.1_12
       rect:
         serializedVersion: 2
-        x: 230
-        y: 331
-        width: 139
-        height: 138
+        x: 232
+        y: 332
+        width: 136
+        height: 136
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -285,12 +285,12 @@ TextureImporter:
       name: map_v2.1_13
       rect:
         serializedVersion: 2
-        x: 381
-        y: 331
-        width: 138
-        height: 138
+        x: 382
+        y: 332
+        width: 136
+        height: 136
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -298,12 +298,12 @@ TextureImporter:
       name: map_v2.1_14
       rect:
         serializedVersion: 2
-        x: 531
-        y: 331
-        width: 138
-        height: 138
+        x: 532
+        y: 332
+        width: 136
+        height: 136
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -311,12 +311,12 @@ TextureImporter:
       name: map_v2.1_15
       rect:
         serializedVersion: 2
-        x: 681
-        y: 331
-        width: 138
-        height: 138
+        x: 682
+        y: 332
+        width: 136
+        height: 136
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -329,7 +329,7 @@ TextureImporter:
         width: 42
         height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -342,7 +342,7 @@ TextureImporter:
         width: 42
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -355,7 +355,7 @@ TextureImporter:
         width: 43
         height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -368,7 +368,7 @@ TextureImporter:
         width: 37
         height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -381,7 +381,7 @@ TextureImporter:
         width: 31
         height: 25
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -389,12 +389,12 @@ TextureImporter:
       name: map_v2.1_21
       rect:
         serializedVersion: 2
-        x: 81
-        y: 131
-        width: 138
-        height: 138
+        x: 82
+        y: 132
+        width: 136
+        height: 136
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -402,12 +402,12 @@ TextureImporter:
       name: map_v2.1_22
       rect:
         serializedVersion: 2
-        x: 231
-        y: 131
-        width: 138
-        height: 138
+        x: 232
+        y: 132
+        width: 136
+        height: 136
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -415,12 +415,12 @@ TextureImporter:
       name: map_v2.1_23
       rect:
         serializedVersion: 2
-        x: 381
-        y: 131
-        width: 138
-        height: 138
+        x: 382
+        y: 132
+        width: 136
+        height: 136
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -428,12 +428,12 @@ TextureImporter:
       name: map_v2.1_24
       rect:
         serializedVersion: 2
-        x: 531
-        y: 131
-        width: 138
-        height: 138
+        x: 532
+        y: 132
+        width: 136
+        height: 136
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -441,12 +441,12 @@ TextureImporter:
       name: map_v2.1_25
       rect:
         serializedVersion: 2
-        x: 681
-        y: 131
-        width: 138
-        height: 138
+        x: 682
+        y: 132
+        width: 136
+        height: 136
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -454,12 +454,12 @@ TextureImporter:
       name: map_v2.1_26
       rect:
         serializedVersion: 2
-        x: 831
-        y: 131
-        width: 138
-        height: 138
+        x: 832
+        y: 132
+        width: 136
+        height: 136
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
