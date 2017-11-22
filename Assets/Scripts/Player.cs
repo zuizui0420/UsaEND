@@ -82,7 +82,7 @@ public class Player : MonoBehaviour {
 			specialAction = true;
 			animaNom = 2;
 			Animation(animaNom);
-			posY = playerPos.y + 4.0f;
+			posY = playerPos.y + 3.0f;
 
 		}
 		if (animationTime <= 0.5 && animaNom == 2)
