@@ -19,6 +19,10 @@ public class Player : MonoBehaviour {
 	private float posY;
 	private int jumpCount = 0;
 
+	private float speed;
+
+	public int sceneNom = 1;
+
 	// Use this for initialization
 	void Start () {
 		player = GameObject.Find("Player");
@@ -34,7 +38,7 @@ public class Player : MonoBehaviour {
 
 		if(specialAction == false)
 		{
-			Move();			
+			Move(sceneNom);			
 		}
 
 		else if(specialAction == true)
@@ -51,17 +55,22 @@ public class Player : MonoBehaviour {
 	}
 
 	//プレイヤー移動
-	int Move()
+	int Move(int sceneNom)
 	{
+		if (sceneNom == 1)
+		{
+			speed = 0;
+		}
+		else speed = 0.06f;
 
 		if (Input.GetKey("left"))
 		{
-			playerPos += Vector2.left * 0.06f;
+			playerPos += Vector2.left * speed;
 			animaNom = -1;
 		}
 		else if (Input.GetKey("right"))
 		{
-			playerPos += Vector2.right * 0.06f;
+			playerPos += Vector2.right * speed;
 			animaNom = 1;
 		}
 
@@ -77,6 +86,13 @@ public class Player : MonoBehaviour {
 
 	int Jump()
 	{
+		if (sceneNom == 1)
+		{
+			speed = 0;
+		}
+		else speed = 0.03f;
+
+
 		if (Input.GetKeyDown("up") && isGround == true)
 		{
 			specialAction = true;
@@ -98,11 +114,11 @@ public class Player : MonoBehaviour {
 		
 			if (Input.GetKey("left"))
 			{
-				playerPos += Vector2.left * 0.03f;
+				playerPos += Vector2.left * speed;
 			}
 			else if (Input.GetKey("right"))
 			{
-				playerPos += Vector2.right * 0.03f;
+				playerPos += Vector2.right * speed;
 			}
 		}
 
