@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class Entrance : MonoBehaviour {
 
@@ -18,7 +20,17 @@ public class Entrance : MonoBehaviour {
 	{
 		if (collision.gameObject.tag == "Player")
 		{
-			SceneManeger.Property = "DemoScene";
+			// シーン遷移コルーチン開始
+			StartCoroutine(GoToSceneCoroutine());
 		}
+
+	}
+
+	private static IEnumerator GoToSceneCoroutine()
+	{
+		// 5秒間待つ
+		yield return new WaitForSeconds(0.5f);
+		// TitleSceneに遷移
+		SceneManager.LoadScene("DemoScene");
 	}
 }
