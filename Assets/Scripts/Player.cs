@@ -18,6 +18,7 @@ public class Player : MonoBehaviour {
 	private bool isGround = false;
 	private float posY;
 	private int jumpCount = 0;
+	private float speed = 0.06f;
 
 	// Use this for initialization
 	void Start () {
@@ -56,12 +57,12 @@ public class Player : MonoBehaviour {
 
 		if (Input.GetKey("left"))
 		{
-			playerPos += Vector2.left * 0.06f;
+			playerPos += Vector2.left * speed;
 			animaNom = -1;
 		}
 		else if (Input.GetKey("right"))
 		{
-			playerPos += Vector2.right * 0.06f;
+			playerPos += Vector2.right * speed;
 			animaNom = 1;
 		}
 
@@ -98,11 +99,11 @@ public class Player : MonoBehaviour {
 		
 			if (Input.GetKey("left"))
 			{
-				playerPos += Vector2.left * 0.03f;
+				playerPos += Vector2.left * speed;
 			}
 			else if (Input.GetKey("right"))
 			{
-				playerPos += Vector2.right * 0.03f;
+				playerPos += Vector2.right * speed;
 			}
 		}
 
