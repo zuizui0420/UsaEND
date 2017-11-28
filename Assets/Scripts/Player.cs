@@ -19,13 +19,17 @@ public class Player : MonoBehaviour {
 	private float posY;
 	private int jumpCount = 0;
 	private float speed = 0.06f;
+	private Rigidbody2D rig;
 
 	// Use this for initialization
 	void Start () {
 		player = GameObject.Find("Player");
 		playerPos = transform.position;
 		playerRot = transform.rotation;
+		playerRot.y = -180;
 		posY = transform.position.y;
+
+		rig = GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
@@ -33,7 +37,9 @@ public class Player : MonoBehaviour {
 	{
 		animationTime = playerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime;
 
-		if(specialAction == false)
+		playerPos = transform.position;
+
+		if (specialAction == false)
 		{
 			Move();			
 		}
@@ -48,7 +54,11 @@ public class Player : MonoBehaviour {
 
 		Jump();
 
-		transform.position = playerPos;
+	}
+
+	private void FixedUpdate()
+	{
+		rig.MovePosition(playerPos);
 	}
 
 	//プレイヤー移動
@@ -151,10 +161,11 @@ public class Player : MonoBehaviour {
 	}
 
 
-	private void OnTriggerEnter2D(Collider2D collision)
-	{
-		
-	}
+	//private void OnCollisionEnter2D(Collision2D collision)
+	//{
+	//	if(collision.gameObject.tag == "Wall")
+	//		speed = 0;
+	//}
 
 	private void OnTriggerStay2D(Collider2D collision)
 	{
