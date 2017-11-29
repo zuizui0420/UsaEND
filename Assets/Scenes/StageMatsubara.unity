@@ -2120,7 +2120,7 @@ Prefab:
     - target: {fileID: 212878862364992832, guid: b7fb7691c4fa4154ea58fc09253ed9dc,
         type: 2}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4257256498479150, guid: b7fb7691c4fa4154ea58fc09253ed9dc, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
