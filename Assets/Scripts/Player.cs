@@ -20,6 +20,10 @@ public class Player : MonoBehaviour {
 	private int jumpCount = 0;
 	private float speed = 0.06f;
 	private Rigidbody2D rig;
+	private bool isDead = false;
+
+	//デバック用
+	float nextTime = Time.time;
 
 	// Use this for initialization
 	void Start () {
@@ -30,6 +34,9 @@ public class Player : MonoBehaviour {
 		posY = transform.position.y;
 
 		rig = GetComponent<Rigidbody2D>();
+
+		//デバック用
+		float nextTime = Time.time;
 	}
 	
 	// Update is called once per frame
@@ -54,6 +61,8 @@ public class Player : MonoBehaviour {
 
 		Jump();
 
+		/*if(isDead == true)*/ Dead();
+		
 	}
 
 	private void FixedUpdate()
@@ -160,12 +169,21 @@ public class Player : MonoBehaviour {
 		return 0;
 	}
 
+	void Dead()
+	{
+		float interval = 0.1f;   // 点滅周期
 
-	//private void OnCollisionEnter2D(Collision2D collision)
-	//{
-	//	if(collision.gameObject.tag == "Wall")
-	//		speed = 0;
-	//}
+		SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+
+		if (Time.time > nextTime)
+		{
+			renderer.enabled = !renderer.enabled;
+
+			nextTime += interval;
+		}
+
+	}
+
 
 	private void OnTriggerStay2D(Collider2D collision)
 	{

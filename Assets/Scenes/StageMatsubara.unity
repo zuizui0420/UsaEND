@@ -2163,6 +2163,11 @@ Prefab:
       propertyPath: m_Offset.y
       value: -2.82
       objectReference: {fileID: 0}
+    - target: {fileID: 114521860685523790, guid: b7fb7691c4fa4154ea58fc09253ed9dc,
+        type: 2}
+      propertyPath: spriteRen
+      value: 
+      objectReference: {fileID: 476549708}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fb7691c4fa4154ea58fc09253ed9dc, type: 2}
   m_IsPrefabParent: 0
@@ -7402,6 +7407,11 @@ SpriteRenderer:
 --- !u!1 &476549703 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1566602773250982, guid: b7fb7691c4fa4154ea58fc09253ed9dc,
+    type: 2}
+  m_PrefabInternal: {fileID: 161224277}
+--- !u!212 &476549708 stripped
+SpriteRenderer:
+  m_PrefabParentObject: {fileID: 212878862364992832, guid: b7fb7691c4fa4154ea58fc09253ed9dc,
     type: 2}
   m_PrefabInternal: {fileID: 161224277}
 --- !u!61 &476549710
