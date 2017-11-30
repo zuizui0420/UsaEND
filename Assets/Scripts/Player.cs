@@ -21,9 +21,11 @@ public class Player : MonoBehaviour {
 	private float speed = 0.06f;
 	private Rigidbody2D rig;
 	private bool isDead = false;
+	private bool isClimb = false;
 
+	private Vector2 ladderPos;
 	//デバック用
-	float nextTime = Time.time;
+	//float nextTime = Time.time;
 
 	// Use this for initialization
 	void Start () {
@@ -32,16 +34,19 @@ public class Player : MonoBehaviour {
 		playerRot = transform.rotation;
 		playerRot.y = -180;
 		posY = transform.position.y;
-
 		rig = GetComponent<Rigidbody2D>();
 
-		//デバック用
-		float nextTime = Time.time;
+		isDead = false;
+		isClimb = false;
+
+	//デバック用
+	//float nextTime = Time.time;
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
+
 		animationTime = playerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime;
 
 		playerPos = transform.position;
@@ -60,8 +65,9 @@ public class Player : MonoBehaviour {
 		}
 
 		Jump();
+		if(isClimb == true) ClimbLadder();
 
-		/*if(isDead == true)*/ Dead();
+		//if(isDead == true) Dead();
 		
 	}
 
@@ -124,9 +130,35 @@ public class Player : MonoBehaviour {
 			{
 				playerPos += Vector2.right * speed;
 			}
+
 		}
 
 		return 0;
+	}
+
+	void ClimbLadder()
+	{
+		specialAction = true; 
+		animaNom = 3;
+		Animation(animaNom);
+
+		playerPos.x = Mathf.Lerp(playerPos.x, ladderPos.x, 0.1f);
+
+		if (Input.GetKey("up"))
+		{
+			playerAnimator.speed = 1;
+			playerPos += Vector2.up * speed;
+		}
+		else if (Input.GetKey("down"))
+		{
+			playerAnimator.speed = 1;
+			playerPos += Vector2.down * speed;
+		}
+		else　
+		{
+			playerAnimator.speed = 0;
+		}
+		
 	}
 
 	//プレイヤーアニメーション
@@ -161,6 +193,10 @@ public class Player : MonoBehaviour {
 				
 
 				break;
+
+			case 3:
+				playerAnimator.Play("playerClimb");
+				break;
 			
 		};
 
@@ -169,20 +205,20 @@ public class Player : MonoBehaviour {
 		return 0;
 	}
 
-	void Dead()
-	{
-		float interval = 0.1f;   // 点滅周期
+	//void Dead()
+	//{
+	//	float interval = 0.1f;   // 点滅周期
 
-		SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+	//	SpriteRenderer renderer = GetComponent<SpriteRenderer>();
 
-		if (Time.time > nextTime)
-		{
-			renderer.enabled = !renderer.enabled;
+	//	if (Time.time > nextTime)
+	//	{
+	//		renderer.enabled = !renderer.enabled;
 
-			nextTime += interval;
-		}
+	//		nextTime += interval;
+	//	}
 
-	}
+	//}
 
 
 	private void OnTriggerStay2D(Collider2D collision)
@@ -190,6 +226,22 @@ public class Player : MonoBehaviour {
 		if (collision.gameObject.tag == "Stage")
 		{
 			isGround = true;
+		}
+
+		else if(collision.gameObject.tag == "Ladder")
+		{
+			if (Input.GetKeyDown(KeyCode.A))
+			{
+				isClimb = true;
+				isGround = true;
+				ladderPos = collision.gameObject.transform.position;
+			}
+			//else if (Input.GetKeyDown("up"))
+			//{
+			//	isClimb = false;
+			//	isGround = false;
+			//}
+			
 		}
 	}
 
@@ -199,6 +251,14 @@ public class Player : MonoBehaviour {
 		{
 			isGround = false;
 		}
+
+		else if (collision.gameObject.tag == "Ladder")
+		{
+			isClimb = false;
+			isGround = false;
+
+		}
 	}
+
 
 }

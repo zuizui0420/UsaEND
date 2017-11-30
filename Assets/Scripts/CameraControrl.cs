@@ -41,7 +41,6 @@ public class CameraControrl : MonoBehaviour {
 		Vector3 topLeftDiff = anchorTopLeft.position - topLeft;
 		Vector3 bottomRightDiff = anchorBottomRight.position - bottomRight;
 
-		Debug.Log(topLeftDiff.y);
 
 		if (topLeftDiff.x >= 0) newPosition.x += topLeftDiff.x;
 		if (topLeftDiff.y <= 0) newPosition.y += topLeftDiff.y;
