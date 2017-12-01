@@ -72,6 +72,7 @@ public class Player : MonoBehaviour {
 		}
 
 		Jump();
+
 		if(isClimb == true) ClimbLadder();
 
 		
@@ -145,6 +146,8 @@ public class Player : MonoBehaviour {
 
 	void ClimbLadder()
 	{
+		isGround = true;
+
 		specialAction = true; 
 		animaNom = 3;
 		Animation(animaNom);
