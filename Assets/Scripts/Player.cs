@@ -20,12 +20,13 @@ public class Player : MonoBehaviour {
 	private int jumpCount = 0;
 	private float speed = 0.06f;
 	private Rigidbody2D rig;
-	private bool isDead = false;
-	private bool isClimb = false;
+	public bool isDead;
+	private bool isClimb;
 
 	private Vector2 ladderPos;
 	//デバック用
-	//float nextTime = Time.time;
+	private float nextTime;
+
 
 	// Use this for initialization
 	void Start () {
@@ -39,13 +40,19 @@ public class Player : MonoBehaviour {
 		isDead = false;
 		isClimb = false;
 
-	//デバック用
-	//float nextTime = Time.time;
+		//デバック用
+		nextTime = Time.time;
+
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
+		if (isDead == true)
+		{
+			Dead();
+			return;
+		}
 
 		animationTime = playerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime;
 
@@ -67,7 +74,7 @@ public class Player : MonoBehaviour {
 		Jump();
 		if(isClimb == true) ClimbLadder();
 
-		//if(isDead == true) Dead();
+		
 		
 	}
 
@@ -103,7 +110,7 @@ public class Player : MonoBehaviour {
 
 	int Jump()
 	{
-		if (Input.GetKeyDown("up") && isGround == true)
+		if (Input.GetKeyDown(KeyCode.S) && isGround == true)
 		{
 			specialAction = true;
 			animaNom = 2;
@@ -142,7 +149,8 @@ public class Player : MonoBehaviour {
 		animaNom = 3;
 		Animation(animaNom);
 
-		playerPos.x = Mathf.Lerp(playerPos.x, ladderPos.x, 0.1f);
+		playerPos.x = Mathf.Lerp(playerPos.x, ladderPos.x, 0.2f);
+
 
 		if (Input.GetKey("up"))
 		{
@@ -154,12 +162,35 @@ public class Player : MonoBehaviour {
 			playerAnimator.speed = 1;
 			playerPos += Vector2.down * speed;
 		}
-		else　
+		else
 		{
 			playerAnimator.speed = 0;
+
 		}
 		
 	}
+
+
+	void Dead()
+	{
+		animaNom = 4;
+
+		float interval = 0.2f;   // 点滅周期
+
+		SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+
+		if (Time.time >= nextTime)
+		{
+			renderer.enabled = !renderer.enabled;
+
+			nextTime += interval;
+		}
+
+		Animation(animaNom);
+
+
+	}
+
 
 	//プレイヤーアニメーション
 	int Animation(int i)
@@ -197,6 +228,11 @@ public class Player : MonoBehaviour {
 			case 3:
 				playerAnimator.Play("playerClimb");
 				break;
+
+			case 4:
+				playerAnimator.Play("playerDying");
+
+				break;
 			
 		};
 
@@ -205,21 +241,7 @@ public class Player : MonoBehaviour {
 		return 0;
 	}
 
-	//void Dead()
-	//{
-	//	float interval = 0.1f;   // 点滅周期
-
-	//	SpriteRenderer renderer = GetComponent<SpriteRenderer>();
-
-	//	if (Time.time > nextTime)
-	//	{
-	//		renderer.enabled = !renderer.enabled;
-
-	//		nextTime += interval;
-	//	}
-
-	//}
-
+	
 
 	private void OnTriggerStay2D(Collider2D collision)
 	{
