@@ -10,6 +10,15 @@ public class Player : MonoBehaviour {
 	[SerializeField]
 	private Animator playerAnimator;
 
+	public enum PLAYER_STATE
+	{
+		NOMAL,
+		JAMP,
+		CLIMB_LADDER
+	};
+
+	public PLAYER_STATE playerState;
+
 	private Vector2 playerPos;
 	private Quaternion playerRot;
 	private int animaNom;
