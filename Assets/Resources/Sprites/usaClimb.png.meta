@@ -1,11 +1,13 @@
 fileFormatVersion: 2
-guid: 5a344c77963520e4a89fa1858053e086
-timeCreated: 1512075407
+guid: aeb9f8fa6cc1a2f4fba9220b1eda1c74
+timeCreated: 1512103196
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: usagiClimb_0
-    21300002: usagiClimb_1
+    21300000: us3o (2)_0
+    21300002: us3o (2)_1
+    21300004: usaClimb_0
+    21300006: usaClimb_1
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -88,7 +90,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: usagiClimb_0
+      name: usaClimb_0
       rect:
         serializedVersion: 2
         x: 92
@@ -101,7 +103,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: usagiClimb_1
+      name: usaClimb_1
       rect:
         serializedVersion: 2
         x: 414
