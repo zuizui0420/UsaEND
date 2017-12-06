@@ -14,7 +14,8 @@ public class Player : MonoBehaviour {
 	{
 		NOMAL,
 		JAMP,
-		CLIMB_LADDER
+		CLIMB_LADDER,
+		
 	};
 
 	public PLAYER_STATE playerState;
@@ -84,7 +85,11 @@ public class Player : MonoBehaviour {
 
 		if(isClimb == true) ClimbLadder();
 
-		
+		switch (playerState)
+		{
+			case PLAYER_STATE.NOMAL:
+				break;
+				}
 		
 	}
 
