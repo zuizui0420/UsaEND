@@ -11,8 +11,8 @@ public class Needle : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 2f);
-          Debug.DrawRay(transform.position, transform.right* 2f, Color.green);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, 0.4f);
+          Debug.DrawRay(transform.position, transform.up* 0.4f, Color.green);
         if (hit)
         {
 
