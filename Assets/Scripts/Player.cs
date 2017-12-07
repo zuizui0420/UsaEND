@@ -25,13 +25,13 @@ public class Player : MonoBehaviour {
 	private int animaNom;
 	private bool specialAction = false;
 	private float animationTime;
-	private bool isGround = false;
+	public bool isGround = false;
 	private float posY;
 	private int jumpCount = 0;
 	private float speed = 0.06f;
 	private Rigidbody2D rig;
 	public bool isDead;
-	private bool isClimb;
+	public bool isClimb;
 
 	private Vector2 ladderPos;
 	//デバック用
@@ -160,7 +160,7 @@ public class Player : MonoBehaviour {
 
 	void ClimbLadder()
 	{
-		isGround = true;
+		isGround = true;//梯子のあたり判定を呼び出した時isGround=trueが読み込まれていない事があるのでここでも呼び出しておく
 
 		specialAction = true; 
 		animaNom = 3;
@@ -258,7 +258,14 @@ public class Player : MonoBehaviour {
 		return 0;
 	}
 
-	
+	private void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.gameObject.tag == "Stage")
+		{
+			isGround = true;
+			isClimb = false;
+		}
+	}
 
 	private void OnTriggerStay2D(Collider2D collision)
 	{
@@ -267,20 +274,13 @@ public class Player : MonoBehaviour {
 			isGround = true;
 		}
 
-		else if(collision.gameObject.tag == "Ladder")
+		if(collision.gameObject.tag == "Ladder")
 		{
 			if (Input.GetKeyDown(KeyCode.A))
 			{
 				isClimb = true;
-				isGround = true;
 				ladderPos = collision.gameObject.transform.position;
 			}
-			//else if (Input.GetKeyDown("up"))
-			//{
-			//	isClimb = false;
-			//	isGround = false;
-			//}
-			
 		}
 	}
 
