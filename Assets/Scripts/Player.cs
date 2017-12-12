@@ -20,9 +20,11 @@ public class Player : MonoBehaviour {
 
 	public PLAYER_STATE playerState;
 
+	public int InputDet;//入力検知
+
 	private Vector2 playerPos;
 	private Quaternion playerRot;
-	private int animaNom;
+	public int animaNom;
 	private bool specialAction = false;
 	private float animationTime;
 	public bool isGround = false;
@@ -83,7 +85,7 @@ public class Player : MonoBehaviour {
 
 		Jump();
 
-		if(isClimb == true) ClimbLadder();
+		if (isClimb == true) ClimbLadder();
 
 		switch (playerState)
 		{
@@ -101,21 +103,31 @@ public class Player : MonoBehaviour {
 	//プレイヤー移動
 	int Move()
 	{
+		if (isGround == true)
+		{
+			speed = 0.06f;
 
-		if (Input.GetKey("left"))
-		{
-			playerPos += Vector2.left * speed;
-			animaNom = -1;
-		}
-		else if (Input.GetKey("right"))
-		{
-			playerPos += Vector2.right * speed;
-			animaNom = 1;
+			if (Input.GetKey("left"))
+			{
+				playerPos += Vector2.left * speed;
+				animaNom = -1;
+			}
+			else if (Input.GetKey("right"))
+			{
+				playerPos += Vector2.right * speed;
+				animaNom = 1;
+			}
+
+			else
+			{
+				animaNom = 0;
+			}
 		}
 
-		else
+		else if (isGround == false)
 		{
-			animaNom = 0;
+			animaNom = 4;
+			speed = 0.02f;
 		}
 
 		Animation(animaNom);
@@ -125,6 +137,8 @@ public class Player : MonoBehaviour {
 
 	int Jump()
 	{
+		speed = 0.04f;
+
 		if (Input.GetKeyDown(KeyCode.S) && isGround == true)
 		{
 			specialAction = true;
@@ -162,6 +176,7 @@ public class Player : MonoBehaviour {
 	{
 		isGround = true;//梯子のあたり判定を呼び出した時isGround=trueが読み込まれていない事があるのでここでも呼び出しておく
 
+		speed = 0.06f;
 		specialAction = true; 
 		animaNom = 3;
 		Animation(animaNom);
@@ -173,11 +188,13 @@ public class Player : MonoBehaviour {
 		{
 			playerAnimator.speed = 1;
 			playerPos += Vector2.up * speed;
+			InputDet = 3;
 		}
 		else if (Input.GetKey("down"))
 		{
 			playerAnimator.speed = 1;
 			playerPos += Vector2.down * speed;
+			InputDet = 4;
 		}
 		else
 		{
@@ -242,12 +259,14 @@ public class Player : MonoBehaviour {
 
 				break;
 
+            //梯子
 			case 3:
 				playerAnimator.Play("playerClimb");
 				break;
 
+           //落ちる 
 			case 4:
-				playerAnimator.Play("playerDying");
+				playerAnimator.Play("playerFall");
 
 				break;
 			
@@ -263,7 +282,8 @@ public class Player : MonoBehaviour {
 		if (other.gameObject.tag == "Stage")
 		{
 			isGround = true;
-			isClimb = false;
+			if(InputDet == 4)isClimb = false;
+			
 		}
 	}
 
