@@ -161,10 +161,12 @@ public class Player : MonoBehaviour {
 			if (Input.GetKey("left"))
 			{
 				playerPos += Vector2.left * speed;
+				playerRot.y = 0;
 			}
 			else if (Input.GetKey("right"))
 			{
 				playerPos += Vector2.right * speed;
+				playerRot.y = -180;
 			}
 
 		}
