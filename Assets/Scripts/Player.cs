@@ -30,10 +30,11 @@ public class Player : MonoBehaviour {
 	public bool isGround = false;
 	private float posY;
 	private int jumpCount = 0;
-	private float speed = 0.06f;
+	public float speed = 0.06f;
 	private Rigidbody2D rig;
 	public bool isDead;
 	public bool isClimb;
+	public bool isJump;
 
 	private Vector2 ladderPos;
 	//デバック用
@@ -51,6 +52,7 @@ public class Player : MonoBehaviour {
 
 		isDead = false;
 		isClimb = false;
+		isJump = false;
 
 		//デバック用
 		nextTime = Time.time;
@@ -60,6 +62,7 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
+		
 		if (isDead == true)
 		{
 			Dead();
@@ -70,22 +73,58 @@ public class Player : MonoBehaviour {
 
 		playerPos = transform.position;
 
-		if (specialAction == false)
-		{
-			Move();			
-		}
-
-		else if(specialAction == true)
+	
+		if(specialAction == true)
 		{		
 			if(animationTime >= 1.0f)
 			{
 				specialAction = false;
+				isJump = false;
 			}
 		}
 
-		Jump();
+		if (isGround == true)
+		{
+			speed = 0.06f;
+			if(isJump==false)Move();
+			
+		}
+
+		//空中の処理
+		else if (isGround == false)
+		{
+			
+			playerPos.y -= 0.1f;
+			if (isJump == false)
+			{
+				animaNom = 4;
+				speed = 0.02f;
+				Debug.Log(4);
+			}
+			
+			if (Input.GetKey("left"))
+			{
+				playerPos += Vector2.left * speed;
+				playerRot.y = 0;
+			}
+			else if (Input.GetKey("right"))
+			{
+				playerPos += Vector2.right * speed;
+				playerRot.y = -180;
+			}
+		}
+
+		//ジャンプ中の処理
+		if (animationTime <= 0.5 && animaNom == 2)
+		{
+			playerPos.y = Mathf.Lerp(playerPos.y, posY, 0.1f);
+
+		}
 
 		if (isClimb == true) ClimbLadder();
+
+		Animation(animaNom);
+
 
 		switch (playerState)
 		{
@@ -103,74 +142,40 @@ public class Player : MonoBehaviour {
 	//プレイヤー移動
 	int Move()
 	{
-		if (isGround == true)
+		if (specialAction == false)
 		{
-			speed = 0.06f;
+			//		speed = 0.06f;
 
+			//移動キー
 			if (Input.GetKey("left"))
+				{
+					playerPos += Vector2.left * speed;
+					animaNom = -1;
+				}
+				else if (Input.GetKey("right"))
+				{
+					playerPos += Vector2.right * speed;
+					animaNom = 1;
+				}
+				else
+				{
+					animaNom = 0;
+				}
+			//ジャンプキー
+			if (Input.GetKeyDown(KeyCode.S))
 			{
-				playerPos += Vector2.left * speed;
-				animaNom = -1;
-			}
-			else if (Input.GetKey("right"))
-			{
-				playerPos += Vector2.right * speed;
-				animaNom = 1;
+				isJump = true;
+				speed = 0.04f;
+				specialAction = true;
+				animaNom = 2;
+				Animation(animaNom);
+				posY = playerPos.y + 3.0f;
+				Debug.Log("j");
 			}
 
-			else
-			{
-				animaNom = 0;
-			}
 		}
-
-		else if (isGround == false)
-		{
-			animaNom = 4;
-			speed = 0.02f;
-		}
-
-		Animation(animaNom);
+		//Animation(animaNom);
 	
-		return 0;
-	}
-
-	int Jump()
-	{
-		speed = 0.04f;
-
-		if (Input.GetKeyDown(KeyCode.S) && isGround == true)
-		{
-			specialAction = true;
-			animaNom = 2;
-			Animation(animaNom);
-			posY = playerPos.y + 3.0f;
-
-		}
-		if (animationTime <= 0.5 && animaNom == 2)
-		{
-			playerPos.y = Mathf.Lerp(playerPos.y, posY, 0.1f);
-
-		}
-
-
-		if (isGround == false)
-		{
-			playerPos.y -= 0.1f;
-		
-			if (Input.GetKey("left"))
-			{
-				playerPos += Vector2.left * speed;
-				playerRot.y = 0;
-			}
-			else if (Input.GetKey("right"))
-			{
-				playerPos += Vector2.right * speed;
-				playerRot.y = -180;
-			}
-
-		}
-
 		return 0;
 	}
 
@@ -181,7 +186,7 @@ public class Player : MonoBehaviour {
 		speed = 0.06f;
 		specialAction = true; 
 		animaNom = 3;
-		Animation(animaNom);
+		//Animation(animaNom);
 
 		playerPos.x = Mathf.Lerp(playerPos.x, ladderPos.x, 0.2f);
 
@@ -197,13 +202,25 @@ public class Player : MonoBehaviour {
 			playerAnimator.speed = 1;
 			playerPos += Vector2.down * speed;
 			InputDet = 4;
-		}
+		}		
 		else
 		{
 			playerAnimator.speed = 0;
 
 		}
-		
+
+		if (Input.GetKeyDown(KeyCode.S))
+		{
+
+			isJump = true;
+			specialAction = true;
+			animaNom = 2;
+			Animation(animaNom);
+			posY = playerPos.y + 3.0f;
+			isClimb = false;
+			isGround = false;
+
+		}
 	}
 
 
@@ -284,8 +301,8 @@ public class Player : MonoBehaviour {
 		if (other.gameObject.tag == "Stage")
 		{
 			isGround = true;
-			if(InputDet == 4)isClimb = false;
-			
+			if (InputDet == 4) isClimb = false;
+		
 		}
 	}
 
@@ -293,7 +310,8 @@ public class Player : MonoBehaviour {
 	{
 		if (collision.gameObject.tag == "Stage")
 		{
-			isGround = true;
+			if(isJump==false)isGround = true;
+			
 		}
 
 		if(collision.gameObject.tag == "Ladder")
@@ -303,6 +321,7 @@ public class Player : MonoBehaviour {
 				isClimb = true;
 				ladderPos = collision.gameObject.transform.position;
 			}
+
 		}
 	}
 
