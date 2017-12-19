@@ -62,6 +62,7 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
+		isDead = GameControll.isDead;
 		
 		if (isDead == true)
 		{
@@ -99,7 +100,6 @@ public class Player : MonoBehaviour {
 			{
 				animaNom = 4;
 				speed = 0.02f;
-				Debug.Log(4);
 			}
 			
 			if (Input.GetKey("left"))
@@ -118,7 +118,6 @@ public class Player : MonoBehaviour {
 		if (animationTime <= 0.5 && animaNom == 2)
 		{
 			playerPos.y = Mathf.Lerp(playerPos.y, posY, 0.1f);
-
 		}
 
 		if (isClimb == true) ClimbLadder();
@@ -126,11 +125,11 @@ public class Player : MonoBehaviour {
 		Animation(animaNom);
 
 
-		switch (playerState)
-		{
-			case PLAYER_STATE.NOMAL:
-				break;
-				}
+		//switch (playerState)
+		//{
+		//	case PLAYER_STATE.NOMAL:
+		//		break;
+		//		}
 		
 	}
 
@@ -144,23 +143,26 @@ public class Player : MonoBehaviour {
 	{
 		if (specialAction == false)
 		{
-			//		speed = 0.06f;
-
-			//移動キー
-			if (Input.GetKey("left"))
+			if (isClimb == false)
+			{
+				//移動キー
+				if (Input.GetKey("left"))
 				{
 					playerPos += Vector2.left * speed;
 					animaNom = -1;
 				}
+
 				else if (Input.GetKey("right"))
 				{
 					playerPos += Vector2.right * speed;
 					animaNom = 1;
 				}
+
 				else
 				{
 					animaNom = 0;
 				}
+			}
 			//ジャンプキー
 			if (Input.GetKeyDown(KeyCode.S))
 			{
@@ -226,20 +228,20 @@ public class Player : MonoBehaviour {
 
 	void Dead()
 	{
-		animaNom = 4;
+		animaNom = 5;
 
-		float interval = 0.2f;   // 点滅周期
+		//float interval = 0.2f;   // 点滅周期
 
-		SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+		//SpriteRenderer renderer = GetComponent<SpriteRenderer>();
 
-		if (Time.time >= nextTime)
-		{
-			renderer.enabled = !renderer.enabled;
+		//if (Time.time >= nextTime)
+		//{
+		//	renderer.enabled = !renderer.enabled;
 
-			nextTime += interval;
-		}
+		//	nextTime += interval;
+		//}
 
-		Animation(animaNom);
+		//Animation(animaNom);
 
 
 	}
@@ -288,7 +290,10 @@ public class Player : MonoBehaviour {
 				playerAnimator.Play("playerFall");
 
 				break;
-			
+
+			case 5:
+				playerAnimator.Play("playerDying");
+				break;
 		};
 
 		transform.rotation = playerRot;
