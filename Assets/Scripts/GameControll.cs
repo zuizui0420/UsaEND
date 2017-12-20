@@ -17,7 +17,7 @@ public class GameControll : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		Debug.Log(isDead);
+		//Debug.Log(isDead);
 
 	}
 

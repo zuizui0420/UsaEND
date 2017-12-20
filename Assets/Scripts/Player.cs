@@ -166,7 +166,9 @@ public class Player : MonoBehaviour {
 			//ジャンプキー
 			if (Input.GetKeyDown(KeyCode.S))
 			{
+				//isClimb = false;
 				isJump = true;
+			    //isGround = false;
 				speed = 0.04f;
 				specialAction = true;
 				animaNom = 2;
@@ -187,7 +189,7 @@ public class Player : MonoBehaviour {
 		speed = 0.06f;
 		specialAction = true; 
 		animaNom = 3;
-		//Animation(animaNom);
+	
 
 		playerPos.x = Mathf.Lerp(playerPos.x, ladderPos.x, 0.2f);
 
@@ -210,15 +212,18 @@ public class Player : MonoBehaviour {
 
 		}
 
+		//ジャンプキー
 		if (Input.GetKeyDown(KeyCode.S))
 		{
+			playerAnimator.speed = 1;//アニメーションが止まるのでここで強制的にアニメーションを動かす
+			InputDet = 4;
 			isJump = true;
 			specialAction = true;
 			animaNom = 2;
 			Animation(animaNom);
 			posY = playerPos.y + 3.0f;
 			isClimb = false;
-			isGround = false;
+			isGround = false; 
 
 		}
 	}
