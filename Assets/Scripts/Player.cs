@@ -25,7 +25,7 @@ public class Player : MonoBehaviour {
 	private Vector2 playerPos;
 	private Quaternion playerRot;
 	public int animaNom;
-	private bool specialAction = false;
+	public bool specialAction = false;
 	private float animationTime;
 	public bool isGround = false;
 	private float posY;
@@ -172,7 +172,6 @@ public class Player : MonoBehaviour {
 				animaNom = 2;
 				Animation(animaNom);
 				posY = playerPos.y + 3.0f;
-				Debug.Log("j");
 			}
 
 		}
@@ -213,7 +212,6 @@ public class Player : MonoBehaviour {
 
 		if (Input.GetKeyDown(KeyCode.S))
 		{
-
 			isJump = true;
 			specialAction = true;
 			animaNom = 2;
