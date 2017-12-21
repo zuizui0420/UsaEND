@@ -17,7 +17,7 @@ public class PhotonManager : Photon.MonoBehaviour
 	}
 
 	//ロビー接続
-	void ConnectPhoton()
+	public void ConnectPhoton()
 	{
 		PhotonNetwork.ConnectUsingSettings("v1.0");
 	}
@@ -26,6 +26,9 @@ public class PhotonManager : Photon.MonoBehaviour
 	void OnJoinedLobby()
 	{
 		Debug.Log("PhotonManager OnJoinedLobby");
+		//ボタンを押せるようにする
+		GameObject.Find("CreateRoomBtn").GetComponent<Button>().interactable = true;
+		GameObject.Find("EnterRoomBtn").GetComponent<Button>().interactable = true;
 	}
 
 	//ルーム一覧が取れると
@@ -73,9 +76,15 @@ public class PhotonManager : Photon.MonoBehaviour
 		PhotonNetwork.JoinOrCreateRoom(userId, roomOptions, null);
 	}
 
+	public void JoinRoom()
+	{
+		PhotonNetwork.JoinRoom("user1");
+	}
+
 	//ルームに入室した時に呼び出される
 	void OnJoinedRoom()
 	{
 		Debug.Log("PhotonManager OnJoinedRoom");
+		GameObject.Find("StatusText").GetComponent<Text>().text = "OnJoinedRoom";
 	}
 }

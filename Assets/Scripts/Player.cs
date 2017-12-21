@@ -62,17 +62,19 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		isDead = GameControll.isDead;
+		//isDead = GameControll.isDead;
 		
+		animationTime = playerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+
+		playerPos = transform.position;
+
+		Animation(animaNom);//アニメーション再生
+
 		if (isDead == true)
 		{
 			Dead();
 			return;
 		}
-
-		animationTime = playerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-
-		playerPos = transform.position;
 
 	
 		if(specialAction == true)
@@ -122,7 +124,6 @@ public class Player : MonoBehaviour {
 
 		if (isClimb == true) ClimbLadder();
 
-		Animation(animaNom);
 
 
 		//switch (playerState)
@@ -231,7 +232,13 @@ public class Player : MonoBehaviour {
 
 	void Dead()
 	{
+		if(animaNom!=6)
 		animaNom = 5;
+
+		if (animationTime >= 1.0f)
+		{
+			animaNom = 6;
+		}
 
 		//float interval = 0.2f;   // 点滅周期
 
@@ -293,9 +300,16 @@ public class Player : MonoBehaviour {
 				playerAnimator.Play("playerFall");
 
 				break;
-
+           //死亡
 			case 5:
 				playerAnimator.Play("playerDying");
+
+				break;
+
+         　//死体
+			case 6:
+				playerAnimator.Play("playerDead");
+
 				break;
 		};
 
