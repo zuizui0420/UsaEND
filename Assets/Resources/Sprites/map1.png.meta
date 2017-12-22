@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 4f22640b6efb17d4fac87f7b394773e6
-timeCreated: 1511499246
+timeCreated: 1513768652
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -80,7 +80,7 @@ TextureImporter:
         width: 106
         height: 44
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -88,12 +88,12 @@ TextureImporter:
       name: map1_1
       rect:
         serializedVersion: 2
-        x: 51
-        y: 132
-        width: 47
-        height: 432
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 54
+        y: 285
+        width: 40
+        height: 252
+      alignment: 9
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
