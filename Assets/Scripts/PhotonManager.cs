@@ -86,5 +86,6 @@ public class PhotonManager : Photon.MonoBehaviour
 	{
 		Debug.Log("PhotonManager OnJoinedRoom");
 		GameObject.Find("StatusText").GetComponent<Text>().text = "OnJoinedRoom";
+		//ここでキャラクターなどのプレイヤー間で共有するGameObjectを作成すると良い
 	}
 }
