@@ -8,11 +8,18 @@ public class CameraControrl : MonoBehaviour {
 	public Transform anchorTopLeft;
 	public Transform anchorBottomRight;
 
-	// Use this for initialization
-	void Start () {
-		player = GameObject.FindGameObjectWithTag("Player");
+	int actID = 0;//ルーム内のプレイヤーID
+
+	void Awake()
+	{
+		actID = GameObject.Find("PhotonManager").GetComponent<PhotonManager>().actID;
 	}
-	
+
+	// Use this for initialization
+	void Start()
+	{
+		player = GameObject.FindWithTag("Player"+actID);
+	}
 	// Update is called once per frame
 	void Update () {
 		

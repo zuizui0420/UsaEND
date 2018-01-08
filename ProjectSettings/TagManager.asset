@@ -7,6 +7,8 @@ TagManager:
   - Stage
   - Wall
   - Ladder
+  - Player0
+  - Player1
   layers:
   - Default
   - TransparentFX

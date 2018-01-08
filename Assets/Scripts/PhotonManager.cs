@@ -3,17 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class PhotonManager : Photon.MonoBehaviour
 {
+	public int test;
+	//string [] userName = new string[4];
+	string userName = "ユーザ1";
+	string userId = "user0";
+	public bool gameStart;
+
+	public PhotonPlayer photonPlayer;
+	public int actID = -1;
+	void Awake()
+	{
+		
+		//シーン間を引き継ぐ
+		DontDestroyOnLoad(this);
+	}
 
 	// Use this for initialization
 	void Start () {
-		
+		test = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+	
+	}
+
+	public void IsStart()
+	{
+		GameObject.Find("GameController").GetComponent<GameControl>().gameStart = true;
+	
 	}
 
 	//ロビー接続
@@ -29,6 +50,7 @@ public class PhotonManager : Photon.MonoBehaviour
 		//ボタンを押せるようにする
 		GameObject.Find("CreateRoomBtn").GetComponent<Button>().interactable = true;
 		GameObject.Find("EnterRoomBtn").GetComponent<Button>().interactable = true;
+		test = 1;
 	}
 
 	//ルーム一覧が取れると
@@ -56,9 +78,17 @@ public class PhotonManager : Photon.MonoBehaviour
 		//ルーム作成
 		public void CreateRoom()
 	{
-		string userName = "ユーザ1";
-		string userId = "user1";
+		gameStart = false;
+		actID = 0;
+
+		photonPlayer = new PhotonPlayer(false, actID, userName);
+
+	
+		//string userName = "ユーザ1";
+		//string userId = "user1";
+		//userName[0] = "ユーザ1";
 		PhotonNetwork.autoCleanUpPlayerObjects = false;
+
 		//カスタムプロパティ
 		ExitGames.Client.Photon.Hashtable customProp = new ExitGames.Client.Photon.Hashtable();
 		customProp.Add("userName", userName); //ユーザ名
@@ -73,12 +103,13 @@ public class PhotonManager : Photon.MonoBehaviour
 		roomOptions.isOpen = true; //入室許可する
 		roomOptions.isVisible = true; //ロビーから見えるようにする
 									  //userIdが名前のルームがなければ作って入室、あれば普通に入室する。
-		PhotonNetwork.JoinOrCreateRoom(userId, roomOptions, null);
+		PhotonNetwork.JoinOrCreateRoom(userName, roomOptions, null);
 	}
 
 	public void JoinRoom()
 	{
 		PhotonNetwork.JoinRoom("user1");
+		photonPlayer = new PhotonPlayer(false, 1, userName);
 	}
 
 	//ルームに入室した時に呼び出される
@@ -86,6 +117,14 @@ public class PhotonManager : Photon.MonoBehaviour
 	{
 		Debug.Log("PhotonManager OnJoinedRoom");
 		GameObject.Find("StatusText").GetComponent<Text>().text = "OnJoinedRoom";
+		GameObject.Find("StartBtn").GetComponent<Button>().interactable = true;
 		//ここでキャラクターなどのプレイヤー間で共有するGameObjectを作成すると良い
+
+		test = 2;
+	}
+
+	//CustomRoomPropertiesが変更された際に呼ばれます。
+	void OnPhotonCustomRoomPropertiesChanged()
+	{
 	}
 }
