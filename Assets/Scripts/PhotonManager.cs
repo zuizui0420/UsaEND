@@ -8,7 +8,7 @@ public class PhotonManager : Photon.MonoBehaviour
 {
 	public int test;
 	//string [] userName = new string[4];
-	string userName = "ユーザ1";
+	string userName = "ユーザ0";
 	string userId = "user0";
 
 	[SerializeField]
@@ -98,12 +98,12 @@ public class PhotonManager : Photon.MonoBehaviour
 		roomOptions.isOpen = true; //入室許可する
 		roomOptions.isVisible = true; //ロビーから見えるようにする
 									  //userIdが名前のルームがなければ作って入室、あれば普通に入室する。
-		PhotonNetwork.JoinOrCreateRoom(userName, roomOptions, null);
+		PhotonNetwork.JoinOrCreateRoom(userId, roomOptions, null);
 	}
 
 	public void JoinRoom()
 	{
-		PhotonNetwork.JoinRoom("user1");
+		PhotonNetwork.JoinRoom("user0");
 		photonPlayer = new PhotonPlayer(false, 1, userName);
 	}
 

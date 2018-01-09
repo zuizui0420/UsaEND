@@ -14,7 +14,7 @@ public class MultiGameControl : Photon.MonoBehaviour
 
 	void Awake()
 	{
-		////シーン間を引き継ぐ
+		//シーン間を引き継ぐ
 		DontDestroyOnLoad(this);
 
 		for (int i = 0; i < 2; i++)
@@ -52,7 +52,7 @@ public class MultiGameControl : Photon.MonoBehaviour
 		if (stream.isWriting)
 		{
 			//データの送信
-			//stream.SendNext(変数名);
+			//stream.SendNext();
 		}
 		else
 		{

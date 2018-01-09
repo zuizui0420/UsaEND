@@ -15,7 +15,8 @@ public class GameStartManager : Photon.MonoBehaviour{
 	
 	// Update is called once per frame
 	void Update () {
-
+		//シーン間を引き継ぐ
+		//DontDestroyOnLoad(this);
 		if (gameStart == true)
 		{
 			SceneManager.LoadScene("StageMatsubara");

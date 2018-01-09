@@ -18,7 +18,7 @@ public class GameControl : MonoBehaviour {
 
 	void Awake()
 	{
-		////シーン間を引き継ぐ
+		//シーン間を引き継ぐ
 		DontDestroyOnLoad(this);
 
 		for (int i=0; i < 2; i++)
