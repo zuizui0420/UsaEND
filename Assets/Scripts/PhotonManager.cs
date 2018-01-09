@@ -10,7 +10,9 @@ public class PhotonManager : Photon.MonoBehaviour
 	//string [] userName = new string[4];
 	string userName = "ユーザ1";
 	string userId = "user0";
-	public bool gameStart;
+
+	[SerializeField]
+	GameObject[] players = new GameObject[2];
 
 	public PhotonPlayer photonPlayer;
 	public int actID = -1;
@@ -28,12 +30,6 @@ public class PhotonManager : Photon.MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
-
-	public void IsStart()
-	{
-		GameObject.Find("GameController").GetComponent<GameControl>().gameStart = true;
 	
 	}
 
@@ -78,7 +74,6 @@ public class PhotonManager : Photon.MonoBehaviour
 		//ルーム作成
 		public void CreateRoom()
 	{
-		gameStart = false;
 		actID = 0;
 
 		photonPlayer = new PhotonPlayer(false, actID, userName);
@@ -119,6 +114,7 @@ public class PhotonManager : Photon.MonoBehaviour
 		GameObject.Find("StatusText").GetComponent<Text>().text = "OnJoinedRoom";
 		GameObject.Find("StartBtn").GetComponent<Button>().interactable = true;
 		//ここでキャラクターなどのプレイヤー間で共有するGameObjectを作成すると良い
+		players[actID] = PhotonNetwork.Instantiate("Player"+actID,new Vector3(0,0,0), Quaternion.Euler(Vector3.zero), 0);
 
 		test = 2;
 	}

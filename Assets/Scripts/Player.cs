@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
 
@@ -10,8 +11,11 @@ public class Player : MonoBehaviour {
 	[SerializeField]
 	private Animator playerAnimator;
 
+	private GameObject[] startPos = new GameObject[2];
+
 	int actID = 0;//ルーム内のプレイヤーID
 	int playerID;//PlayerスクリプトでのプレイヤーID
+
 	public enum PLAYER_STATE
 	{
 		NOMAL,
@@ -45,18 +49,25 @@ public class Player : MonoBehaviour {
 	void Awake()
 	{
 		actID = GameObject.Find("PhotonManager").GetComponent<PhotonManager>().actID;
+
 		//プレイヤーのタグの末尾をintにしてプレイヤーIDとして設定
 		playerID = int.Parse(player.tag.Substring(6));
 	}
 
+
 	// Use this for initialization
 	void Start () {
-		//player = GameObject.Find("Player");
+		player = GameObject.FindWithTag("Player"+playerID);
+
+		SceneManager.sceneLoaded += OnSceneLoaded;//デリゲートの登録
+
 		playerPos = transform.position;
 		playerRot = transform.rotation;
 		playerRot.y = -180;
-		posY = transform.position.y;
+		//posY = transform.position.y;//これ必要？
 		rig = GetComponent<Rigidbody2D>();
+
+		
 
 		isDead = false;
 		isClimb = false;
@@ -70,8 +81,15 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
+		//マルチでのルーム内のキャラの引き継ぎ
+		if (actID != -1)
+		{
+			//シーン間を引き継ぐ
+			DontDestroyOnLoad(this);
+		}
 
 		if (playerID != actID) return;
+		
 		//isDead = GameControll.isDead;
 
 		animationTime = playerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime;
@@ -147,6 +165,22 @@ public class Player : MonoBehaviour {
 	private void FixedUpdate()
 	{
 		rig.MovePosition(playerPos);
+	}
+	
+	//シーン読み込みデリゲート
+	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+	{
+		if(SceneManager.GetActiveScene().name== "StageMatsubara")//現在のシーンがステージシーンであるか？
+		{
+			//プレイヤーのスタートPos
+			player.GetComponent<Transform>().transform.position = GameObject.Find("StartPos"+playerID).GetComponent<Transform>().transform.position;
+			//プレイヤーのスタートPosを初期値に設定(シーンロード時にスタートPosにズレが生じるため)
+			playerPos = transform.position;
+			playerRot = transform.rotation;
+			playerRot.y = -180;
+		}
+		
+		Debug.Log(scene.name + " scene loaded");
 	}
 
 	//プレイヤー移動

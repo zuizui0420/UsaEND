@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class test_sceneChange : MonoBehaviour {
+public class RoomBtnControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -12,11 +11,11 @@ public class test_sceneChange : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
+	}
 
-		if (Input.GetKey(KeyCode.Space))
-		{
-			SceneManager.LoadScene("StageMatsubara");
-
-		}
+	public void OnClickStart()
+	{
+		GameObject.Find("GameStartManager").GetComponent<GameStartManager>().gameStart = true;
 	}
 }
