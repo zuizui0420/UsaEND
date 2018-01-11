@@ -16,6 +16,6 @@ public class RoomBtnControl : MonoBehaviour {
 
 	public void OnClickStart()
 	{
-		GameObject.Find("GameStartManager").GetComponent<GameStartManager>().gameStart = true;
+		GameObject.Find("MultiGameController").GetComponent<MultiGameControl>().gameStart = true;
 	}
 }

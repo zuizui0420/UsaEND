@@ -149,7 +149,7 @@ MonoBehaviour:
     SynchronizeEnabled: 1
     TeleportEnabled: 1
     TeleportIfDistanceGreaterThan: 3
-    InterpolateOption: 2
+    InterpolateOption: 3
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 1
     InterpolateMoveTowardsAcceleration: 2
@@ -184,7 +184,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    ExtrapolateOption: 0
+    ExtrapolateOption: 1
     ExtrapolateSpeed: 1
     ExtrapolateIncludingRoundTripTime: 1
     ExtrapolateNumberOfStoredPositions: 1
@@ -238,6 +238,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1725867795662406}
   playerAnimator: {fileID: 95080024921398766}
+  actID: 0
+  playerID: 0
   playerState: 0
   InputDet: 0
   animaNom: 0

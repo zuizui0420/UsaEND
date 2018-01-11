@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class Player : MonoBehaviour {
+public class Player : Photon.MonoBehaviour
+{
 
 	[SerializeField]
 	private GameObject player;	
@@ -13,8 +14,12 @@ public class Player : MonoBehaviour {
 
 	private GameObject[] startPos = new GameObject[2];
 
-	int actID = 0;//ルーム内のプレイヤーID
-	int playerID;//PlayerスクリプトでのプレイヤーID
+	public int actID;//ルーム内のプレイヤーID
+	public int playerID;//PlayerスクリプトでのプレイヤーID
+
+	private PhotonView photonView;
+	private PhotonTransformView photonTransformView;
+
 
 	public enum PLAYER_STATE
 	{
@@ -49,7 +54,7 @@ public class Player : MonoBehaviour {
 	void Awake()
 	{
 		actID = GameObject.Find("PhotonManager").GetComponent<PhotonManager>().actID;
-
+		//actID = int.Parse(this.gameObject.tag.Substring(6));
 		//プレイヤーのタグの末尾をintにしてプレイヤーIDとして設定
 		playerID = int.Parse(player.tag.Substring(6));
 	}
@@ -57,7 +62,12 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		player = GameObject.FindWithTag("Player"+playerID);
+		//player = GameObject.FindWithTag("Player"+playerID);
+		player = GameObject.FindWithTag("Player" + actID);
+		//playerID = actID;
+
+		photonTransformView = GetComponent<PhotonTransformView>();
+		photonView = PhotonView.Get(this);
 
 		SceneManager.sceneLoaded += OnSceneLoaded;//デリゲートの登録
 
@@ -80,7 +90,7 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update ()
-	{
+	{		
 		//マルチでのルーム内のキャラの引き継ぎ
 		if (actID != -1)
 		{
@@ -89,7 +99,15 @@ public class Player : MonoBehaviour {
 		}
 
 		if (playerID != actID) return;
-		
+
+		if (photonView.isMine)
+		{
+			//現在の移動速度
+			Vector2 velocity = rig.velocity;
+			//移動速度を指定
+			photonTransformView.SetSynchronizedValues(velocity, 0);
+		}
+
 		//isDead = GameControll.isDead;
 
 		animationTime = playerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime;
@@ -172,12 +190,14 @@ public class Player : MonoBehaviour {
 	{
 		if(SceneManager.GetActiveScene().name== "StageMatsubara")//現在のシーンがステージシーンであるか？
 		{
+			//player = GameObject.FindWithTag("Player" + actID);
 			//プレイヤーのスタートPos
 			player.GetComponent<Transform>().transform.position = GameObject.Find("StartPos"+playerID).GetComponent<Transform>().transform.position;
 			//プレイヤーのスタートPosを初期値に設定(シーンロード時にスタートPosにズレが生じるため)
 			playerPos = transform.position;
 			playerRot = transform.rotation;
 			playerRot.y = -180;
+			
 		}
 		
 		Debug.Log(scene.name + " scene loaded");

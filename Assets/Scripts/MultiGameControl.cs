@@ -7,10 +7,13 @@ public class MultiGameControl : Photon.MonoBehaviour
 	[SerializeField]
 	GameObject[] players = new GameObject[2];
 
+	public int actID = -1;
+	//public int playerNom = -1;
 
 	private bool[] isDead = new bool[4];
 	//private int playerNom;
 
+	public bool gameStart;
 
 	void Awake()
 	{
@@ -28,11 +31,15 @@ public class MultiGameControl : Photon.MonoBehaviour
 
 	// Use this for initialization
 	void Start () {
-		
+		gameStart = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		//if(actID != playerNom)
+		//{
+		//	//CreateCharacter();
+		//}
 	
 	}
 
@@ -47,17 +54,25 @@ public class MultiGameControl : Photon.MonoBehaviour
 	//		return isDead[0];
 	//	}
 	//}
+
+	//void CreateCharacter()
+	//{
+	//	PhotonNetwork.Instantiate("Player" + actID, new Vector3(0, 0, 0), Quaternion.Euler(Vector3.zero), 0);
+	//	playerNom = actID;
+	//}
+
+
 	void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
 	{
 		if (stream.isWriting)
 		{
 			//データの送信
-			//stream.SendNext();
+			stream.SendNext(gameStart);
 		}
 		else
 		{
 			//データの受信
-			//this.変数名 = (bool)stream.ReceiveNext();
+			this.gameStart = (bool)stream.ReceiveNext();
 		}
 	}
 }

@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameStartManager : Photon.MonoBehaviour{
 
-	public bool gameStart;
+	public bool gameStart = false;
 
 	// Use this for initialization
 	void Start () {
@@ -15,25 +15,13 @@ public class GameStartManager : Photon.MonoBehaviour{
 	
 	// Update is called once per frame
 	void Update () {
-		//シーン間を引き継ぐ
-		//DontDestroyOnLoad(this);
+
+		gameStart = GameObject.Find("MultiGameController").GetComponent<MultiGameControl>().gameStart;
+
 		if (gameStart == true)
 		{
 			SceneManager.LoadScene("StageMatsubara");
 		}
 	}
 
-	void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-	{
-		if (stream.isWriting)
-		{
-			//データの送信
-			stream.SendNext(gameStart);
-		}
-		else
-		{
-			//データの受信
-			this.gameStart = (bool)stream.ReceiveNext();
-		}
-	}
 }
