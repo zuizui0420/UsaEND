@@ -238,6 +238,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1347466335872494}
   playerAnimator: {fileID: 95081551744054324}
+  actID: 0
+  playerID: 0
   playerState: 0
   InputDet: 0
   animaNom: 0

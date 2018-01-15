@@ -100,13 +100,13 @@ public class Player : Photon.MonoBehaviour
 
 		if (playerID != actID) return;
 
-		if (photonView.isMine)
-		{
-			//現在の移動速度
-			Vector2 velocity = rig.velocity;
-			//移動速度を指定
-			photonTransformView.SetSynchronizedValues(velocity, 0);
-		}
+		//if (photonView.isMine)
+		//{
+		//	//現在の移動速度
+		//	Vector2 velocity = rig.velocity;
+		//	//移動速度を指定
+		//	photonTransformView.SetSynchronizedValues(velocity, 0);
+		//}
 
 		//isDead = GameControll.isDead;
 
