@@ -37,11 +37,13 @@ public class Player : Photon.MonoBehaviour
 	private Quaternion playerRot;
 	public int animaNom;
 	public bool specialAction = false;
-	private float animationTime;
+	public float animationTime;
 	public bool isGround = false;
-	private float posY;
+	public float jumpTopPos;//ジャンプの最高地点
 	private int jumpCount = 0;
 	public float speed = 0.06f;
+	public float noGroundPos;//離陸地点
+	public float onGroundPos;//着地地点
 	private Rigidbody2D rig;
 	public bool isDead;
 	public bool isClimb;
@@ -116,14 +118,29 @@ public class Player : Photon.MonoBehaviour
 
 		Animation(animaNom);//アニメーション再生
 
+		if (animaNom == 6 && animationTime >= 60)
+		{
+			isDead = false;
+			StartCoroutine("Restart");
+			return;
+		}
+
 		if (isDead == true)
 		{
 			Dead();
 			return;
 		}
 
-	
-		if(specialAction == true)
+		//高さ4以上で死ぬ
+		if (noGroundPos - onGroundPos >= 4 || jumpTopPos-onGroundPos>=4)
+		{
+			isDead = true;
+		}
+
+		
+
+
+		if (specialAction == true)
 		{		
 			if(animationTime >= 1.0f)
 			{
@@ -165,10 +182,14 @@ public class Player : Photon.MonoBehaviour
 		//ジャンプ中の処理
 		if (animationTime <= 0.5 && animaNom == 2)
 		{
-			playerPos.y = Mathf.Lerp(playerPos.y, posY, 0.1f);
+			playerPos.y = Mathf.Lerp(playerPos.y, jumpTopPos, 0.1f);
 		}
 
-		if (isClimb == true) ClimbLadder();
+
+		if (isClimb == true)
+		{
+			ClimbLadder();
+		}
 
 
 
@@ -193,6 +214,7 @@ public class Player : Photon.MonoBehaviour
 			//player = GameObject.FindWithTag("Player" + actID);
 			//プレイヤーのスタートPos
 			player.GetComponent<Transform>().transform.position = GameObject.Find("StartPos"+playerID).GetComponent<Transform>().transform.position;
+
 			//プレイヤーのスタートPosを初期値に設定(シーンロード時にスタートPosにズレが生じるため)
 			playerPos = transform.position;
 			playerRot = transform.rotation;
@@ -238,7 +260,7 @@ public class Player : Photon.MonoBehaviour
 				specialAction = true;
 				animaNom = 2;
 				Animation(animaNom);
-				posY = playerPos.y + 3.0f;
+				jumpTopPos = playerPos.y + 3.0f;
 			}
 
 		}
@@ -264,12 +286,14 @@ public class Player : Photon.MonoBehaviour
 			playerAnimator.speed = 1;
 			playerPos += Vector2.up * speed;
 			InputDet = 3;
+			onGroundPos = player.gameObject.transform.position.y;
 		}
 		else if (Input.GetKey("down"))
 		{
 			playerAnimator.speed = 1;
 			playerPos += Vector2.down * speed;
 			InputDet = 4;
+			onGroundPos = player.gameObject.transform.position.y;
 		}		
 		else
 		{
@@ -286,9 +310,9 @@ public class Player : Photon.MonoBehaviour
 			specialAction = true;
 			animaNom = 2;
 			Animation(animaNom);
-			posY = playerPos.y + 3.0f;
+			jumpTopPos = playerPos.y + 3.0f;
 			isClimb = false;
-			isGround = false; 
+			isGround = false;
 
 		}
 	}
@@ -296,12 +320,19 @@ public class Player : Photon.MonoBehaviour
 
 	void Dead()
 	{
-		if(animaNom!=6)
-		animaNom = 5;
 
-		if (animationTime >= 1.0f)
+		if (animaNom != 6&& animaNom != 5)
+		{
+			animaNom = 5;
+			return;
+		}
+
+
+		else if (animationTime >= 1.0f)
 		{
 			animaNom = 6;
+			return;
+
 		}
 
 		//float interval = 0.2f;   // 点滅周期
@@ -320,6 +351,14 @@ public class Player : Photon.MonoBehaviour
 
 	}
 
+	IEnumerator Restart()
+	{
+		//isDead = false;
+		playerPos = GameObject.Find("StartPos" + 0).GetComponent<Transform>().transform.position;
+		animaNom = 0;
+		
+		yield break;
+	}
 
 	//プレイヤーアニメーション
 	int Animation(int i)
@@ -388,6 +427,8 @@ public class Player : Photon.MonoBehaviour
 		{
 			isGround = true;
 			if (InputDet == 4) isClimb = false;
+
+			onGroundPos = player.gameObject.transform.position.y;
 		
 		}
 	}
@@ -406,6 +447,7 @@ public class Player : Photon.MonoBehaviour
 			{
 				isClimb = true;
 				ladderPos = collision.gameObject.transform.position;
+				onGroundPos = player.transform.position.y;
 			}
 
 		}
@@ -416,12 +458,14 @@ public class Player : Photon.MonoBehaviour
 		if (collision.gameObject.tag == "Stage")
 		{
 			isGround = false;
+			noGroundPos = player.transform.position.y;
 		}
 
 		else if (collision.gameObject.tag == "Ladder")
 		{
 			isClimb = false;
 			isGround = false;
+			noGroundPos = player.transform.position.y;
 
 		}
 	}
