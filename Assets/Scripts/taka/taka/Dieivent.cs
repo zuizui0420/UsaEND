@@ -10,11 +10,11 @@ public class Dieivent : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        PactID = other.GetComponent<Player>().actID;
-        playertag = GameObject.FindWithTag("Player" + PactID);
-        if (other.gameObject.tag == "Player" + PactID)
+        //PactID = other.GetComponent<Player>().actID;
+        //playertag = GameObject.FindWithTag("Player" + PactID);
+        if (other.gameObject.tag == "Player" +0)
         {
-            playertag.GetComponent<Player>().isDead = true;
+            other.GetComponent<Player>().isDead = true;
         }
     }
 }

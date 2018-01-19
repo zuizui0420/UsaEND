@@ -49,6 +49,8 @@ public class Player : Photon.MonoBehaviour
 	public bool isClimb;
 	public bool isJump;
 
+	public bool isGoal = false;
+
 	private Vector2 ladderPos;
 	//デバック用
 	private float nextTime;
@@ -118,6 +120,7 @@ public class Player : Photon.MonoBehaviour
 
 		Animation(animaNom);//アニメーション再生
 
+		//リスタート
 		if (animaNom == 6 && animationTime >= 60)
 		{
 			isDead = false;
@@ -137,8 +140,11 @@ public class Player : Photon.MonoBehaviour
 			isDead = true;
 		}
 
-		
-
+		//ゴール後
+		if(isGoal == true)
+		{
+			SceneManager.LoadScene("GoalScene");
+		}
 
 		if (specialAction == true)
 		{		
@@ -430,6 +436,11 @@ public class Player : Photon.MonoBehaviour
 
 			onGroundPos = player.gameObject.transform.position.y;
 
+		}
+
+		if(other.gameObject.tag == "Goal")
+		{
+			isGoal = true;
 		}
 	}
 

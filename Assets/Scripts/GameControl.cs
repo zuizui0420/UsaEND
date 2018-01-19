@@ -43,10 +43,10 @@ public class GameControl : MonoBehaviour {
 		playerAnimaNom = player.GetComponent<Player>().animaNom;
 		playerAnimaTime = player.GetComponent<Player>().animationTime;
 
-		if (playerAnimaNom >= 6 && playerAnimaTime>=100.0f)
-		{
-			StartCoroutine("Restart");
-		}
+		//if (playerAnimaNom >= 6 && playerAnimaTime>=100.0f)
+		//{
+		//	StartCoroutine("Restart");
+		//}
 	}
 
 	//public bool DeadFlag
@@ -61,12 +61,12 @@ public class GameControl : MonoBehaviour {
 	//	}
 	//}
 
-	IEnumerator Restart()
-	{
-		player.GetComponent<Player>().isDead = false;	
-		player.GetComponent<Transform>().transform.position = GameObject.Find("StartPos" + 0).GetComponent<Transform>().transform.position;
-		player.GetComponent<Player>().animaNom = 0;
-		yield break;
-	}
+	//IEnumerator Restart()
+	//{
+	//	player.GetComponent<Player>().isDead = false;	
+	//	player.GetComponent<Transform>().transform.position = GameObject.Find("StartPos" + 0).GetComponent<Transform>().transform.position;
+	//	player.GetComponent<Player>().animaNom = 0;
+	//	yield break;
+	//}
 
 }

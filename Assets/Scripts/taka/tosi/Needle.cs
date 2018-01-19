@@ -5,49 +5,25 @@ using UnityEngine;
 public class Needle : MonoBehaviour {
     bool walltouch;
     bool moveNe;
+	bool stpps;
 	// Use this for initialization
 	void Start () {
         walltouch = true;
         moveNe = false;
+		stpps = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (moveNe)
+        if (moveNe&&stpps)
         {
             if (walltouch)
             {
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, 0.4f);
-                Debug.DrawRay(transform.position, transform.up * 0.4f, Color.green);
-
-                if (hit)
-                {
-                    if (hit.collider.gameObject.tag == "wall"||hit.collider.gameObject.tag=="Ladder")
-                    {
-                        StartCoroutine("stoppsge1");
-                    }
-                }
-                else
-                {
                     transform.position -= new Vector3(0.1f, 0, 0);
-                }
             }
             else
             {
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, 0.4f);
-                Debug.DrawRay(transform.position, -transform.up * 0.4f, Color.red);
-                if (hit)
-                {
-                    if (hit.collider.gameObject.tag == "wall")
-                    {
-                        StartCoroutine("stoppsge2");
-                    }
-                }
-                else
-                {
                     transform.position += new Vector3(0.04f, 0, 0);
-                }
-
             }
         }
     }
@@ -55,16 +31,19 @@ public class Needle : MonoBehaviour {
     {
         moveNe = true;
     }
-    IEnumerator stoppsge1()
+    IEnumerator stoppsge()
     {
         yield return new WaitForSeconds(2);
-        walltouch = false;
+		stpps = true;
+		walltouch = !walltouch;
         yield break;
     }
-    IEnumerator stoppsge2()
-    {
-        yield return new WaitForSeconds(2);
-        walltouch = true;
-        yield break;
-    }
+	private void OnTriggerEnter2D(Collider2D col)
+	{
+		if (col.gameObject.tag == "Wall")
+		{
+			stpps = false;
+			StartCoroutine("stoppsge");
+		}
+	}
 }

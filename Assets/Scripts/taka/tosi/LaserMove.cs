@@ -26,6 +26,12 @@ public class LaserMove : MonoBehaviour
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, minpos, maxpos), transform.position.y, 0);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up);
         sr.size = new Vector2(0.5f,11.7f-hit.point.y);
+
+		if(hit.collider.tag == "Player0")
+		{
+			//プレイヤーの死亡イベント読み込み
+		}
+		//Debug.Log(hit.collider.tag);
     }
     private void FixedUpdate()
     {

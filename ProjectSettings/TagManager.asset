@@ -9,6 +9,7 @@ TagManager:
   - Ladder
   - Player0
   - Player1
+  - Goal
   layers:
   - Default
   - TransparentFX
