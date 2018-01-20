@@ -52,6 +52,15 @@ public class Player : Photon.MonoBehaviour
 	public bool isGoal = false;
 
 	private Vector2 ladderPos;
+
+	//移動制御 true or false
+	int StopMove;
+	int StopInput;
+
+	//Item Ui
+	public string Item0, Item1;
+	public Text Item0t, Item1t;
+
 	//デバック用
 	private float nextTime;
 
@@ -81,7 +90,9 @@ public class Player : Photon.MonoBehaviour
 		//posY = transform.position.y;//これ必要？
 		rig = GetComponent<Rigidbody2D>();
 
-		
+		StopMove = 0;
+		Item0 = " ";
+		Item1 = " ";
 
 		isDead = false;
 		isClimb = false;
@@ -204,8 +215,56 @@ public class Player : Photon.MonoBehaviour
 		//	case PLAYER_STATE.NOMAL:
 		//		break;
 		//		}
-		
+
+		if (Input.GetKey(KeyCode.Alpha1) && StopInput == 0 && isGround == true)
+		{
+			switch (Item0)
+			{
+				case "Energy":
+					GetEnergyUse(); Item0 = " ";
+					break;
+				case "Carrot":
+					GetCarrotUse(); Item0 = " ";
+					break;
+				case "Pickel":
+					GetPickelUse(); Item0 = " ";
+					break;
+				case "Torch":
+					GetTorchUse(); Item0 = " ";
+					break;
+			}
+		}
+		if (Input.GetKey(KeyCode.Alpha2) && StopInput == 0 && isGround == true)
+		{
+			switch (Item1)
+			{
+				case "Energy":
+					GetEnergyUse(); Item1 = " ";
+					break;
+				case "Carrot":
+					GetCarrotUse(); Item1 = " ";
+					break;
+				case "Pickel":
+					GetPickelUse(); Item1 = " ";
+					break;
+				case "Torch":
+					GetTorchUse(); Item1 = " ";
+					break;
+			}
+		}
+		Item0t.text = Item0;
+		Item1t.text = Item1;
+		if (Input.GetKeyDown(KeyCode.Q))
+		{
+			string Item2;
+			Item2 = Item0;
+			Item0 = Item1;
+			Item1 = Item2;
+		}
+
 	}
+
+
 
 	private void FixedUpdate()
 	{
@@ -230,6 +289,8 @@ public class Player : Photon.MonoBehaviour
 		
 		Debug.Log(scene.name + " scene loaded");
 	}
+
+
 
 	//プレイヤー移動
 	int Move()
@@ -420,11 +481,65 @@ public class Player : Photon.MonoBehaviour
 				playerAnimator.Play("playerDead");
 
 				break;
+
+			//エナドリ
+			case 7:
+				playerAnimator.Play("playerFlyaway");
+
+				break;
+
+			//人参
+			case 8:
+				playerAnimator.Play("playerCarrot");
+
+				break;
+
+			//斧
+			case 9:
+				playerAnimator.Play("playerPickel");
+
+				break;
 		};
 
 		transform.rotation = playerRot;
 		
 		return 0;
+	}
+
+	public void GetEnergyUse()      //エナドリanimation
+	{
+		StopMove = 1;
+		StopInput = 1;
+		animaNom = 7;
+		GetComponent<Rigidbody2D>();
+		Debug.Log("Redbull");
+	}
+	public void GetCarrotUse()      //人参animation
+	{
+		StopMove = 1;
+		StopInput = 1;
+		animaNom = 8;
+		Debug.Log("NINJIN");
+	}
+	public void GetPickelUse()
+	{
+		StopMove = 1;
+		StopInput = 1;
+		animaNom = 9;
+		Debug.Log("PIKERU");
+	}
+	public void GetTorchUse()
+	{
+		StopMove = 1;
+		StopInput = 1;
+		animaNom = 10;
+		Debug.Log("TAIMATU");
+	}
+
+	public void stpMove()          //移動制御false>true
+	{
+		StopMove = 0;
+		StopInput = 0;
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)

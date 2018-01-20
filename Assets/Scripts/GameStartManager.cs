@@ -20,7 +20,7 @@ public class GameStartManager : Photon.MonoBehaviour{
 
 		if (gameStart == true)
 		{
-			SceneManager.LoadScene("StageMatsubara");
+			SceneManager.LoadScene("Stage01");
 		}
 	}
 
