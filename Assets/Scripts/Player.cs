@@ -74,7 +74,6 @@ public class Player : Photon.MonoBehaviour
 		}
 		catch {
 			actID = 0;
-			Instantiate(playerPre);
 		}
 		
 		//actID = int.Parse(this.gameObject.tag.Substring(6));

@@ -34811,7 +34811,7 @@ Prefab:
       objectReference: {fileID: 1210861572}
     - target: {fileID: 1725867795662406, guid: 470e94124d0e7de4082d5583b0483b1a, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114823515608356878, guid: 470e94124d0e7de4082d5583b0483b1a,
         type: 2}
@@ -34872,6 +34872,12 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114823515608356878, guid: 470e94124d0e7de4082d5583b0483b1a,
+        type: 2}
+      propertyPath: playerPre
+      value: 
+      objectReference: {fileID: 1566602773250982, guid: b7fb7691c4fa4154ea58fc09253ed9dc,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 470e94124d0e7de4082d5583b0483b1a, type: 2}
   m_IsPrefabParent: 0
