@@ -6,11 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class Player : Photon.MonoBehaviour
 {
+	[SerializeField]
+	private GameObject playerPre; //ソロ用のプレイヤー
 
 	[SerializeField]
 	private GameObject player;	
 	[SerializeField]
 	private Animator playerAnimator;
+
 
 	private GameObject[] startPos = new GameObject[2];
 
@@ -66,7 +69,14 @@ public class Player : Photon.MonoBehaviour
 
 	void Awake()
 	{
-		actID = GameObject.Find("PhotonManager").GetComponent<PhotonManager>().actID;
+		try {
+			actID = GameObject.Find("PhotonManager").GetComponent<PhotonManager>().actID;
+		}
+		catch {
+			actID = 0;
+			Instantiate(playerPre);
+		}
+		
 		//actID = int.Parse(this.gameObject.tag.Substring(6));
 		//プレイヤーのタグの末尾をintにしてプレイヤーIDとして設定
 		playerID = int.Parse(player.tag.Substring(6));
@@ -105,7 +115,9 @@ public class Player : Photon.MonoBehaviour
 	
 	// Update is called once per frame
 	void Update ()
-	{		
+	{
+		//Debug.Log(animaNom);
+
 		//マルチでのルーム内のキャラの引き継ぎ
 		if (actID != -1)
 		{
@@ -254,7 +266,8 @@ public class Player : Photon.MonoBehaviour
 		}
 		Item0t.text = Item0;
 		Item1t.text = Item1;
-		if (Input.GetKeyDown(KeyCode.Q))
+
+		if (Input.GetKeyDown(KeyCode.E))
 		{
 			string Item2;
 			Item2 = Item0;
@@ -274,7 +287,7 @@ public class Player : Photon.MonoBehaviour
 	//シーン読み込みデリゲート
 	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 	{
-		if(SceneManager.GetActiveScene().name== "StageMatsubara")//現在のシーンがステージシーンであるか？
+		if(SceneManager.GetActiveScene().name== "Stage01")//現在のシーンがステージシーンであるか？
 		{
 			//player = GameObject.FindWithTag("Player" + actID);
 			//プレイヤーのスタートPos
@@ -295,7 +308,7 @@ public class Player : Photon.MonoBehaviour
 	//プレイヤー移動
 	int Move()
 	{
-		if (specialAction == false)
+		if (specialAction == false && StopMove == 0)
 		{
 			if (isClimb == false)
 			{
@@ -388,8 +401,15 @@ public class Player : Photon.MonoBehaviour
 
 	void Dead()
 	{
+		if (animaNom == 7)
+		{
+			player.GetComponent<BoxCollider2D>().isTrigger = true;
+			isGround = false;
+			playerPos.y += 0.05f;
+			return;
+		}
 
-		if (animaNom != 6&& animaNom != 5)
+		if (animaNom != 6&& animaNom != 5 &&animaNom != 7)
 		{
 			animaNom = 5;
 		}
@@ -401,6 +421,8 @@ public class Player : Photon.MonoBehaviour
 			return;
 
 		}
+
+		
 
 		//float interval = 0.2f;   // 点滅周期
 
@@ -494,7 +516,7 @@ public class Player : Photon.MonoBehaviour
 
 				break;
 
-			//斧
+			//ピッケル
 			case 9:
 				playerAnimator.Play("playerPickel");
 
@@ -511,29 +533,30 @@ public class Player : Photon.MonoBehaviour
 		StopMove = 1;
 		StopInput = 1;
 		animaNom = 7;
-		GetComponent<Rigidbody2D>();
-		Debug.Log("Redbull");
+		//GetComponent<BoxCollider2D>().enabled = false;
+		isDead = true;
+		//Debug.Log("Redbull");
 	}
 	public void GetCarrotUse()      //人参animation
 	{
 		StopMove = 1;
 		StopInput = 1;
 		animaNom = 8;
-		Debug.Log("NINJIN");
+		//Debug.Log("NINJIN");
 	}
 	public void GetPickelUse()
 	{
 		StopMove = 1;
 		StopInput = 1;
 		animaNom = 9;
-		Debug.Log("PIKERU");
+		//Debug.Log("PIKERU");
 	}
 	public void GetTorchUse()
 	{
 		StopMove = 1;
 		StopInput = 1;
 		animaNom = 10;
-		Debug.Log("TAIMATU");
+		//Debug.Log("TAIMATU");
 	}
 
 	public void stpMove()          //移動制御false>true

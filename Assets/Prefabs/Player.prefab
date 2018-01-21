@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 50266494116093000}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Player
+  m_TagString: Player0
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,9 +143,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 564fe747e45ad7c449447fc7930ea73e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPre: {fileID: 1566602773250982}
   player: {fileID: 1566602773250982}
   playerAnimator: {fileID: 95264028076136490}
+  actID: 0
+  playerID: 0
+  playerState: 0
+  InputDet: 0
+  animaNom: 0
+  specialAction: 0
+  animationTime: 0
+  isGround: 0
+  jumpTopPos: 0
+  speed: 0.06
+  noGroundPos: 0
+  onGroundPos: 0
   isDead: 1
+  isClimb: 0
+  isJump: 0
+  isGoal: 0
+  Item0: 
+  Item1: 
+  Item0t: {fileID: 0}
+  Item1t: {fileID: 0}
 --- !u!212 &212878862364992832
 SpriteRenderer:
   m_ObjectHideFlags: 1

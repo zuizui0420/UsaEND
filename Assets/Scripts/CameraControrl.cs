@@ -12,7 +12,15 @@ public class CameraControrl : MonoBehaviour {
 
 	void Awake()
 	{
-		actID = GameObject.Find("PhotonManager").GetComponent<PhotonManager>().actID;
+		try {
+
+			actID = GameObject.Find("PhotonManager").GetComponent<PhotonManager>().actID;
+
+		}
+		catch {
+			actID = 0;
+		}
+		
 	}
 
 	// Use this for initialization

@@ -83,7 +83,7 @@ public class ItemUi : MonoBehaviour
 		{
 			Item1sprite.GetComponent<Image>().sprite = nullimg;
 		}
-		if (Input.GetKeyDown(KeyCode.Q))
+		if (Input.GetKeyDown(KeyCode.E))
 		{
 			Sprite Item2sprite;
 			Item2sprite = Item0sprite.GetComponent<Image>().sprite;

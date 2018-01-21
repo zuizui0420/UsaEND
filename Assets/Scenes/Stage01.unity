@@ -10699,7 +10699,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 578298047}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6890627098b8ee448ff72db2937bb47, type: 3}
   m_Name: 
@@ -34759,11 +34759,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4896683142156752, guid: 470e94124d0e7de4082d5583b0483b1a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -17.4
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 4896683142156752, guid: 470e94124d0e7de4082d5583b0483b1a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 8.6
+      value: 24.4
       objectReference: {fileID: 0}
     - target: {fileID: 4896683142156752, guid: 470e94124d0e7de4082d5583b0483b1a, type: 2}
       propertyPath: m_LocalPosition.z
@@ -34811,7 +34811,7 @@ Prefab:
       objectReference: {fileID: 1210861572}
     - target: {fileID: 1725867795662406, guid: 470e94124d0e7de4082d5583b0483b1a, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114823515608356878, guid: 470e94124d0e7de4082d5583b0483b1a,
         type: 2}
@@ -34840,32 +34840,37 @@ Prefab:
     - target: {fileID: 212124747673536860, guid: 470e94124d0e7de4082d5583b0483b1a,
         type: 2}
       propertyPath: m_Size.x
-      value: 3.49
+      value: 5.26
       objectReference: {fileID: 0}
     - target: {fileID: 212124747673536860, guid: 470e94124d0e7de4082d5583b0483b1a,
         type: 2}
       propertyPath: m_Size.y
-      value: 6.34
+      value: 6.37
       objectReference: {fileID: 0}
     - target: {fileID: 61739066531766146, guid: 470e94124d0e7de4082d5583b0483b1a,
         type: 2}
       propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 3.49
+      value: 5.26
       objectReference: {fileID: 0}
     - target: {fileID: 61739066531766146, guid: 470e94124d0e7de4082d5583b0483b1a,
         type: 2}
       propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 6.34
+      value: 6.37
       objectReference: {fileID: 0}
     - target: {fileID: 61071154079434426, guid: 470e94124d0e7de4082d5583b0483b1a,
         type: 2}
       propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 3.49
+      value: 5.26
       objectReference: {fileID: 0}
     - target: {fileID: 61071154079434426, guid: 470e94124d0e7de4082d5583b0483b1a,
         type: 2}
       propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 6.34
+      value: 6.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 61071154079434426, guid: 470e94124d0e7de4082d5583b0483b1a,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 470e94124d0e7de4082d5583b0483b1a, type: 2}
