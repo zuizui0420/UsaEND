@@ -30,18 +30,19 @@ public class LaserMove : MonoBehaviour
 		if(hit.collider.tag == "Player0")
 		{
 			//プレイヤーの死亡イベント読み込み
+			hit.collider.GetComponent<Player>().isDead = true;
 		}
 		//Debug.Log(hit.collider.tag);
     }
     private void FixedUpdate()
     {
         if (flip){
-            transform.position += new Vector3(0.1f, 0, 0);
+            transform.position += new Vector3(0.07f, 0, 0);
             if (transform.position.x >= maxpos)
                 flip = false;
         }
         else{
-            transform.position -= new Vector3(0.1f, 0, 0);
+            transform.position -= new Vector3(0.07f, 0, 0);
             if (transform.position.x <= minpos)
                 flip = true;
         }

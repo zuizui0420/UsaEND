@@ -48,6 +48,7 @@ public class Player : Photon.MonoBehaviour
 	public float noGroundPos;//離陸地点
 	public float onGroundPos;//着地地点
 	private Rigidbody2D rig;
+	public bool isDying;
 	public bool isDead;
 	public bool isClimb;
 	public bool isJump;
@@ -62,7 +63,6 @@ public class Player : Photon.MonoBehaviour
 
 	//Item Ui
 	public string Item0, Item1;
-	public Text Item0t, Item1t;
 
 	//デバック用
 	private float nextTime;
@@ -115,7 +115,6 @@ public class Player : Photon.MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		//Debug.Log(animaNom);
 
 		//マルチでのルーム内のキャラの引き継ぎ
 		if (actID != -1)
@@ -145,21 +144,43 @@ public class Player : Photon.MonoBehaviour
 		//リスタート
 		if (animaNom == 6 && animationTime >= 60)
 		{
-			isDead = false;
+			
 			StartCoroutine("Restart");
 			return;
 		}
 
-		if (isDead == true)
+		//if (isDead == true)
+		//{
+		//	//Dead();
+		//	Dying();
+		//	return;
+		//}
+		//
+
+		//プレイヤーがエナジードリンクを使ったら
+		if(animaNom == 7)
 		{
-			Dead();
+			FlyAway();
+		}
+		
+		if(isDead == true)
+		{
+			return;
+		}
+
+		//他のスクリプトから読み出したときはここでDying()を実行(Dyingメソッドの処理が重なるため)
+		if(isDying == true)
+		{
+			Dying();
 			return;
 		}
 
 		//高さ4以上で死ぬ
 		if (noGroundPos - onGroundPos >= 4 /*|| jumpTopPos-onGroundPos>=4*/)
 		{
-			isDead = true;
+			Dying();
+			return;
+			//isDead = true;
 		}
 
 		//ゴール後
@@ -189,7 +210,7 @@ public class Player : Photon.MonoBehaviour
 		{
 			
 			playerPos.y -= 0.1f;
-			if (isJump == false)
+			if (isJump == false&&specialAction == false)
 			{
 				animaNom = 4;
 				speed = 0.02f;
@@ -263,8 +284,7 @@ public class Player : Photon.MonoBehaviour
 					break;
 			}
 		}
-		Item0t.text = Item0;
-		Item1t.text = Item1;
+		
 
 		if (Input.GetKeyDown(KeyCode.E))
 		{
@@ -367,6 +387,7 @@ public class Player : Photon.MonoBehaviour
 			playerPos += Vector2.up * speed;
 			InputDet = 3;
 			onGroundPos = player.gameObject.transform.position.y;
+			noGroundPos = player.gameObject.transform.position.y;
 		}
 		else if (Input.GetKey("down"))
 		{
@@ -374,6 +395,7 @@ public class Player : Photon.MonoBehaviour
 			playerPos += Vector2.down * speed;
 			InputDet = 4;
 			onGroundPos = player.gameObject.transform.position.y;
+			noGroundPos = player.gameObject.transform.position.y;
 		}		
 		else
 		{
@@ -397,53 +419,75 @@ public class Player : Photon.MonoBehaviour
 		}
 	}
 
-
-	void Dead()
+	public void Dying()
 	{
-		if (animaNom == 7)
-		{
-			player.GetComponent<BoxCollider2D>().isTrigger = true;
-			isGround = false;
-			playerPos.y += 0.05f;
-			return;
-		}
-
-		if (animaNom != 6&& animaNom != 5 &&animaNom != 7)
+		if (isDead == false)
 		{
 			animaNom = 5;
 		}
-
-
-		else if (animationTime >= 1.0f)
-		{
-			animaNom = 6;
-			return;
-
-		}
-
-		
-
-		//float interval = 0.2f;   // 点滅周期
-
-		//SpriteRenderer renderer = GetComponent<SpriteRenderer>();
-
-		//if (Time.time >= nextTime)
-		//{
-		//	renderer.enabled = !renderer.enabled;
-
-		//	nextTime += interval;
-		//}
-
-		//Animation(animaNom);
-
-
 	}
+
+	void Dead()
+	{
+		isDead = true;
+		isDying = false;
+		animaNom = 6;
+	}
+
+	void FlyAway()
+	{
+		player.GetComponent<BoxCollider2D>().isTrigger = true;
+		isGround = false;
+		playerPos.y += 0.05f;
+		isDead = true;
+	}
+
+	//public void Dead()
+	//{
+	//	if (animaNom == 7)
+	//	{
+	//		player.GetComponent<BoxCollider2D>().isTrigger = true;
+	//		isGround = false;
+	//		playerPos.y += 0.05f;
+	//		return;
+	//	}
+
+	//	if (animaNom != 6&& animaNom != 5 &&animaNom != 7)
+	//	{
+	//		animaNom = 5;
+	//	}
+
+
+	//	else if (animationTime >= 1.0f&& animaNom == 5)
+	//	{
+	//		animaNom = 6;
+	//		return;
+
+	//	}
+
+
+
+	//	//float interval = 0.2f;   // 点滅周期
+
+	//	//SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+
+	//	//if (Time.time >= nextTime)
+	//	//{
+	//	//	renderer.enabled = !renderer.enabled;
+
+	//	//	nextTime += interval;
+	//	//}
+
+	//	//Animation(animaNom);
+
+
+	//}
 
 	IEnumerator Restart()
 	{
-		//isDead = false;
 		playerPos = GameObject.Find("StartPos" + 0).GetComponent<Transform>().transform.position;
 		animaNom = 0;
+		isDead = false;
 		
 		yield break;
 	}
@@ -529,11 +573,11 @@ public class Player : Photon.MonoBehaviour
 
 	public void GetEnergyUse()      //エナドリanimation
 	{
+		specialAction = true;
 		StopMove = 1;
 		StopInput = 1;
 		animaNom = 7;
 		//GetComponent<BoxCollider2D>().enabled = false;
-		isDead = true;
 		//Debug.Log("Redbull");
 	}
 	public void GetCarrotUse()      //人参animation
@@ -579,6 +623,13 @@ public class Player : Photon.MonoBehaviour
 		{
 			isGoal = true;
 		}
+
+		if(other.gameObject.tag == "MainCamera")
+		{
+			animaNom = 6;
+			stpMove();
+			
+		}
 	}
 
 	private void OnTriggerStay2D(Collider2D collision)
@@ -613,9 +664,11 @@ public class Player : Photon.MonoBehaviour
 		{
 			isClimb = false;
 			isGround = false;
-			noGroundPos = player.transform.position.y;
+			//noGroundPos = player.transform.position.y;//ジャンプすることで梯子から脱するのでここはいらないはず
 
 		}
+
+
 	}
 
 

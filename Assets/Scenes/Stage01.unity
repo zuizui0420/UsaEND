@@ -2270,11 +2270,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4545705525804700, guid: 90f7cc819d0e0184898a278ca780678a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -11
+      value: -26.39
       objectReference: {fileID: 0}
     - target: {fileID: 4545705525804700, guid: 90f7cc819d0e0184898a278ca780678a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 25
+      value: 23.97
       objectReference: {fileID: 0}
     - target: {fileID: 4545705525804700, guid: 90f7cc819d0e0184898a278ca780678a, type: 2}
       propertyPath: m_LocalPosition.z
@@ -13206,6 +13206,7 @@ GameObject:
   - component: {fileID: 680958372}
   - component: {fileID: 680958371}
   - component: {fileID: 680958376}
+  - component: {fileID: 680958377}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -13296,6 +13297,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anchorTopLeft: {fileID: 1747540484}
   anchorBottomRight: {fileID: 1019000030}
+--- !u!61 &680958377
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 680958370}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.01708889, y: 7.601269}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 18.809118, y: 1.233181}
+  m_EdgeRadius: 0
 --- !u!1 &683017751
 GameObject:
   m_ObjectHideFlags: 0
@@ -33461,9 +33487,10 @@ GameObject:
   - component: {fileID: 1722019690}
   - component: {fileID: 1722019693}
   - component: {fileID: 1722019692}
+  - component: {fileID: 1722019694}
   m_Layer: 0
   m_Name: Items01_11 (4)
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33553,9 +33580,20 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1722019689}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f380b85cd3399e4f8023795f8fdafea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1722019694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1722019689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc3ee456e917b004093ee3fd20d6aba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1722166323
@@ -34759,11 +34797,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4896683142156752, guid: 470e94124d0e7de4082d5583b0483b1a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -24.75
+      value: -21.1
       objectReference: {fileID: 0}
     - target: {fileID: 4896683142156752, guid: 470e94124d0e7de4082d5583b0483b1a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 8.44
+      value: 24.5
       objectReference: {fileID: 0}
     - target: {fileID: 4896683142156752, guid: 470e94124d0e7de4082d5583b0483b1a, type: 2}
       propertyPath: m_LocalPosition.z

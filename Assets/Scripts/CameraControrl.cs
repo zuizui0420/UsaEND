@@ -7,6 +7,7 @@ public class CameraControrl : MonoBehaviour {
 	private Vector3 offset;
 	public Transform anchorTopLeft;
 	public Transform anchorBottomRight;
+	private int playerAnimNom;
 
 	int actID = 0;//ルーム内のプレイヤーID
 
@@ -30,13 +31,17 @@ public class CameraControrl : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		
+
+		playerAnimNom = player.GetComponent<Player>().animaNom;
 	}
 
 	void FixedUpdate()
 	{
-		TrackPlayer();
-	
+		if(playerAnimNom != 7 && playerAnimNom != 6)
+		{
+			TrackPlayer();
+		}
+		
 	}
 
 
