@@ -30,7 +30,7 @@ public class LaserMove : MonoBehaviour
 		if(hit.collider.tag == "Player0")
 		{
 			//プレイヤーの死亡イベント読み込み
-			hit.collider.GetComponent<Player>().isDead = true;
+			hit.collider.GetComponent<Player>().isDying = true;
 		}
 		//Debug.Log(hit.collider.tag);
     }

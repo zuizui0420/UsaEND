@@ -360,7 +360,7 @@ public class Player : Photon.MonoBehaviour
 				animaNom = 2;
 				Animation(animaNom);
 				jumpTopPos = playerPos.y + 3.0f;
-				noGroundPos = jumpTopPos;
+				noGroundPos = jumpTopPos-1;
 			}
 
 		}
@@ -657,7 +657,10 @@ public class Player : Photon.MonoBehaviour
 		if (collision.gameObject.tag == "Stage")
 		{
 			isGround = false;
-			noGroundPos = player.transform.position.y;
+			if (isJump == false)
+			{
+				noGroundPos = player.transform.position.y;
+			}
 		}
 
 		else if (collision.gameObject.tag == "Ladder")
