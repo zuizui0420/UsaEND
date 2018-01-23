@@ -115,7 +115,7 @@ public class Player : Photon.MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-
+		Debug.Log(noGroundPos - onGroundPos);
 		//マルチでのルーム内のキャラの引き継ぎ
 		if (actID != -1)
 		{
@@ -176,7 +176,7 @@ public class Player : Photon.MonoBehaviour
 		}
 
 		//高さ4以上で死ぬ
-		if (noGroundPos - onGroundPos > 4 /*|| jumpTopPos-onGroundPos>=4*/)
+		if (noGroundPos - onGroundPos >= 4 /*|| jumpTopPos-onGroundPos>=4*/)
 		{
 			Dying();
 			return;
@@ -263,24 +263,6 @@ public class Player : Photon.MonoBehaviour
 					break;
 				case "Torch":
 					GetTorchUse(); Item0 = " ";
-					break;
-			}
-		}
-		if (Input.GetKey(KeyCode.Alpha2) && StopInput == 0 && isGround == true)
-		{
-			switch (Item1)
-			{
-				case "Energy":
-					GetEnergyUse(); Item1 = " ";
-					break;
-				case "Carrot":
-					GetCarrotUse(); Item1 = " ";
-					break;
-				case "Pickel":
-					GetPickelUse(); Item1 = " ";
-					break;
-				case "Torch":
-					GetTorchUse(); Item1 = " ";
 					break;
 			}
 		}
@@ -489,6 +471,7 @@ public class Player : Photon.MonoBehaviour
 	IEnumerator Restart()
 	{
 		playerPos = GameObject.Find("StartPos" + 0).GetComponent<Transform>().transform.position;
+		player.GetComponent<BoxCollider2D>().isTrigger = false;
 		animaNom = 0;
 		isDead = false;
 		
@@ -649,7 +632,7 @@ public class Player : Photon.MonoBehaviour
 			{
 				isClimb = true;
 				ladderPos = collision.gameObject.transform.position;
-				onGroundPos = player.transform.position.y;
+				//onGroundPos = player.transform.position.y;
 			}
 
 		}
