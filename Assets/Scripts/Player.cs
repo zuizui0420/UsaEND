@@ -176,7 +176,7 @@ public class Player : Photon.MonoBehaviour
 		}
 
 		//高さ4以上で死ぬ
-		if (noGroundPos - onGroundPos >= 4 /*|| jumpTopPos-onGroundPos>=4*/)
+		if (noGroundPos - onGroundPos > 4 /*|| jumpTopPos-onGroundPos>=4*/)
 		{
 			Dying();
 			return;
@@ -360,7 +360,7 @@ public class Player : Photon.MonoBehaviour
 				animaNom = 2;
 				Animation(animaNom);
 				jumpTopPos = playerPos.y + 3.0f;
-				noGroundPos = jumpTopPos-1;
+				noGroundPos = jumpTopPos;
 			}
 
 		}
@@ -413,6 +413,7 @@ public class Player : Photon.MonoBehaviour
 			animaNom = 2;
 			Animation(animaNom);
 			jumpTopPos = playerPos.y + 3.0f;
+			noGroundPos = jumpTopPos;
 			isClimb = false;
 			isGround = false;
 
@@ -421,9 +422,11 @@ public class Player : Photon.MonoBehaviour
 
 	public void Dying()
 	{
+		
 		if (isDead == false)
 		{
 			animaNom = 5;
+			specialAction = true;
 		}
 	}
 
