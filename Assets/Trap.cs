@@ -1,14 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 
-public class StageSelect : MonoBehaviour {
-
-    public void OnStargeButtanClicke()
-    {
-        Application.LoadLevel("StageMao");
-    }
+public class Trap : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
