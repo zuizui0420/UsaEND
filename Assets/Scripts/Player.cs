@@ -52,6 +52,7 @@ public class Player : Photon.MonoBehaviour
 	public bool isDead;
 	public bool isClimb;
 	public bool isJump;
+	int i = 0;
 
 	public bool isGoal = false;
 
@@ -115,7 +116,7 @@ public class Player : Photon.MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		Debug.Log(noGroundPos - onGroundPos);
+		//Debug.Log(noGroundPos - onGroundPos);
 		//マルチでのルーム内のキャラの引き継ぎ
 		if (actID != -1)
 		{
@@ -162,29 +163,29 @@ public class Player : Photon.MonoBehaviour
 		{
 			FlyAway();
 		}
-		
-		if(isDead == true)
-		{
-			return;
-		}
 
 		//他のスクリプトから読み出したときはここでDying()を実行(Dyingメソッドの処理が重なるため)
 		if(isDying == true)
 		{
 			Dying();
-			return;
+			
 		}
 
 		//高さ4以上で死ぬ
 		if (noGroundPos - onGroundPos >= 4 /*|| jumpTopPos-onGroundPos>=4*/)
 		{
 			Dying();
-			return;
+			
 			//isDead = true;
 		}
 
+		if (isDead == true)
+		{
+			return;
+		}
+
 		//ゴール後
-		if(isGoal == true)
+		if (isGoal == true)
 		{
 			SceneManager.LoadScene("GoalScene");
 		}
@@ -404,11 +405,13 @@ public class Player : Photon.MonoBehaviour
 
 	public void Dying()
 	{
-		
 		if (isDead == false)
 		{
 			animaNom = 5;
 			specialAction = true;
+			isDead = true;
+			i++;
+			Debug.Log(i);
 		}
 	}
 
@@ -416,7 +419,9 @@ public class Player : Photon.MonoBehaviour
 	{
 		isDead = true;
 		isDying = false;
+			
 		animaNom = 6;
+
 	}
 
 	void FlyAway()

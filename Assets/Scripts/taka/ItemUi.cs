@@ -24,6 +24,7 @@ public class ItemUi : MonoBehaviour
 
 	private void Start()
 	{
+		//各アイテムのスプライト画像を保存
 		Energyimg = Energy.GetComponent<SpriteRenderer>().sprite;
 		Carrotimg = Carrot.GetComponent<SpriteRenderer>().sprite;
 		Pickelimg = Pickel.GetComponent<SpriteRenderer>().sprite;
@@ -32,8 +33,11 @@ public class ItemUi : MonoBehaviour
 	}
 	void Update()
 	{
+		//プレイヤーの所持アイテムをここで読み込む
 		Item0st = player.GetComponent<Player>().Item0;
 		Item1st = player.GetComponent<Player>().Item1;
+
+		//アイテムボックス０のアイテム
 		switch (Item0st)
 		{
 			case "Energy":
@@ -56,6 +60,8 @@ public class ItemUi : MonoBehaviour
 				Actionbtn.GetComponent<Image>().sprite = TorchACT; Item0num = 1;
 				break;
 		}
+
+		//アイテムボックス１のアイテム
 		switch (Item1st)
 		{
 			case "Energy":
