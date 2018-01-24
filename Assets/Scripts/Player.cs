@@ -477,8 +477,12 @@ public class Player : Photon.MonoBehaviour
 	{
 		playerPos = GameObject.Find("StartPos" + 0).GetComponent<Transform>().transform.position;
 		player.GetComponent<BoxCollider2D>().isTrigger = false;
-		animaNom = 0;
-		isDead = false;
+		if(player.transform.position == GameObject.Find("StartPos" + 0).GetComponent<Transform>().transform.position)
+		{
+			animaNom = 0;
+			isDead = false;
+		}
+		
 		
 		yield break;
 	}
