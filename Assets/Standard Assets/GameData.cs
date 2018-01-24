@@ -1,40 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 
-public class GameData {
-
-	public static int[] VariousData; //様々データ配列
-	public static int[] TrophyData;//トロフィーデータ配列
-
-	private static string data;
+[SerializeField]
+public class GameData : SaveblSingletonBase<GameData>
+{
+	string jsonData;
 
 	//各データ
-    static int gameStart;
-	static int deadCount;
-	static int needleDead;
+	[SerializeField]	
+    int gameStart;
+	[SerializeField]
+	int deadCount;
+	[SerializeField]
+	int needleDead;
 
-	static int GameState
+	public int GameStart
 	{
-		get { return VariousData[0]; }
-		set { VariousData[0] = value; }
-	}
-
-	static GameData()
-	{
-
-	}
-
-	/// <summary>
-	/// VariousData配列を初期化する.
-	/// </summary>
-	public static void InitVariousData()
-	{
-		for (int i = 0; i < VariousData.Length; i++)
-		{
-			VariousData[i] = 0;
-		}
+		get { return gameStart; }
+		set { gameStart = value; }
 
 	}
+	public int DeadCount
+	{
+		get { return deadCount; }
+		set { deadCount = value; }
+
+	}
+
+	public int NeedDead
+	{
+		get { return needleDead; }
+		set { needleDead = value; }
+	}
+
 }

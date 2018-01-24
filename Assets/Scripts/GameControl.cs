@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class GameControl : MonoBehaviour {
 
+	string filePath;
 	//[SerializeField] GameObject[] players = new GameObject[2];
 
 	GameObject player;
@@ -16,10 +17,18 @@ public class GameControl : MonoBehaviour {
 	//private int playerNom;
 	int playerAnimaNom;
 	float playerAnimaTime;
- 	//public bool gameStart;
+    GameData gameData = new GameData();
+	//public bool gameStart;
+
+	string json;
 
 	void Awake()
 	{
+
+		//ファイルパスを作る
+		filePath = Application.persistentDataPath;
+
+
 		////シーン間を引き継ぐ
 		//DontDestroyOnLoad(this);
 
@@ -29,25 +38,42 @@ public class GameControl : MonoBehaviour {
 		//	players[i] = GameObject.FindWithTag("Player"+i);
 		//}
 
-		
+
 	}
 
 
 	// Use this for initialization
 	void Start() {
-		player = GameObject.FindWithTag("Player"+0);
+
+		int i = 0;
+		GameData.Instance.GameStart++;
+		
+		GameData.Instance.Save();
+		
+		//player = GameObject.FindWithTag("Player"+0);
+
+		////gameData.GameStart = 1;
+		//gameData.DeadCount = 3;
+
+		//JsonUtility.FromJson<GameData>(json);
+		//Debug.Log(gameData.GameStart);
+
+		//json = JsonUtility.ToJson(gameData);
+		//Debug.Log(json);
+
 	}
 
 	// Update is called once per frame
-	void Update() {
-		playerAnimaNom = player.GetComponent<Player>().animaNom;
-		playerAnimaTime = player.GetComponent<Player>().animationTime;
+	void Update()
+	{       //playerAnimaNom = player.GetComponent<Player>().animaNom;
+			//playerAnimaTime = player.GetComponent<Player>().animationTime;
 
 		//if (playerAnimaNom >= 6 && playerAnimaTime>=100.0f)
 		//{
 		//	StartCoroutine("Restart");
 		//}
-	}
+	} 
+	
 
 	//public bool DeadFlag
 	//{

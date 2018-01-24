@@ -172,7 +172,7 @@ public class Player : Photon.MonoBehaviour
 		}
 
 		//高さ4以上で死ぬ
-		if (noGroundPos - onGroundPos >= 4 /*|| jumpTopPos-onGroundPos>=4*/)
+		if (noGroundPos - onGroundPos >= 4.1 /*|| jumpTopPos-onGroundPos>=4*/)
 		{
 			Dying();
 			
@@ -411,7 +411,6 @@ public class Player : Photon.MonoBehaviour
 			specialAction = true;
 			isDead = true;
 			i++;
-			Debug.Log(i);
 		}
 	}
 
@@ -619,12 +618,12 @@ public class Player : Photon.MonoBehaviour
 			isGoal = true;
 		}
 
-		if(other.gameObject.tag == "MainCamera")
-		{
-			animaNom = 6;
-			stpMove();
+		//if(other.gameObject.tag == "MainCamera")
+		//{
+		//	animaNom = 6;
+		//	stpMove();
 			
-		}
+		//}
 	}
 
 	private void OnTriggerStay2D(Collider2D collision)
@@ -663,6 +662,13 @@ public class Player : Photon.MonoBehaviour
 			isClimb = false;
 			isGround = false;
 			//noGroundPos = player.transform.position.y;//ジャンプすることで梯子から脱するのでここはいらないはず
+
+		}
+
+		if (collision.gameObject.tag == "MainCamera")
+		{
+			animaNom = 6;
+			stpMove();
 
 		}
 
