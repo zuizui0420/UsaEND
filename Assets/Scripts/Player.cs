@@ -53,6 +53,7 @@ public class Player : Photon.MonoBehaviour
 	public bool isClimb;
 	public bool isJump;
 	int i = 0;
+    public bool isRestart;
 
 	public bool isGoal = false;
 
@@ -143,7 +144,7 @@ public class Player : Photon.MonoBehaviour
 		Animation(animaNom);//アニメーション再生
 
 		//リスタート
-		if (animaNom == 6 && animationTime >= 60)
+		if (/*animaNom == 6 && animationTime >= 60*/isRestart)
 		{
 			
 			StartCoroutine("Restart");

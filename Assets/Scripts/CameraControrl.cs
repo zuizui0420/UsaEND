@@ -43,8 +43,6 @@ public class CameraControrl : MonoBehaviour {
 		}
 		
 	}
-
-
 	void TrackPlayer()
 	{
 		Vector3 newPosition = transform.position;

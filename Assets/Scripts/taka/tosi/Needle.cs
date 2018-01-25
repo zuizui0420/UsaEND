@@ -3,19 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Needle : MonoBehaviour {
-    bool walltouch;
-    bool moveNe;
-	bool stpps;
-	// Use this for initialization
-	void Start () {
+    GameObject needlecon;
+    public bool moveNe;
+    public bool playerhit;
+    public bool walltouch;
+	public bool stops;
+    float startpos;
+    // Use this for initialization
+    void Start () {
+        needlecon = transform.parent.gameObject;
+        startpos = transform.position.x;
+        playerhit = false;
         walltouch = true;
-        moveNe = false;
-		stpps = true;
+		stops = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (moveNe&&stpps)
+        if (moveNe&&stops)
         {
             if (walltouch)
             {
@@ -26,6 +31,19 @@ public class Needle : MonoBehaviour {
                     transform.position += new Vector3(0.04f, 0, 0);
             }
         }
+        //if (playerhit)
+        //{
+        //    if (startpos>=transform.position.x)
+        //    {
+        //        transform.position += new Vector3(0.1f, 0, 0);
+        //    }
+        //    else
+        //    {
+        //        NeedleCon nedcon = needlecon.GetComponent<NeedleCon>();
+        //        nedcon.StartCoroutine("NeedleMove");
+        //        playerhit = false;
+        //    }
+        //}
     }
     public void neel()
     {
@@ -34,7 +52,7 @@ public class Needle : MonoBehaviour {
     IEnumerator stoppsge()
     {
         yield return new WaitForSeconds(2);
-		stpps = true;
+		stops = true;
 		walltouch = !walltouch;
         yield break;
     }
@@ -42,8 +60,14 @@ public class Needle : MonoBehaviour {
 	{
         if (col.gameObject.tag == "Wall" || col.gameObject.tag =="Stage")
 		{
-			stpps = false;
+			stops = false;
 			StartCoroutine("stoppsge");
 		}
-	}
+        if (col.gameObject.tag == "Player0"||col.gameObject.tag=="Player1")
+        {
+            NeedleCon nedcon = needlecon.GetComponent<NeedleCon>();
+            stops = false;
+            nedcon.NeedleStops();
+        }
+    }
 }
