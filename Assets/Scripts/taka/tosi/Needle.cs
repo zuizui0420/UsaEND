@@ -40,7 +40,7 @@ public class Needle : MonoBehaviour {
     }
 	private void OnTriggerEnter2D(Collider2D col)
 	{
-		if (col.gameObject.tag == "Wall")
+        if (col.gameObject.tag == "Wall" || col.gameObject.tag =="Stage")
 		{
 			stpps = false;
 			StartCoroutine("stoppsge");
