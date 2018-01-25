@@ -150,14 +150,6 @@ public class Player : Photon.MonoBehaviour
 			return;
 		}
 
-		//if (isDead == true)
-		//{
-		//	//Dead();
-		//	Dying();
-		//	return;
-		//}
-		//
-
 		//プレイヤーがエナジードリンクを使ったら
 		if(animaNom == 7)
 		{
@@ -241,14 +233,6 @@ public class Player : Photon.MonoBehaviour
 			ClimbLadder();
 		}
 
-
-
-		//switch (playerState)
-		//{
-		//	case PLAYER_STATE.NOMAL:
-		//		break;
-		//		}
-
 		if (Input.GetKey(KeyCode.Alpha1) && StopInput == 0 && isGround == true)
 		{
 			switch (Item0)
@@ -315,7 +299,7 @@ public class Player : Photon.MonoBehaviour
 			if (isClimb == false)
 			{
 				//移動キー
-				if (Input.GetKey("left"))
+				if (Input.GetKey("left") || ButtonControl.isRight)
 				{
 					playerPos += Vector2.left * speed;
 					animaNom = -1;
@@ -596,7 +580,7 @@ public class Player : Photon.MonoBehaviour
 		//Debug.Log("TAIMATU");
 	}
 
-	public void stpMove()          //移動制御false>true
+	public void stpMove()  //移動制御false>true
 	{
 		StopMove = 0;
 		StopInput = 0;
@@ -617,13 +601,6 @@ public class Player : Photon.MonoBehaviour
 		{
 			isGoal = true;
 		}
-
-		//if(other.gameObject.tag == "MainCamera")
-		//{
-		//	animaNom = 6;
-		//	stpMove();
-			
-		//}
 	}
 
 	private void OnTriggerStay2D(Collider2D collision)
@@ -640,7 +617,6 @@ public class Player : Photon.MonoBehaviour
 			{
 				isClimb = true;
 				ladderPos = collision.gameObject.transform.position;
-				//onGroundPos = player.transform.position.y;
 			}
 
 		}

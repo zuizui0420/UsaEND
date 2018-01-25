@@ -12,28 +12,30 @@ public class GameData : SaveblSingletonBase<GameData>
 	//各データ
 	[SerializeField]	
     int gameStart;
-	[SerializeField]
-	int deadCount;
-	[SerializeField]
-	int needleDead;
-
 	public int GameStart
 	{
 		get { return gameStart; }
 		set { gameStart = value; }
-
 	}
+
+	[SerializeField]
+	int deadCount;
 	public int DeadCount
 	{
 		get { return deadCount; }
 		set { deadCount = value; }
-
 	}
 
+	[SerializeField]
+	int needleDead;
 	public int NeedDead
 	{
 		get { return needleDead; }
 		set { needleDead = value; }
 	}
+	
+	
 
+	
+	
 }
