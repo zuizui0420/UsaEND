@@ -5861,7 +5861,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 329578376}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f380b85cd3399e4f8023795f8fdafea, type: 3}
+  m_Script: {fileID: 11500000, guid: bc3ee456e917b004093ee3fd20d6aba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!61 &329578380
@@ -8429,7 +8429,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 468948922}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f380b85cd3399e4f8023795f8fdafea, type: 3}
+  m_Script: {fileID: 11500000, guid: bc3ee456e917b004093ee3fd20d6aba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!61 &468948926
@@ -14857,7 +14857,7 @@ GameObject:
   - component: {fileID: 761171383}
   m_Layer: 0
   m_Name: Items01_7
-  m_TagString: Untagged
+  m_TagString: Ladder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22643,6 +22643,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1111749706}
   - component: {fileID: 1111749705}
+  - component: {fileID: 1111749708}
+  - component: {fileID: 1111749707}
   m_Layer: 0
   m_Name: map_v2.1_1
   m_TagString: Untagged
@@ -22704,6 +22706,42 @@ Transform:
   m_Father: {fileID: 1870711711}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1111749707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1111749704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc3ee456e917b004093ee3fd20d6aba4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &1111749708
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1111749704}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0011196136, y: -0.0042635202}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.0147059, y: 1.1617647}
+    newSize: {x: 1, y: 1.1449275}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.67749405, y: 1.1532376}
+  m_EdgeRadius: 0
 --- !u!1 &1113450187
 GameObject:
   m_ObjectHideFlags: 0
@@ -35367,11 +35405,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4896683142156752, guid: 470e94124d0e7de4082d5583b0483b1a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -21.1
+      value: -23.75
       objectReference: {fileID: 0}
     - target: {fileID: 4896683142156752, guid: 470e94124d0e7de4082d5583b0483b1a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 24.5
+      value: 18.7
       objectReference: {fileID: 0}
     - target: {fileID: 4896683142156752, guid: 470e94124d0e7de4082d5583b0483b1a, type: 2}
       propertyPath: m_LocalPosition.z
@@ -35571,6 +35609,7 @@ GameObject:
   - component: {fileID: 1778752054}
   - component: {fileID: 1778752055}
   - component: {fileID: 1778752056}
+  - component: {fileID: 1778752053}
   m_Layer: 0
   m_Name: Items01_11
   m_TagString: Untagged
@@ -35633,6 +35672,17 @@ Transform:
   m_Father: {fileID: 40735175}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!114 &1778752053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1778752050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc3ee456e917b004093ee3fd20d6aba4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &1778752054
 BoxCollider2D:
   m_ObjectHideFlags: 0
