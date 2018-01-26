@@ -53,6 +53,7 @@ public class Player : Photon.MonoBehaviour
 	public bool isClimb;
 	public bool isJump;
 	int i = 0;
+	public bool isRestart = false;
 
 	public bool isGoal = false;
 
@@ -143,11 +144,12 @@ public class Player : Photon.MonoBehaviour
 		Animation(animaNom);//アニメーション再生
 
 		//リスタート
-		if (animaNom == 6 && animationTime >= 60)
+		if (/*animaNom == 6 && animationTime >= 60*/isRestart)
 		{
 			
 			StartCoroutine("Restart");
-			return;
+			
+			
 		}
 
 		//プレイヤーがエナジードリンクを使ったら
@@ -209,12 +211,12 @@ public class Player : Photon.MonoBehaviour
 				speed = 0.02f;
 			}
 			
-			if (Input.GetKey("left"))
+			if (Input.GetKey("left") || ButtonControl.isLeft)
 			{
 				playerPos += Vector2.left * speed;
 				playerRot.y = 0;
 			}
-			else if (Input.GetKey("right"))
+			else if (Input.GetKey("right") || ButtonControl.isRight)
 			{
 				playerPos += Vector2.right * speed;
 				playerRot.y = -180;
@@ -299,13 +301,13 @@ public class Player : Photon.MonoBehaviour
 			if (isClimb == false)
 			{
 				//移動キー
-				if (Input.GetKey("left") || ButtonControl.isRight)
+				if (Input.GetKey("left") || ButtonControl.isLeft)
 				{
 					playerPos += Vector2.left * speed;
 					animaNom = -1;
 				}
 
-				else if (Input.GetKey("right"))
+				else if (Input.GetKey("right") || ButtonControl.isRight)
 				{
 					playerPos += Vector2.right * speed;
 					animaNom = 1;
@@ -317,7 +319,7 @@ public class Player : Photon.MonoBehaviour
 				}
 			}
 			//ジャンプキー
-			if (Input.GetKeyDown(KeyCode.S))
+			if (Input.GetKeyDown(KeyCode.S) || ButtonControl.isJump)
 			{
 				//isClimb = false;
 				isJump = true;
@@ -348,7 +350,7 @@ public class Player : Photon.MonoBehaviour
 		playerPos.x = Mathf.Lerp(playerPos.x, ladderPos.x, 0.2f);
 
 
-		if (Input.GetKey("up"))
+		if (Input.GetKey("up") )
 		{
 			playerAnimator.speed = 1;
 			playerPos += Vector2.up * speed;
@@ -371,7 +373,7 @@ public class Player : Photon.MonoBehaviour
 		}
 
 		//ジャンプキー
-		if (Input.GetKeyDown(KeyCode.S))
+		if (Input.GetKeyDown(KeyCode.S) || ButtonControl.isJump)
 		{
 			playerAnimator.speed = 1;//アニメーションが止まるのでここで強制的にアニメーションを動かす
 			InputDet = 4;
@@ -460,13 +462,14 @@ public class Player : Photon.MonoBehaviour
 	{
 		playerPos = GameObject.Find("StartPos" + 0).GetComponent<Transform>().transform.position;
 		player.GetComponent<BoxCollider2D>().isTrigger = false;
-		if(player.transform.position == GameObject.Find("StartPos" + 0).GetComponent<Transform>().transform.position)
-		{
-			animaNom = 0;
-			isDead = false;
-		}
-		
-		
+		//if(player.transform.position == GameObject.Find("StartPos" + 0).GetComponent<Transform>().transform.position)
+		//{
+		//	animaNom = 0;
+		//	isDead = false;
+		//}
+
+		animaNom = 0;
+		isDead = false;
 		yield break;
 	}
 

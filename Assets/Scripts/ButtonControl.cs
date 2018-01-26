@@ -22,18 +22,39 @@ public class ButtonControl : MonoBehaviour {
 	public void OnClickLeft()
 	{
 		Debug.Log("Left click!");
+		isLeft = true;
 
+	}
+
+	public void UpClickLeft()
+	{
+		isLeft = false;
 	}
 	public void OnClickRight()
 	{
 		Debug.Log("Right click!");
+		isRight = true;
+	}
+	public void UpClickRight()
+	{
+		isRight = false;
 	}
 	public void OnClickAction()
 	{
 		Debug.Log("Action click!");
+		isAction= true;
+	}
+	public void UpClickAction()
+	{
+		isAction = false;
 	}
 	public void OnClickJump()
 	{
 		Debug.Log("Jump click!");
+		isJump = true;
+	}
+	public void UpClickJump()
+	{
+		isJump = false;
 	}
 }
