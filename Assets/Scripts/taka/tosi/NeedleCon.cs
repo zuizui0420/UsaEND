@@ -4,16 +4,25 @@ using UnityEngine;
 
 public class NeedleCon : MonoBehaviour {
     GameObject player;
+    Player players;
     //GameObject player1;
     // Use this for initialization
     void Start () {
         StartCoroutine("NeedleMove");
         player = GameObject.FindWithTag("Player0" );
+        players = player.GetComponent<Player>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if (players.isRestart)
+        {
+            foreach (Transform child in transform)
+            {
+                //Needle nee = child.GetComponent<Needle>();
+                StartCoroutine("NeedleMove");
+            }
+        }
 	}
     IEnumerator NeedleMove()
     {
@@ -21,9 +30,7 @@ public class NeedleCon : MonoBehaviour {
         foreach (Transform child in transform)
         {
             yield return new WaitForSeconds(0.5f);
-            Needle ne1 = child.GetComponent<Needle>();
-            //ne1.walltouch = true;
-            //ne1.stops = true;
+            NeedleAxis ne1 = child.GetComponent<NeedleAxis>();
             ne1.neel();
         }
     }
@@ -31,10 +38,9 @@ public class NeedleCon : MonoBehaviour {
     {
         foreach (Transform child in transform)
         {
-            Needle needle = child.GetComponent<Needle>();
-            Debug.Log("AAA");
-            needle.moveNe = false;
-            //needle.playerhit = true;
+            NeedleAxis ne1 = child.GetComponent<NeedleAxis>();
+            Debug.Log("AA");
+            ne1.needstop();
         }
     }
 }

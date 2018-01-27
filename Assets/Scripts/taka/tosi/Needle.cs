@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class Needle : MonoBehaviour {
     GameObject needlecon;
+    public float startpos;
     public bool moveNe;
-    public bool playerhit;
     public bool walltouch;
-	public bool stops;
-    float startpos;
+    public bool stops;
     // Use this for initialization
     void Start () {
         needlecon = transform.parent.gameObject;
         startpos = transform.position.x;
-        playerhit = false;
         walltouch = true;
 		stops = true;
 	}
@@ -31,24 +29,8 @@ public class Needle : MonoBehaviour {
                     transform.position += new Vector3(0.04f, 0, 0);
             }
         }
-        //if (playerhit)
-        //{
-        //    if (startpos>=transform.position.x)
-        //    {
-        //        transform.position += new Vector3(0.1f, 0, 0);
-        //    }
-        //    else
-        //    {
-        //        NeedleCon nedcon = needlecon.GetComponent<NeedleCon>();
-        //        nedcon.StartCoroutine("NeedleMove");
-        //        playerhit = false;
-        //    }
-        //}
     }
-    public void neel()
-    {
-        moveNe = true;
-    }
+   
     IEnumerator stoppsge()
     {
         yield return new WaitForSeconds(2);
@@ -65,9 +47,9 @@ public class Needle : MonoBehaviour {
 		}
         if (col.gameObject.tag == "Player0"||col.gameObject.tag=="Player1")
         {
-            NeedleCon nedcon = needlecon.GetComponent<NeedleCon>();
-            stops = false;
-            nedcon.NeedleStops();
+            NeedleAxis nedcon = needlecon.GetComponent<NeedleAxis>();
+            
+            nedcon.needCon();
         }
     }
 }
