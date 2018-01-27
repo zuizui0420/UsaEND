@@ -117,7 +117,7 @@ public class Player : Photon.MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		//Debug.Log(noGroundPos - onGroundPos);
+		Debug.Log(noGroundPos - onGroundPos);
 		//マルチでのルーム内のキャラの引き継ぎ
 		if (actID != -1)
 		{
@@ -166,7 +166,7 @@ public class Player : Photon.MonoBehaviour
 		}
 
 		//高さ4以上で死ぬ
-		if (noGroundPos - onGroundPos >= 4.1 /*|| jumpTopPos-onGroundPos>=4*/)
+		if (noGroundPos - onGroundPos >= 4 /*|| jumpTopPos-onGroundPos>=4*/)
 		{
 			Dying();
 			
