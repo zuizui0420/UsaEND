@@ -135,8 +135,6 @@ public class Player : Photon.MonoBehaviour
 			photonTransformView.SetSynchronizedValues(velocity, 0);
 		}
 
-		//isDead = GameControll.isDead;
-
 		animationTime = playerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime;
 
 		playerPos = transform.position;
@@ -147,9 +145,7 @@ public class Player : Photon.MonoBehaviour
 		if (/*animaNom == 6 && animationTime >= 60*/isRestart)
 		{
 			
-			StartCoroutine("Restart");
-			
-			
+			StartCoroutine("Restart");			
 		}
 
 		//プレイヤーがエナジードリンクを使ったら
