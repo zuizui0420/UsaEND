@@ -117,7 +117,8 @@ public class Player : Photon.MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		Debug.Log(noGroundPos - onGroundPos);
+		//Debug.Log(noGroundPos - onGroundPos);
+
 		//マルチでのルーム内のキャラの引き継ぎ
 		if (actID != -1)
 		{
@@ -127,13 +128,14 @@ public class Player : Photon.MonoBehaviour
 
 		if (playerID != actID) return;
 
-		if (photonView.isMine)
-		{
-			//現在の移動速度
-			Vector2 velocity = rig.velocity;
-			//移動速度を指定
-			photonTransformView.SetSynchronizedValues(velocity, 0);
-		}
+		//マルチで使用
+		//if (photonView.isMine)
+		//{
+		//	//現在の移動速度
+		//	Vector2 velocity = rig.velocity;
+		//	//移動速度を指定
+		//	photonTransformView.SetSynchronizedValues(velocity, 0);
+		//}
 
 		animationTime = playerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime;
 
@@ -144,7 +146,6 @@ public class Player : Photon.MonoBehaviour
 		//リスタート
 		if (/*animaNom == 6 && animationTime >= 60*/isRestart)
 		{
-			
 			StartCoroutine("Restart");			
 		}
 
@@ -260,7 +261,6 @@ public class Player : Photon.MonoBehaviour
 		}
 
 	}
-
 
 
 	private void FixedUpdate()

@@ -13,20 +13,21 @@ public class GameControl : MonoBehaviour {
 	//[SerializeField] GameObject[] players = new GameObject[2];
 
 	GameObject player;
-	private bool isDead;
-	//private int playerNom;
+	public bool playerDead;
+	public int StageDeadCount;
 	int playerAnimaNom;
 	float playerAnimaTime;
-    GameData gameData = new GameData();
+    //GameData gameData = new GameData();
 	//public bool gameStart;
 
 	string json;
 
 	void Awake()
 	{
+		StageDeadCount = 0;
 
 		//ファイルパスを作る
-		filePath = Application.persistentDataPath;
+		//filePath = Application.persistentDataPath;
 
 
 		////シーン間を引き継ぐ
@@ -50,7 +51,7 @@ public class GameControl : MonoBehaviour {
 		
 		GameData.Instance.Save();
 		
-		//player = GameObject.FindWithTag("Player"+0);
+		player = GameObject.FindWithTag("Player"+0);
 
 		////gameData.GameStart = 1;
 		//gameData.DeadCount = 3;
@@ -65,7 +66,15 @@ public class GameControl : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update()
-	{    
+	{
+		playerDead = player.GetComponent<Player>().isDead;
+		if(playerDead == true)
+		{
+			//ゲームオーバーUIを表示
+		 	GameObject.Find("GameResultUI").GetComponent<StageResultUI>().AppearUI(0);
+			StageDeadCount++;
+
+		}
 	} 
 	
 
