@@ -124,7 +124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39122c94c9f384a49a582090542375a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StageNom: 2
+  ClearStage: 1
+  StageButtan: []
+  S: []
 --- !u!1 &601546392
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,7 +707,7 @@ GameObject:
   - component: {fileID: 1805876791}
   - component: {fileID: 1805876790}
   m_Layer: 5
-  m_Name: tugi
+  m_Name: Next
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -770,11 +772,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 387061236}
         m_MethodName: NextStageBottan
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

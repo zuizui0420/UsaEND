@@ -17,6 +17,11 @@ public class BigRock : MonoBehaviour {
 
     public bool kotei;
 
+    /// <summary>
+    /// 左から動く
+    /// </summary>
+    public bool FromtheLeft;
+
 
     /// <summary>
     /// 壁に当たっているか？
@@ -33,6 +38,10 @@ public class BigRock : MonoBehaviour {
 
 
     GameObject TrapArea;
+
+    /// <summary>
+    /// 罠発動フラグ
+    /// </summary>
     bool trapFlagAction;
 
 
@@ -41,7 +50,7 @@ public class BigRock : MonoBehaviour {
     {
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
 
-        StartCoroutine("hukusei");
+       
         TrapArea = GameObject.Find("TrapArea");
 
         if (kotei)
@@ -106,18 +115,13 @@ public class BigRock : MonoBehaviour {
         }
     }
 
-
-    private IEnumerator hukusei()
+    void OnTriggerEnter2D(Collider2D other)
     {
-        // ログ出力  
-        Debug.Log("1");
-
-        // 1秒待つ  
-        yield return new WaitForSeconds(3.0f);
-
-        // ログ出力  
-        Debug.Log("2");
-
-
+        if(other.gameObject.tag == "Out")
+        {
+            Destroy(this.gameObject);
+        }
     }
+
+
 }
