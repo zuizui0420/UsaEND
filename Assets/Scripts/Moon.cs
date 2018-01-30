@@ -6,7 +6,7 @@ public class Moon : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+        AudioManager.FadeIn(1, "tumiki");
 	}
 	
 	// Update is called once per frame

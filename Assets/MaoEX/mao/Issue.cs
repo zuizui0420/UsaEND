@@ -15,7 +15,7 @@ public class Issue : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-
+        AudioManager.CrossFade(1, "Fight_in_the_outer_space");
     }
 	
 	// Update is called once per frame

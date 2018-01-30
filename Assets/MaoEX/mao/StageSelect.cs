@@ -17,21 +17,22 @@ public class StageSelect : MonoBehaviour
     /// </summary>
     public Button[] StageButtan;
 
+    GameObject sceneManager;
 
-    public void OnStargeButtan1Clicke()
-    {
-        Application.LoadLevel("StageMao");
-    }
+    public bool FadeStart;
 
-    public void MenuSceneBottan()
-    {
-        Application.LoadLevel("MenuScene");
-    }
+    int StageNom;
 
-    public void StageSelectedButtan(int stageNom)
-    {
-        SceneManager.LoadScene("Stage0" + stageNom);
-    }
+
+    //public void OnStargeButtan1Clicke()
+    //{
+    //    Application.LoadLevel("StageMao");
+    //}
+
+    //public void MenuSceneBottan()
+    //{
+    //    Application.LoadLevel("MenuScene");
+    //}
 
     public void NextStageButtan()
     {
@@ -41,12 +42,18 @@ public class StageSelect : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        AudioManager.CrossFade(1, "the_inside_of_Spaceship");
+        sceneManager = GameObject.Find("FadeManager");
     }
 
     // Update is called once per frame
     public void Update()
     {
+        FadeStart = sceneManager.GetComponent<FadeManager>().FadeStart;
+        if (FadeStart)
+        {
+            ToNextScene();
+        }
 
         switch (ClearStage)
         {
@@ -74,5 +81,23 @@ public class StageSelect : MonoBehaviour
                 StageButtan[ClearStage].interactable = true;
                 break;
         }
+    }
+
+    public void StageSelectedButtan(int stageNom)
+    {
+        //ここでフェイドアウトを始めるよ
+        sceneManager.GetComponent<FadeManager>().isFade = true;
+        sceneManager.GetComponent<FadeManager>().isFadeOut = true;
+        sceneManager.GetComponent<FadeManager>().gameObject.transform.SetAsLastSibling();
+
+
+        StageNom = stageNom;
+      
+    }
+
+    private void ToNextScene()
+    {
+        //シーン遷移が始める
+        SceneManager.LoadScene("Stage0" + StageNom);
     }
 }
