@@ -67,6 +67,11 @@ public class ButtonControl : MonoBehaviour {
 		isJump = false;
 	}
 
+	public void OnClickToMenuBtn()
+	{
+
+	}
+
 	public void Restart()
 	{
 		reStartBtn.GetComponent<Button>().interactable = false;
