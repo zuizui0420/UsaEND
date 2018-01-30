@@ -1,10 +1,12 @@
 fileFormatVersion: 2
-guid: 602c3dd0950d91d4d9dbe7e551217a66
-timeCreated: 1517284718
+guid: 9072280042fb45e4b973eb8e95efb476
+timeCreated: 1517218695
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: needle1_0
+    21300000: hebi_san_0
+    21300002: hebi_san_1
+    21300004: hebi_san_2
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -87,15 +89,41 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: needle1_0
+      name: hebi_san_0
       rect:
         serializedVersion: 2
-        x: 322
-        y: 620
-        width: 364
-        height: 48
+        x: 2
+        y: 24
+        width: 73
+        height: 33
       alignment: 9
-      pivot: {x: 1, y: 0.5}
+      pivot: {x: 0.49762496, y: 0.38966683}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: hebi_san_1
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 25
+        width: 61
+        height: 34
+      alignment: 9
+      pivot: {x: 0.5, y: 0.37761363}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: hebi_san_2
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 25
+        width: 74
+        height: 20
+      alignment: 9
+      pivot: {x: 0.49765694, y: 0.51733816}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

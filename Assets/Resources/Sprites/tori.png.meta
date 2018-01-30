@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 602c3dd0950d91d4d9dbe7e551217a66
-timeCreated: 1517284718
+guid: 6436e8352271cf24683515817cf2e231
+timeCreated: 1517215437
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: needle1_0
+    21300000: tori_0
+    21300002: tori_1
+    21300004: tori_2
+    21300006: tori_3
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -87,15 +90,54 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: needle1_0
+      name: tori_0
       rect:
         serializedVersion: 2
-        x: 322
-        y: 620
-        width: 364
-        height: 48
+        x: 17
+        y: 51
+        width: 86
+        height: 105
       alignment: 9
-      pivot: {x: 1, y: 0.5}
+      pivot: {x: 0.5538929, y: 0.23515451}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tori_1
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 57
+        width: 124
+        height: 84
+      alignment: 9
+      pivot: {x: 0.5622956, y: 0.25477272}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tori_2
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 23
+        width: 144
+        height: 107
+      alignment: 9
+      pivot: {x: 0.45708507, y: 0.7406435}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tori_3
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 43
+        width: 135
+        height: 92
+      alignment: 9
+      pivot: {x: 0.39318985, y: 0.8694401}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

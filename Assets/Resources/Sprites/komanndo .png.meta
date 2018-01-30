@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 602c3dd0950d91d4d9dbe7e551217a66
-timeCreated: 1517284718
+guid: 3f78cadd6b46ced45abf43800d78fec2
+timeCreated: 1517286416
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: needle1_0
+    21300000: komanndo _0
+    21300002: komanndo _1
+    21300004: komanndo _2
+    21300006: komanndo _3
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -87,15 +90,54 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: needle1_0
+      name: komanndo _0
       rect:
         serializedVersion: 2
-        x: 322
-        y: 620
-        width: 364
-        height: 48
-      alignment: 9
-      pivot: {x: 1, y: 0.5}
+        x: 383
+        y: 41
+        width: 762
+        height: 697
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: komanndo _1
+      rect:
+        serializedVersion: 2
+        x: 1160
+        y: 534
+        width: 377
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: komanndo _2
+      rect:
+        serializedVersion: 2
+        x: 1161
+        y: 388
+        width: 429
+        height: 124
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: komanndo _3
+      rect:
+        serializedVersion: 2
+        x: 1161
+        y: 532
+        width: 119
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

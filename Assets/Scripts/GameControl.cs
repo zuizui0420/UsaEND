@@ -67,14 +67,7 @@ public class GameControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
-		playerDead = player.GetComponent<Player>().isDead;
-		if(playerDead == true)
-		{
-			//ゲームオーバーUIを表示
-		 	GameObject.Find("GameResultUI").GetComponent<StageResultUI>().AppearUI(0);
-			StageDeadCount++;
-
-		}
+	
 	} 
 	
 
