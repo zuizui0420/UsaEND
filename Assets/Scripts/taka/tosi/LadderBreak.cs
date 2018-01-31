@@ -16,10 +16,10 @@ public class LadderBreak : MonoBehaviour {
 	void Update () {
 		
 	}
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerStay2D(Collider2D col)
     {
         Player player = col.gameObject.GetComponent<Player>();
-        if (col.gameObject.tag == "Player0" &&player.isClimb==true)
+        if (col.gameObject.tag == "Player0" /*&&player.isClimb==true*/)
         {
             Ladder.sprite = Breakladder;
             if (player.isClimb == true)

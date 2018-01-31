@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class ButtonControl : MonoBehaviour {
@@ -69,7 +70,7 @@ public class ButtonControl : MonoBehaviour {
 
 	public void OnClickToMenuBtn()
 	{
-
+		SceneManager.LoadScene("Menu");
 	}
 
 	public void Restart()

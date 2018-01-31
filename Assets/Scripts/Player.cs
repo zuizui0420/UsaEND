@@ -28,6 +28,7 @@ public class Player : Photon.MonoBehaviour
 	{
 		ALIVE,
 		DEAD,
+		MENU
 		
 	};
 
@@ -292,6 +293,53 @@ public class Player : Photon.MonoBehaviour
 					StartCoroutine("Restart");
 				}
 
+				break;
+
+			case PLAYER_STATE.MENU:
+
+				speed = 0;
+				if (specialAction == true)
+				{
+					if (animationTime >= 1.0f)
+					{
+						specialAction = false;
+						isJump = false;
+					}
+				}
+
+				if (isGround == true)
+				{
+					if (isJump == false) Move();
+
+				}
+
+				//空中の処理
+				else if (isGround == false)
+				{
+
+					playerPos.y -= 0.1f;
+					if (isJump == false && specialAction == false)
+					{
+						animaNom = 4;
+					}
+
+					if (Input.GetKey("left") || ButtonControl.isLeft)
+					{
+						playerPos += Vector2.left * speed;
+						playerRot.y = 0;
+					}
+					else if (Input.GetKey("right") || ButtonControl.isRight)
+					{
+						playerPos += Vector2.right * speed;
+						playerRot.y = -180;
+					}
+				}
+
+				//ジャンプ中の処理
+				if (animationTime <= 0.5 && animaNom == 2)
+				{
+					playerPos.y = Mathf.Lerp(playerPos.y, jumpTopPos, 0.1f);
+				}
 				break;
 
 				
