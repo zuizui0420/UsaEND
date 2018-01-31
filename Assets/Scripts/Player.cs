@@ -247,6 +247,13 @@ public class Player : Photon.MonoBehaviour
 						//isDead = true;
 					}
 
+					//プレイヤーがエナジードリンクを使ったら
+					if (animaNom == 7)
+					{
+						FlyAway();
+					}
+
+
 				}
 
 				//プレイヤーがエナジードリンクを使ったら
@@ -280,12 +287,6 @@ public class Player : Photon.MonoBehaviour
 
 				//ゲームオーバーUIを表示
 				GameObject.Find("GameResultUI").GetComponent<StageResultUI>().AppearUI(0);
-
-				//プレイヤーがエナジードリンクを使ったら
-				if (animaNom == 7)
-				{
-					FlyAway();
-				}
 
 				//リスタート
 				if (isRestart)
@@ -611,8 +612,7 @@ public class Player : Photon.MonoBehaviour
 		player.GetComponent<BoxCollider2D>().isTrigger = true;
 		isGround = false;
 		playerPos.y += 0.05f;
-		//isDead = true;
-		return;
+		//isDying = true;
 	}
 
 	//public void Dead()
