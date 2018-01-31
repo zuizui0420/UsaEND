@@ -118,7 +118,7 @@ public class Player : Photon.MonoBehaviour
 	void Update ()
 	{
 
-		//Debug.Log(noGroundPos - onGroundPos);
+		Debug.Log(noGroundPos - onGroundPos);
 
 		//マルチでのルーム内のキャラの引き継ぎ
 		if (actID != -1)

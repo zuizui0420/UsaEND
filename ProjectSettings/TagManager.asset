@@ -12,6 +12,7 @@ TagManager:
   - Goal
   - BreakWall
   - Laser
+  - Rock
   layers:
   - Default
   - TransparentFX

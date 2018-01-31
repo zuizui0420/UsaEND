@@ -24,7 +24,7 @@ public class TrapFlag : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player0")
         {
-            Debug.Log("hit");
+            //Debug.Log("hit");
             if (TrapGimmick)
             {
                 action = true;

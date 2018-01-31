@@ -6,6 +6,7 @@ public class Moon : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		AudioManager.FadeIn(0.5f, "tumiki");
 		
 	}
 	

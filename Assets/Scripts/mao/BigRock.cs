@@ -36,7 +36,7 @@ public class BigRock : MonoBehaviour {
 
     public float speed;
 
-
+	[SerializeField]
     GameObject TrapArea;
 
     /// <summary>
@@ -51,7 +51,7 @@ public class BigRock : MonoBehaviour {
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
 
        
-        TrapArea = GameObject.Find("TrapArea");
+        //TrapArea = GameObject.Find("TrapArea");
 
         if (kotei)
         {
@@ -88,7 +88,7 @@ public class BigRock : MonoBehaviour {
 
     public void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Wall")
+        if (other.gameObject.tag == "Wall"|| other.gameObject.tag == "Rock")
         {
             if (WallHitReflectionGimmick)
             {
@@ -99,7 +99,7 @@ public class BigRock : MonoBehaviour {
 			}
             else
             {
-                Debug.Log("hit");
+                //Debug.Log("hit");
                 Destroy(this.gameObject);
 
             }

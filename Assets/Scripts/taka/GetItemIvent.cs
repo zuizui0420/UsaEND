@@ -9,6 +9,8 @@ public class GetItemIvent : MonoBehaviour {
     private void Start()
     {
         thisobname = this.gameObject.name;
+		AudioManager.CrossFade(0.5f, "Fight_in_the_outer_space");
+
         //Carrot・Energy・Pickel・Torch
     }
     void OnCollisionEnter2D(Collision2D other)
