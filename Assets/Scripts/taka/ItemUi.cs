@@ -9,92 +9,112 @@ public class ItemUi : MonoBehaviour
 	public GameObject player;
 
 	//UI sprite
-	public GameObject Item0sprite, Item1sprite, Actionbtn;
-	Sprite Energyimg, Carrotimg, Pickelimg, Torchimg;
+	public GameObject Item0sprite, Item1sprite, Actionbtn, ActionbtnDown, ActionbtnTop;
+	Sprite Energyimg, Carrotimg, Pickelimg, Sekibanimg, Taimatuimg;
 
 	//Item
-	public GameObject Energy, Carrot, Pickel, Torch;
+	public GameObject Energy, Carrot, Pickel, Sekiban, Taimatu;
 	public Sprite nullimg;
-	string Item0st, Item1st;
-	int Item0num, Item1num;
+	public string Item0st, Item1st, Item2st;
+	public bool LadderSwitch;
 
 	//Action image
-	public Sprite EnergyACT, CarrotACT, PickelACT, TorchACT;
+	public Sprite EnergyACT, CarrotACT, PickelACT, SekibanACT, TaimatuACT,LadderACT, SekibaninACT;
+
+	//Sekibantobira
+	public GameObject Sekibantobira;
 
 
 	private void Start()
 	{
-		//各アイテムのスプライト画像を保存
 		Energyimg = Energy.GetComponent<SpriteRenderer>().sprite;
 		Carrotimg = Carrot.GetComponent<SpriteRenderer>().sprite;
 		Pickelimg = Pickel.GetComponent<SpriteRenderer>().sprite;
-		Torchimg = Torch.GetComponent<SpriteRenderer>().sprite;
-		Item0num = 0;
+		Taimatuimg = Taimatu.GetComponent<SpriteRenderer>().sprite;
+		Sekibanimg = Sekiban.GetComponent<SpriteRenderer>().sprite;
+		Actionbtn.SetActive(false);
+		ActionbtnTop.SetActive(false);
+		LadderSwitch = false;
+		Item0sprite.GetComponent<Image>().sprite = nullimg;
+		Item1sprite.GetComponent<Image>().sprite = nullimg;
 	}
 	void Update()
 	{
-		//プレイヤーの所持アイテムをここで読み込む
+
 		Item0st = player.GetComponent<Player>().Item0;
 		Item1st = player.GetComponent<Player>().Item1;
-
-		//アイテムボックス０のアイテム
-		switch (Item0st)
+		switch (LadderSwitch)
 		{
-			case "Energy":
-				Item0sprite.GetComponent<Image>().sprite = Energyimg;
-				Actionbtn.GetComponent<Image>().sprite = EnergyACT; Item0num = 1;
+			case false:
+				ActionbtnTop.SetActive(false); ActionbtnDown.SetActive(false);
 				break;
-
-			case "Carrot":
-				Item0sprite.GetComponent<Image>().sprite = Carrotimg;
-				Actionbtn.GetComponent<Image>().sprite = CarrotACT; Item0num = 1;
-				break;
-
-			case "Pickel":
-				Item0sprite.GetComponent<Image>().sprite = Pickelimg;
-				Actionbtn.GetComponent<Image>().sprite = PickelACT; Item0num = 1;
-				break;
-
-			case "Torch":
-				Item0sprite.GetComponent<Image>().sprite = Torchimg;
-				Actionbtn.GetComponent<Image>().sprite = TorchACT; Item0num = 1;
+			case true:
+				ActionbtnTop.SetActive(false); ActionbtnDown.SetActive(false); Actionbtn.SetActive(true);
+				Actionbtn.GetComponent<Image>().sprite = LadderACT;
 				break;
 		}
-
-		//アイテムボックス１のアイテム
-		switch (Item1st)
+		if (player.GetComponent<Player>().isClimb == true)
 		{
-			case "Energy":
-				Item1sprite.GetComponent<Image>().sprite = Energyimg; Item1num = 1;
-				break;
-
-			case "Carrot":
-				Item1sprite.GetComponent<Image>().sprite = Carrotimg; Item1num = 1;
-				break;
-
-			case "Pickel":
-				Item1sprite.GetComponent<Image>().sprite = Pickelimg; Item1num = 1;
-				break;
-
-			case "Torch":
-				Item1sprite.GetComponent<Image>().sprite = Torchimg; Item1num = 1;
-				break;
+			ActionbtnDown.SetActive(true);
+			ActionbtnTop.SetActive(true);
 		}
-		if (Item0st == " ")
+		else
 		{
-			Item0sprite.GetComponent<Image>().sprite = nullimg;
-
-		}
-		if (Item1st == " ")
-		{
-			Item1sprite.GetComponent<Image>().sprite = nullimg;
+			switch (Item0st)    //Item0stに入ってる文字からItemのsprite変更とActionのspriteの変更
+			{
+				case "Energy":
+					Item0sprite.SetActive(true); Actionbtn.SetActive(true); Item0sprite.GetComponent<Image>().sprite = Energyimg; Actionbtn.GetComponent<Image>().sprite = EnergyACT;
+					break;
+				case "Carrot":
+					Item0sprite.SetActive(true); Actionbtn.SetActive(true); Item0sprite.GetComponent<Image>().sprite = Carrotimg; Actionbtn.GetComponent<Image>().sprite = CarrotACT;
+					break;
+				case "Pickel":
+					Item0sprite.SetActive(true); Actionbtn.SetActive(true); Item0sprite.GetComponent<Image>().sprite = Pickelimg; Actionbtn.GetComponent<Image>().sprite = PickelACT;
+					break;
+				case "Taimatu":
+					Item0sprite.SetActive(true); Actionbtn.SetActive(true); Item0sprite.GetComponent<Image>().sprite = Taimatuimg; Actionbtn.GetComponent<Image>().sprite = TaimatuACT;
+					break;
+				//case "Sekiban":
+				//	if (player.GetComponent<Player>().sekiban == true)
+				//	{
+				//		Item0sprite.SetActive(true); Item0sprite.GetComponent<Image>().sprite = Sekibanimg; Actionbtn.GetComponent<Image>().sprite = SekibanACT;
+				//	}
+				//	break;
+			}
+			switch (Item1st)//Item1stに入ってる文字からItemのsprite変更
+			{
+				case "Energy":
+					Item1sprite.SetActive(true); Item1sprite.GetComponent<Image>().sprite = Energyimg;
+					break;
+				case "Carrot":
+					Item1sprite.SetActive(true); Item1sprite.GetComponent<Image>().sprite = Carrotimg;
+					break;
+				case "Pickel":
+					Item1sprite.SetActive(true); Item1sprite.GetComponent<Image>().sprite = Pickelimg;
+					break;
+				case "Taimatu":
+					Item1sprite.SetActive(true); Item1sprite.GetComponent<Image>().sprite = Taimatuimg;
+					break;
+				//case "Sekiban":
+				//	Item1sprite.SetActive(true); Item1sprite.GetComponent<Image>().sprite = Sekibanimg;
+				//	break;
+			}
 		}
 		if (Input.GetKeyDown(KeyCode.E))
 		{
-			Sprite Item2sprite;
-			Item2sprite = Item0sprite.GetComponent<Image>().sprite;
-			Item0sprite.GetComponent<Image>().sprite = Item1sprite.GetComponent<Image>().sprite;
-			Item1sprite.GetComponent<Image>().sprite = Item2sprite;
+			if (Item0st == " ")
+			{
+				Item0sprite.GetComponent<Image>().sprite = nullimg;
+				Actionbtn.SetActive(false);
+			}
+			if (Item1st == " ")
+			{
+				Item1sprite.GetComponent<Image>().sprite = nullimg;
+			}
 		}
+	}
+	public void SekibanOnAnimation()
+	{
+		Sekibantobira.GetComponent<Animator>().Play("SekibanEvent");
 	}
 }

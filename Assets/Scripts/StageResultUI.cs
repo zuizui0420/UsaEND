@@ -55,7 +55,7 @@ public class StageResultUI : MonoBehaviour
 	IEnumerator AppearGameOverUI()
 	{
 		backFilter.active = true;
-		yield return new WaitForSeconds(1.5f);
+		yield return new WaitForSeconds(1.0f);
 		resultBtn.active = true;
 		isDisplay = true;
 	}

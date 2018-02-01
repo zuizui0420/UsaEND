@@ -16,6 +16,8 @@ public class Player : Photon.MonoBehaviour
 
 
 	private GameObject[] startPos = new GameObject[2];
+	private GameObject ItemUI;
+
 
 	public int actID;//ルーム内のプレイヤーID
 	public int playerID;//PlayerスクリプトでのプレイヤーID
@@ -28,7 +30,8 @@ public class Player : Photon.MonoBehaviour
 	{
 		ALIVE,
 		DEAD,
-		MENU
+		MENU,
+		GOAL
 		
 	};
 
@@ -52,6 +55,7 @@ public class Player : Photon.MonoBehaviour
 	public bool isDead;
 	public bool isClimb;
 	public bool isJump;
+	public int DeadCount;
 	int i = 0;
 	public bool isRestart = false;
 
@@ -95,8 +99,9 @@ public class Player : Photon.MonoBehaviour
 		photonTransformView = GetComponent<PhotonTransformView>();
 		photonView = PhotonView.Get(this);
 
-		SceneManager.sceneLoaded += OnSceneLoaded;//デリゲートの登録
+		//SceneManager.sceneLoaded += OnSceneLoaded;//デリゲートの登録
 
+		DeadCount = 0;
 
 		playerPos = transform.position;
 		playerRot = transform.rotation;
@@ -112,22 +117,29 @@ public class Player : Photon.MonoBehaviour
 		isClimb = false;
 		isJump = false;
 
+		switch (playerState)
+		{
+			case PLAYER_STATE.ALIVE:
+				ItemUI = GameObject.Find("ItemUI");
+				break;
+		}
+
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
 
-		Debug.Log(noGroundPos - onGroundPos);
+		//Debug.Log(noGroundPos - onGroundPos);
 
 		//マルチでのルーム内のキャラの引き継ぎ
-		if (actID != -1)
-		{
-			//シーン間を引き継ぐ
-			DontDestroyOnLoad(this);
-		}
+		//if (actID != -1 && playerState != PLAYER_STATE.MENU)
+		//{
+		//	//シーン間を引き継ぐ
+		//	//DontDestroyOnLoad(this);
+		//}
 
-		if (playerID != actID) return;
+		//if (playerID != actID) return;
 
 		//マルチで使用
 		//if (photonView.isMine)
@@ -143,11 +155,6 @@ public class Player : Photon.MonoBehaviour
 		playerPos = transform.position;
 
 		Animation(animaNom);//アニメーション再生
-
-		//if (isDead == true)
-		//{
-		//	return;
-		//}
 
 		switch (playerState)
 		{
@@ -211,32 +218,36 @@ public class Player : Photon.MonoBehaviour
 						ClimbLadder();
 					}
 
-					if (Input.GetKey(KeyCode.Alpha1) && StopInput == 0 && isGround == true)
+					if (Input.GetKey(KeyCode.Alpha1) || ButtonControl.isAction)
 					{
-						switch (Item0)
+						if (StopInput == 0 && isGround == true)
 						{
-							case "Energy":
-								GetEnergyUse(); Item0 = " ";
-								break;
-							case "Carrot":
-								GetCarrotUse(); Item0 = " ";
-								break;
-							case "Pickel":
-								GetPickelUse(); Item0 = " ";
-								break;
-							case "Torch":
-								GetTorchUse(); Item0 = " ";
-								break;
+							switch (Item0)
+							{
+								case "Energy":
+									GetEnergyUse(); Item0 = " ";
+									break;
+								case "Carrot":
+									GetCarrotUse(); Item0 = " ";
+									break;
+								case "Pickel":
+									GetPickelUse(); Item0 = " ";
+									break;
+								case "Torch":
+									GetTorchUse(); Item0 = " ";
+									break;
+							}
 						}
 					}
 
 
-					if (Input.GetKeyDown(KeyCode.E))
+					if (Input.GetKeyDown(KeyCode.E)||ButtonControl.isSwitchItem)
 					{
 						string Item2;
 						Item2 = Item0;
 						Item0 = Item1;
 						Item1 = Item2;
+						ButtonControl.isSwitchItem = false;
 					}
 
 					//高さ4以上で死ぬ
@@ -343,121 +354,53 @@ public class Player : Photon.MonoBehaviour
 				}
 				break;
 
-				
+			case PLAYER_STATE.GOAL:
+				speed = 0.06f;
+				if (specialAction == true)
+				{
+					if (animationTime >= 1.0f)
+					{
+						specialAction = false;
+						isJump = false;
+					}
+				}
+
+				if (isGround == true)
+				{
+					if (isJump == false) Move();
+
+				}
+
+				//空中の処理
+				else if (isGround == false)
+				{
+
+					playerPos.y -= 0.1f;
+					if (isJump == false && specialAction == false)
+					{
+						animaNom = 4;
+					}
+
+					if (Input.GetKey("left") || ButtonControl.isLeft)
+					{
+						playerPos += Vector2.left * speed;
+						playerRot.y = 0;
+					}
+					else if (Input.GetKey("right") || ButtonControl.isRight)
+					{
+						playerPos += Vector2.right * speed;
+						playerRot.y = -180;
+					}
+				}
+
+				//ジャンプ中の処理
+				if (animationTime <= 0.5 && animaNom == 2)
+				{
+					playerPos.y = Mathf.Lerp(playerPos.y, jumpTopPos, 0.1f);
+				}
+				break;
+
 		}
-
-		////リスタート
-		//if (isRestart)
-		//{
-		//	StartCoroutine("Restart");			
-		//}
-
-		//プレイヤーがエナジードリンクを使ったら
-		//if(animaNom == 7)
-		//{
-		//	FlyAway();
-		//}
-
-		//他のスクリプトから読み出したときはここでDying()を実行(Dyingメソッドの処理が重なるため)
-		//if(isDying == true)
-		//{
-		//	Dying();
-
-		//}
-
-		//高さ4以上で死ぬ
-		//if (noGroundPos - onGroundPos >= 4 )
-		//{
-		//	Dying();
-
-		//	//isDead = true;
-		//}
-
-		//ゴール後
-		//if (isGoal == true)
-		//{
-		//	SceneManager.LoadScene("GoalScene");
-		//}
-
-		//if (specialAction == true)
-		//{		
-		//	if(animationTime >= 1.0f)
-		//	{
-		//		specialAction = false;
-		//		isJump = false;
-		//	}
-		//}
-
-		//if (isGround == true)
-		//{
-		//	speed = 0.06f;
-		//	if(isJump==false)Move();
-
-		//}
-
-		////空中の処理
-		//else if (isGround == false)
-		//{
-
-		//	playerPos.y -= 0.1f;
-		//	if (isJump == false&&specialAction == false)
-		//	{
-		//		animaNom = 4;
-		//		speed = 0.02f;
-		//	}
-
-		//	if (Input.GetKey("left") || ButtonControl.isLeft)
-		//	{
-		//		playerPos += Vector2.left * speed;
-		//		playerRot.y = 0;
-		//	}
-		//	else if (Input.GetKey("right") || ButtonControl.isRight)
-		//	{
-		//		playerPos += Vector2.right * speed;
-		//		playerRot.y = -180;
-		//	}
-		//}
-
-		////ジャンプ中の処理
-		//if (animationTime <= 0.5 && animaNom == 2)
-		//{
-		//	playerPos.y = Mathf.Lerp(playerPos.y, jumpTopPos, 0.1f);
-		//}
-
-
-		//if (isClimb == true)
-		//{
-		//	ClimbLadder();
-		//}
-
-		//if (Input.GetKey(KeyCode.Alpha1) && StopInput == 0 && isGround == true)
-		//{
-		//	switch (Item0)
-		//	{
-		//		case "Energy":
-		//			GetEnergyUse(); Item0 = " ";
-		//			break;
-		//		case "Carrot":
-		//			GetCarrotUse(); Item0 = " ";
-		//			break;
-		//		case "Pickel":
-		//			GetPickelUse(); Item0 = " ";
-		//			break;
-		//		case "Torch":
-		//			GetTorchUse(); Item0 = " ";
-		//			break;
-		//	}
-		//}
-
-
-		//if (Input.GetKeyDown(KeyCode.E))
-		//{
-		//	string Item2;
-		//	Item2 = Item0;
-		//	Item0 = Item1;
-		//	Item1 = Item2;
-		//}
-
 	}
 
 
@@ -467,23 +410,23 @@ public class Player : Photon.MonoBehaviour
 	}
 	
 	//シーン読み込みデリゲート
-	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-	{
-		if(SceneManager.GetActiveScene().name== "Stage01")//現在のシーンがステージシーンであるか？
-		{
-			//player = GameObject.FindWithTag("Player" + actID);
-			//プレイヤーのスタートPos
-			player.GetComponent<Transform>().transform.position = GameObject.Find("StartPos"+playerID).GetComponent<Transform>().transform.position;
+	//void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+	//{
+	//	if(SceneManager.GetActiveScene().name== "Stage01"|| SceneManager.GetActiveScene().name == "GoalScene")//現在のシーンがステージシーンであるか？
+	//	{
+	//		//player = GameObject.FindWithTag("Player" + actID);
+	//		//プレイヤーのスタートPos
+	//		player.GetComponent<Transform>().transform.position = GameObject.Find("StartPos"+playerID).GetComponent<Transform>().transform.position;
 
-			//プレイヤーのスタートPosを初期値に設定(シーンロード時にスタートPosにズレが生じるため)
-			playerPos = transform.position;
-			playerRot = transform.rotation;
-			playerRot.y = -180;
+	//		//プレイヤーのスタートPosを初期値に設定(シーンロード時にスタートPosにズレが生じるため)
+	//		playerPos = transform.position;
+	//		playerRot = transform.rotation;
+	//		playerRot.y = -180;
 			
-		}
+	//	}
 		
-		Debug.Log(scene.name + " scene loaded");
-	}
+	//	Debug.Log(scene.name + " scene loaded");
+	//}
 
 
 
@@ -514,10 +457,8 @@ public class Player : Photon.MonoBehaviour
 			}
 			//ジャンプキー
 			if (Input.GetKeyDown(KeyCode.S) || ButtonControl.isJump)
-			{
-				//isClimb = false;
+			{		
 				isJump = true;
-			    //isGround = false;
 				speed = 0.04f;
 				specialAction = true;
 				animaNom = 2;
@@ -527,7 +468,6 @@ public class Player : Photon.MonoBehaviour
 			}
 
 		}
-		//Animation(animaNom);
 	
 		return 0;
 	}
@@ -592,18 +532,14 @@ public class Player : Photon.MonoBehaviour
 			isDead = true;
 			i++;
 		}
-
-		//animaNom = 5;
-		//specialAction = true;
 	}
 
 	void Dead()
 	{
-		//isDead = true;
 		isDying = false;
 
 		playerState = PLAYER_STATE.DEAD;
-		//animaNom = 6;
+		DeadCount++;
 
 	}
 
@@ -612,49 +548,8 @@ public class Player : Photon.MonoBehaviour
 		player.GetComponent<BoxCollider2D>().isTrigger = true;
 		isGround = false;
 		playerPos.y += 0.05f;
-		//isDying = true;
 	}
 
-	//public void Dead()
-	//{
-	//	if (animaNom == 7)
-	//	{
-	//		player.GetComponent<BoxCollider2D>().isTrigger = true;
-	//		isGround = false;
-	//		playerPos.y += 0.05f;
-	//		return;
-	//	}
-
-	//	if (animaNom != 6&& animaNom != 5 &&animaNom != 7)
-	//	{
-	//		animaNom = 5;
-	//	}
-
-
-	//	else if (animationTime >= 1.0f&& animaNom == 5)
-	//	{
-	//		animaNom = 6;
-	//		return;
-
-	//	}
-
-
-
-	//	//float interval = 0.2f;   // 点滅周期
-
-	//	//SpriteRenderer renderer = GetComponent<SpriteRenderer>();
-
-	//	//if (Time.time >= nextTime)
-	//	//{
-	//	//	renderer.enabled = !renderer.enabled;
-
-	//	//	nextTime += interval;
-	//	//}
-
-	//	//Animation(animaNom);
-
-
-	//}
 
 	IEnumerator Restart()
 	{
@@ -762,14 +657,12 @@ public class Player : Photon.MonoBehaviour
 		StopInput = 1;
 		animaNom = 7;
 		//GetComponent<BoxCollider2D>().enabled = false;
-		//Debug.Log("Redbull");
 	}
 	public void GetCarrotUse()      //人参animation
 	{
 		StopMove = 1;
 		StopInput = 1;
 		animaNom = 8;
-		//Debug.Log("NINJIN");
 	}
 	public void GetPickelUse()
 	{
@@ -780,14 +673,13 @@ public class Player : Photon.MonoBehaviour
 		{
 			breakwall.GetComponent<Animator>().Play("BreakWall");		//breakwallのanimatorからBreakを呼ぶ
 		}
-		//Debug.Log("PIKERU");
+		
 	}
 	public void GetTorchUse()
 	{
 		StopMove = 1;
 		StopInput = 1;
 		animaNom = 10;
-		//Debug.Log("TAIMATU");
 	}
 
 	public void stpMove()  //移動制御false>true
@@ -823,7 +715,8 @@ public class Player : Photon.MonoBehaviour
 
 		if(collision.gameObject.tag == "Ladder")
 		{
-			if (Input.GetKeyDown(KeyCode.A))
+			ItemUI.GetComponent<ItemUi>().LadderSwitch = true;
+			if (Input.GetKeyDown(KeyCode.A)||ButtonControl.isAction)
 			{
 				isClimb = true;
 				ladderPos = collision.gameObject.transform.position;
@@ -851,6 +744,7 @@ public class Player : Photon.MonoBehaviour
 
 		else if (collision.gameObject.tag == "Ladder")
 		{
+			ItemUI.GetComponent<ItemUi>().LadderSwitch = false;
 			isClimb = false;
 			isGround = false;
 			//noGroundPos = player.transform.position.y;//ジャンプすることで梯子から脱するのでここはいらないはず

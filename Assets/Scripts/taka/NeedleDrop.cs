@@ -42,17 +42,16 @@ public class NeedleDrop : MonoBehaviour
         Invoke("NeedleDestroy", 0.2f);
 		if(collision.gameObject.tag == "Player0")
 		{
-			DieEvrnt();
+			DieEvent();
 		}
 	}
 
     public void NeedleDestroy()
 	{
-		Invoke("NeedleDestroy", 0.2f);
 		needlebase.GetComponent<Animator>().Play("StalactiteNyoki");
         Destroy(gameObject);
     }
-	void DieEvrnt()
+	void DieEvent()
 	{
 		player.GetComponent<Player>().isDying = true;
 		needlebase.GetComponent<Animator>().Play("StalactiteNyoki");

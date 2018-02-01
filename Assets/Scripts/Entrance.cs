@@ -18,7 +18,7 @@ public class Entrance : MonoBehaviour {
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.gameObject.tag == "Player")
+		if (collision.gameObject.tag == "Player0")
 		{
 			// シーン遷移コルーチン開始
 			StartCoroutine(GoToSceneCoroutine());
@@ -31,6 +31,6 @@ public class Entrance : MonoBehaviour {
 		// 5秒間待つ
 		yield return new WaitForSeconds(0.5f);
 		// TitleSceneに遷移
-		SceneManager.LoadScene("DemoScene");
+		SceneManager.LoadScene("Stage01");
 	}
 }

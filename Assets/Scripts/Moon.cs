@@ -12,11 +12,11 @@ public class Moon : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKey("left"))
+		if (Input.GetKey("left")||ButtonControl.isLeft)
 		{
 			transform.eulerAngles += new Vector3(0, 0, -0.5f);
 		}
-		else if (Input.GetKey("right"))
+		else if (Input.GetKey("right")||ButtonControl.isRight)
 		{
 			transform.eulerAngles += new Vector3(0, 0, 0.5f);
 		}

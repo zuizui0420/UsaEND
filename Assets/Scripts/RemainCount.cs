@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class RemainCount : MonoBehaviour {
 
+	GameObject player;
+
 	int cursor;
 
 	int Dead;
@@ -32,7 +34,6 @@ public class RemainCount : MonoBehaviour {
 
 	/// <summary>
 	/// 残機数表示部分配列
-	/// </summary>
 	public GameObject[] remainRend = new GameObject[4];
 
 	/// <summary>
@@ -53,6 +54,7 @@ public class RemainCount : MonoBehaviour {
 	// Use this for initialization
 	void Start()
 	{
+		player = GameObject.FindWithTag("Player0");
 	}
 
 	// Update is called once per frame
@@ -60,6 +62,7 @@ public class RemainCount : MonoBehaviour {
 	{
 
 		DigitNum = Digit(DeadCount);
+		DeadCount = player.GetComponent<Player>().DeadCount;
 
 		switch (DigitNum)
 		{

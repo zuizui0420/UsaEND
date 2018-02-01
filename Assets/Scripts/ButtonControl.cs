@@ -16,6 +16,7 @@ public class ButtonControl : MonoBehaviour {
 	public static bool isLeft { get; private set; }
 	public static bool isAction { get; private set; }
 	public static bool isJump { get; private set; }
+	public static bool isSwitchItem {  get; set; }
 
 	// Use this for initialization
 	void Start () {
@@ -31,7 +32,7 @@ public class ButtonControl : MonoBehaviour {
 
 	public void OnClickLeft()
 	{
-		Debug.Log("Left click!");
+		//Debug.Log("Left click!");
 		isLeft = true;
 
 	}
@@ -42,7 +43,7 @@ public class ButtonControl : MonoBehaviour {
 	}
 	public void OnClickRight()
 	{
-		Debug.Log("Right click!");
+		//Debug.Log("Right click!");
 		isRight = true;
 	}
 	public void UpClickRight()
@@ -51,7 +52,7 @@ public class ButtonControl : MonoBehaviour {
 	}
 	public void OnClickAction()
 	{
-		Debug.Log("Action click!");
+		//Debug.Log("Action click!");
 		isAction= true;
 	}
 	public void UpClickAction()
@@ -60,7 +61,7 @@ public class ButtonControl : MonoBehaviour {
 	}
 	public void OnClickJump()
 	{
-		Debug.Log("Jump click!");
+		//Debug.Log("Jump click!");
 		isJump = true;
 	}
 	public void UpClickJump()
@@ -68,9 +69,14 @@ public class ButtonControl : MonoBehaviour {
 		isJump = false;
 	}
 
+	public void OnClickItemSwitch()
+	{
+		isSwitchItem = true;
+	}
+	
 	public void OnClickToMenuBtn()
 	{
-		SceneManager.LoadScene("Menu");
+		SceneManager.LoadScene("MenuScene");
 	}
 
 	public void Restart()

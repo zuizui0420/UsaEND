@@ -236,19 +236,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 564fe747e45ad7c449447fc7930ea73e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1347466335872494}
-  playerAnimator: {fileID: 95081551744054324}
+  playerPre: {fileID: 1725867795662406, guid: 470e94124d0e7de4082d5583b0483b1a, type: 2}
+  player: {fileID: 1725867795662406, guid: 470e94124d0e7de4082d5583b0483b1a, type: 2}
+  playerAnimator: {fileID: 95080024921398766, guid: 470e94124d0e7de4082d5583b0483b1a,
+    type: 2}
   actID: 0
   playerID: 0
-  playerState: 0
+  playerState: 3
   InputDet: 0
   animaNom: 0
   specialAction: 0
+  animationTime: 0
   isGround: 0
+  jumpTopPos: 0
   speed: 0.06
+  noGroundPos: 0
+  onGroundPos: 0
+  isDying: 0
   isDead: 0
   isClimb: 0
   isJump: 0
+  isRestart: 0
+  isGoal: 0
+  Item0: 
+  Item1: 
 --- !u!212 &212531806947440596
 SpriteRenderer:
   m_ObjectHideFlags: 1
