@@ -109,9 +109,10 @@ public class FadeManager : MonoBehaviour
     }
     private IEnumerator LoadingTime()
     {
-        AudioManager.PlaySE("falling");
+
         player.GetComponent<LoadingWalk>().go = true;
-        yield return new WaitForSeconds(2f);
+		AudioManager.PlaySE("trumpet2");
+		yield return new WaitForSeconds(2f);
         FadeStart = true;// フェードアウトフラグOFF
     }
 }
