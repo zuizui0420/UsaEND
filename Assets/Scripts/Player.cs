@@ -218,7 +218,7 @@ public class Player : Photon.MonoBehaviour
 						ClimbLadder();
 					}
 
-					if (Input.GetKey(KeyCode.Alpha1) || ButtonControl.isAction)
+					if (Input.GetKey(KeyCode.Alpha1) || ButtonControl.isActionB)
 					{
 						if (StopInput == 0 && isGround == true)
 						{
@@ -484,7 +484,7 @@ public class Player : Photon.MonoBehaviour
 		playerPos.x = Mathf.Lerp(playerPos.x, ladderPos.x, 0.2f);
 
 
-		if (Input.GetKey("up") )
+		if (Input.GetKey("up")||ButtonControl.isActionA)
 		{
 			playerAnimator.speed = 1;
 			playerPos += Vector2.up * speed;
@@ -492,7 +492,7 @@ public class Player : Photon.MonoBehaviour
 			onGroundPos = player.gameObject.transform.position.y;
 			noGroundPos = player.gameObject.transform.position.y;
 		}
-		else if (Input.GetKey("down"))
+		else if (Input.GetKey("down")||ButtonControl.isActionB)
 		{
 			playerAnimator.speed = 1;
 			playerPos += Vector2.down * speed;
@@ -716,7 +716,7 @@ public class Player : Photon.MonoBehaviour
 		if(collision.gameObject.tag == "Ladder")
 		{
 			ItemUI.GetComponent<ItemUi>().LadderSwitch = true;
-			if (Input.GetKeyDown(KeyCode.A)||ButtonControl.isAction)
+			if (Input.GetKeyDown(KeyCode.A)||ButtonControl.isActionB)
 			{
 				isClimb = true;
 				ladderPos = collision.gameObject.transform.position;
