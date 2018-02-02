@@ -686,6 +686,7 @@ public class Player : Photon.MonoBehaviour
 	{
 		StopMove = 0;
 		StopInput = 0;
+		ItemUI.GetComponent<ItemUi>().UiErase();
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)
