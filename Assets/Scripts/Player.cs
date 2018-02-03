@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class Player : Photon.MonoBehaviour
 {
@@ -74,7 +75,7 @@ public class Player : Photon.MonoBehaviour
 
 	//デバック用
 	private float nextTime;
-
+	
 	void Awake()
 	{
 		try {
@@ -187,8 +188,10 @@ public class Player : Photon.MonoBehaviour
 					//空中の処理
 					else if (isGround == false)
 					{
-
-						playerPos.y -= 0.1f;
+						if (animaNom != 7)
+						{
+							playerPos.y -= 0.1f;
+						}
 						if (isJump == false && specialAction == false)
 						{
 							animaNom = 4;
@@ -219,9 +222,10 @@ public class Player : Photon.MonoBehaviour
 						ClimbLadder();
 					}
 
+					//アイテム使用
 					if (Input.GetKey(KeyCode.Alpha1) || ButtonControl.isActionB)
 					{
-						if (StopInput == 0 && isGround == true)
+						if (StopInput == 0 && isGround == true && !isClimb)
 						{
 							switch (Item0)
 							{
@@ -277,8 +281,12 @@ public class Player : Photon.MonoBehaviour
 				//他のスクリプトから読み出したときはここでDying()を実行(Dyingメソッドの処理が重なるため)
 				else if (isDying)
 				{
-					Dying();
-					return;
+					if (animaNom != 7)
+					{
+						Dying();
+						return;
+					}
+					
 
 				}
 
@@ -547,8 +555,9 @@ public class Player : Photon.MonoBehaviour
 	void FlyAway()
 	{
 		player.GetComponent<BoxCollider2D>().isTrigger = true;
-		isGround = false;
 		playerPos.y += 0.05f;
+		StartCoroutine("FlewAway");
+		
 	}
 
 
@@ -719,10 +728,22 @@ public class Player : Photon.MonoBehaviour
 		if(collision.gameObject.tag == "Ladder")
 		{
 			ItemUI.GetComponent<ItemUi>().LadderSwitch = true;
-			if (Input.GetKeyDown(KeyCode.A)||ButtonControl.isActionB)
+			if (Item0 == " ")
 			{
-				isClimb = true;
-				ladderPos = collision.gameObject.transform.position;
+				if (Input.GetKeyDown(KeyCode.A) || ButtonControl.isActionB)
+				{
+					isClimb = true;
+					ladderPos = collision.gameObject.transform.position;
+				}
+			}
+
+			else
+			{
+				if (Input.GetKeyDown(KeyCode.A) || ButtonControl.isActionA)
+				{
+					isClimb = true;
+					ladderPos = collision.gameObject.transform.position;
+				}
 			}
 
 		}
@@ -736,7 +757,7 @@ public class Player : Photon.MonoBehaviour
 
 	private void OnTriggerExit2D(Collider2D collision)
 	{
-		if (collision.gameObject.tag == "Stage")
+		if (collision.gameObject.tag == "Stage"&&animaNom!=7)
 		{
 			isGround = false;
 			if (isJump == false)
@@ -747,11 +768,16 @@ public class Player : Photon.MonoBehaviour
 
 		else if (collision.gameObject.tag == "Ladder")
 		{
-			ItemUI.GetComponent<ItemUi>().LadderSwitch = false;
-			isClimb = false;
-			isGround = false;
 			ButtonControl.isActionA = false;
 			ButtonControl.isActionB = false;
+			if (animaNom != 7)
+			{
+				ItemUI.GetComponent<ItemUi>().LadderSwitch = false;
+				isClimb = false;
+				isGround = false;
+			}
+			
+			stpMove();
 			//noGroundPos = player.transform.position.y;//ジャンプすることで梯子から脱するのでここはいらないはず
 
 		}
@@ -768,6 +794,19 @@ public class Player : Photon.MonoBehaviour
 			breakwall = null;
 			Break = false;
 		}
+	}
+
+	IEnumerator FlewAway()
+	{
+		yield return new WaitForSeconds(2.5f);
+		if(animaNom != 6)
+		{
+			DeadCount++;
+			animaNom = 6;playerState = PLAYER_STATE.DEAD;
+		}
+		
+		
+	
 	}
 
 	public void stpMoveDestroy()			//tag "BreakWall"に触れている間ピッケルを使った場合に呼ばれる

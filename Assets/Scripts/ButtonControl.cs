@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using System;
 
 public class ButtonControl : MonoBehaviour {
 
@@ -11,6 +11,8 @@ public class ButtonControl : MonoBehaviour {
 	GameObject resultUI;
 	GameObject reStartBtn;
 
+	//アクションボタンのリロードフラグ
+	public bool isActionRelode;
 
 	public static bool isRight { get; private set; }
 	public static bool isLeft { get; private set; }
@@ -26,11 +28,12 @@ public class ButtonControl : MonoBehaviour {
 		player = GameObject.FindWithTag("Player0");
 		resultUI = GameObject.Find("GameResultUI");
 		reStartBtn = GameObject.Find("ReStartBtn");
+		isActionRelode = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
 	public void OnClickLeft()
@@ -65,20 +68,27 @@ public class ButtonControl : MonoBehaviour {
 	public void OnClickActionA()
 	{
 		//Debug.Log("Action click!");
+		if (!isActionRelode) return;
 		isActionA = true;
+
 	}
 	public void UpClickActionA()
 	{
 		isActionA = false;
+		isActionRelode = false;
+		StartCoroutine("ActionBtnInter");
 	}
 	public void OnClickActionB()
 	{
 		//Debug.Log("Action click!");
+		if (!isActionRelode) return;
 		isActionB = true;
 	}
 	public void UpClickActionB()
 	{
 		isActionB = false;
+		isActionRelode = false;
+		StartCoroutine("ActionBtnInter");
 	}
 
 	public void OnClickJump()
@@ -118,5 +128,12 @@ public class ButtonControl : MonoBehaviour {
 		resultUI.GetComponent<StageResultUI>().isRestsrt = true;
 		player.GetComponent<Player>().isRestart = false;
 		reStartBtn.GetComponent<Button>().interactable = true;
+	}
+
+	IEnumerator ActionBtnInter()
+	{
+		yield return new WaitForSeconds(0.2f);
+		isActionRelode = true;
+
 	}
 }

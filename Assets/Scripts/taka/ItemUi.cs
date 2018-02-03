@@ -44,7 +44,7 @@ public class ItemUi : MonoBehaviour
 		Item1st = player.GetComponent<Player>().Item1;
 		switch (LadderSwitch)
 		{
-			case false:
+			case false://梯子が近くにないとき
 				if (Item0st == " ")
 				{
 					ActionbtnA.SetActive(false);
@@ -53,9 +53,11 @@ public class ItemUi : MonoBehaviour
 				else
 				{
 					ActionbtnA.SetActive(false);
+					ItemSwitcging();
 				}
-				break;
-			case true:
+					break;
+
+			case true://梯子が近くにあるとき
 				if (Item0st == " ")
 				{
 					ActionbtnA.SetActive(false);
@@ -160,6 +162,41 @@ public class ItemUi : MonoBehaviour
 		MoveWall.GetComponent<Animator>().Play("MoveWallOnEvent");
 		Debug.Log("dada");
 		MoveWall.SetActive(false);
+	}
+	public void ItemSwitcging()
+	{
+		switch (Item0st)    //Item0stに入ってる文字からItemのsprite変更とActionのspriteの変更
+		{
+			case "Energy":
+				Item0sprite.SetActive(true); ActionbtnB.SetActive(true);
+				Item0sprite.GetComponent<Image>().sprite = Energyimg; ActionbtnB.GetComponent<Image>().sprite = EnergyACT;
+				break;
+			case "Carrot":
+				Item0sprite.SetActive(true); ActionbtnB.SetActive(true);
+				Item0sprite.GetComponent<Image>().sprite = Carrotimg; ActionbtnB.GetComponent<Image>().sprite = CarrotACT;
+				break;
+			case "Pickel":
+				Item0sprite.SetActive(true); ActionbtnB.SetActive(true);
+				Item0sprite.GetComponent<Image>().sprite = Pickelimg; ActionbtnB.GetComponent<Image>().sprite = PickelACT;
+				break;
+			case "Taimatu":
+				Item0sprite.SetActive(true); ActionbtnB.SetActive(true);
+				Item0sprite.GetComponent<Image>().sprite = Taimatuimg; ActionbtnB.GetComponent<Image>().sprite = TaimatuACT;
+				break;
+			case "Sekiban":
+				Item0sprite.SetActive(true); Item0sprite.GetComponent<Image>().sprite = Sekibanimg;
+				if (SekibanSwitch)
+				{
+					ActionbtnB.SetActive(true);
+					ActionbtnB.GetComponent<Image>().sprite = SekibanACT;
+				}
+				else
+				{
+					ActionbtnB.SetActive(false);
+				}
+
+				break;
+		}
 	}
 }
 

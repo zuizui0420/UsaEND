@@ -2143,7 +2143,7 @@ Prefab:
       objectReference: {fileID: 654786188}
     - target: {fileID: 1965568127866968, guid: 90f7cc819d0e0184898a278ca780678a, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 90f7cc819d0e0184898a278ca780678a, type: 2}
@@ -25805,7 +25805,7 @@ MonoBehaviour:
   Item2st: 
   LadderSwitch: 0
   SekibanSwitch: 0
-  EnergyACT: {fileID: 21300014, guid: 5536ad73b89d7634f9d39a671edf5b6e, type: 3}
+  EnergyACT: {fileID: 21300016, guid: 5536ad73b89d7634f9d39a671edf5b6e, type: 3}
   CarrotACT: {fileID: 21300004, guid: 5536ad73b89d7634f9d39a671edf5b6e, type: 3}
   PickelACT: {fileID: 21300006, guid: 5536ad73b89d7634f9d39a671edf5b6e, type: 3}
   SekibanACT: {fileID: 21300008, guid: 5536ad73b89d7634f9d39a671edf5b6e, type: 3}
