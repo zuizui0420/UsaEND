@@ -19,7 +19,6 @@ public class NeedleBase : MonoBehaviour
 
     public void Needlefomr()           //針の生成
     {
-        Debug.Log("にょきにょき");
         Instantiate(needle, this.transform.position + new Vector3(0f, -0.14f, 0), Quaternion.identity);
         NeedleSwitch = false;
         gameObject.GetComponent<Animator>().Play("StalactiteNyokisinai");

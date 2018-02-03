@@ -15,8 +15,8 @@ public class ButtonControl : MonoBehaviour {
 	public static bool isRight { get; private set; }
 	public static bool isLeft { get; private set; }
 	public static bool isAction { get; private set; }
-	public static bool isActionA { get; private set; }
-	public static bool isActionB { get; private set; }
+	public static bool isActionA { get;  set; }
+	public static bool isActionB { get;  set; }
 	public static bool isJump { get; private set; }
 	public static bool isSwitchItem {  get; set; }
 

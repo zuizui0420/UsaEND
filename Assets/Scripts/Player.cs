@@ -64,8 +64,8 @@ public class Player : Photon.MonoBehaviour
 	private Vector2 ladderPos;
 
 	//移動制御 true or false
-	int StopMove;
-	int StopInput;
+	public int StopMove;
+	public int StopInput;
 
 	//Item Ui
 	public string Item0, Item1;
@@ -162,6 +162,7 @@ public class Player : Photon.MonoBehaviour
 
 
 				isDead = false;
+
 				
 				GameObject.Find("GameResultUI").GetComponent<StageResultUI>().HideGameOverUI();
 
@@ -563,6 +564,7 @@ public class Player : Photon.MonoBehaviour
 
 			isDying = false;
 			isDead = false;
+			stpMove();
 
 		}
 
@@ -748,6 +750,8 @@ public class Player : Photon.MonoBehaviour
 			ItemUI.GetComponent<ItemUi>().LadderSwitch = false;
 			isClimb = false;
 			isGround = false;
+			ButtonControl.isActionA = false;
+			ButtonControl.isActionB = false;
 			//noGroundPos = player.transform.position.y;//ジャンプすることで梯子から脱するのでここはいらないはず
 
 		}
@@ -755,7 +759,7 @@ public class Player : Photon.MonoBehaviour
 		if (collision.gameObject.tag == "MainCamera")
 		{
 			animaNom = 6;
-			stpMove();
+			//stpMove();
 
 		}
 		if (collision.gameObject.tag == "BreakWall")	//breakwallのオブジェクトデータをnulへ
