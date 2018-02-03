@@ -132,7 +132,7 @@ public class ButtonControl : MonoBehaviour {
 
 	IEnumerator ActionBtnInter()
 	{
-		yield return new WaitForSeconds(0.2f);
+		yield return new WaitForSeconds(0.1f);
 		isActionRelode = true;
 
 	}

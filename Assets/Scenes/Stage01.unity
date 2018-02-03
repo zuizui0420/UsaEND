@@ -2143,7 +2143,7 @@ Prefab:
       objectReference: {fileID: 654786188}
     - target: {fileID: 1965568127866968, guid: 90f7cc819d0e0184898a278ca780678a, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 90f7cc819d0e0184898a278ca780678a, type: 2}
@@ -8119,6 +8119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de31814d3e615847ae587f99978e698, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActionRelode: 0
 --- !u!1 &471593932
 GameObject:
   m_ObjectHideFlags: 0
