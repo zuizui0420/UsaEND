@@ -8,21 +8,18 @@ public class Issue : MonoBehaviour {
 
     public Transform Spawn;
 
-    private float attackInterval = 3.0f;//間隔
+    private float attackInterval = 4.0f;//間隔
     private float lastAttackTime;
 
 
     // Use this for initialization
     void Start ()
     {
-        AudioManager.CrossFade(1, "Fight_in_the_outer_space");
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        StartCoroutine("Duplication");
-
         if (Time.time > lastAttackTime + attackInterval)
         {
             Instantiate(RockPrefab, Spawn.position, Spawn.rotation);
@@ -31,19 +28,4 @@ public class Issue : MonoBehaviour {
         }
     }
 
-    private IEnumerator Duplication()
-    {
-        
-        // ログ出力  
-        Debug.Log("1");
-
-        // 1秒待つ  
-        yield return new WaitForSeconds(3.0f);
-
-        // ログ出力  
-        Debug.Log("2");
-
-       
-
-    }
 }

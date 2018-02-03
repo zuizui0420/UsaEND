@@ -79,12 +79,12 @@ public class Player : MonoBehaviour {
 	{
 		if (Input.GetKeyDown("up") && isGround == true)
 		{
-			specialAction = true;
+            AudioManager.PlaySE("jump2");
+            specialAction = true;
 			animaNom = 2;
 			Animation(animaNom);
 			posY = playerPos.y + 3.0f;
-
-		}
+        }
 		if (animationTime <= 0.5 && animaNom == 2)
 		{
 			playerPos.y = Mathf.Lerp(playerPos.y, posY, 0.1f);
@@ -95,8 +95,7 @@ public class Player : MonoBehaviour {
 		if (isGround == false)
 		{
 			playerPos.y -= 0.1f;
-		
-			if (Input.GetKey("left"))
+            if (Input.GetKey("left"))
 			{
 				playerPos += Vector2.left * 0.03f;
 			}
@@ -138,7 +137,7 @@ public class Player : MonoBehaviour {
             //ジャンプ
 			case 2:
 				playerAnimator.Play("playerJump");
-				
+
 
 				break;
 			
