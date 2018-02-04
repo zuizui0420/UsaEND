@@ -70,8 +70,8 @@ public class Player : Photon.MonoBehaviour
 
 	//Item Ui
 	public string Item0, Item1;
-	GameObject breakwall;
-	bool Break;
+	GameObject breakwall, movewall;
+	public bool Break, MoveWall;
 
 	//デバック用
 	private float nextTime;
@@ -240,6 +240,13 @@ public class Player : Photon.MonoBehaviour
 									break;
 								case "Torch":
 									GetTorchUse(); Item0 = " ";
+									break;
+								case "Sekiban":
+									if (MoveWall == true)
+									{
+										movewall.GetComponent<Movewall>().movewall = true;Item0 = " ";
+										ItemUI.GetComponent<ItemUi>().Item0sprite.GetComponent<Image>().sprite = ItemUI.GetComponent<ItemUi>().nullimg;
+									}
 									break;
 							}
 						}
@@ -753,6 +760,11 @@ public class Player : Photon.MonoBehaviour
 			breakwall = collision.gameObject;
 			Break = true;
 		}
+		if (collision.gameObject.tag == "MoveWall")
+		{
+			movewall = collision.gameObject;
+			MoveWall = true;
+		}
 	}
 
 	private void OnTriggerExit2D(Collider2D collision)
@@ -790,9 +802,13 @@ public class Player : Photon.MonoBehaviour
 		}
 		if (collision.gameObject.tag == "BreakWall")	//breakwallのオブジェクトデータをnulへ
 		{
-
 			breakwall = null;
 			Break = false;
+		}
+		if (collision.gameObject.tag == "MoveWall")
+		{
+			movewall = null;
+			MoveWall = false;
 		}
 	}
 

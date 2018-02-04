@@ -10,14 +10,14 @@ public class ItemUi : MonoBehaviour
 
 	//UI sprite
 	public GameObject Item0sprite, Item1sprite, ActionbtnA, ActionbtnB;
-	Sprite Energyimg, Carrotimg, Pickelimg, Sekibanimg, Taimatuimg;
-
+	Sprite Energyimg, Carrotimg, Pickelimg, Taimatuimg;
+	public Sprite Sekibanimg;
 
 	//Item
 	public GameObject Energy, Carrot, Pickel, Sekiban, Taimatu;
 	public Sprite nullimg;
 	public string Item0st, Item1st, Item2st;
-	public bool LadderSwitch, SekibanSwitch;
+	public bool LadderSwitch;
 
 	//Action image
 	public Sprite EnergyACT, CarrotACT, PickelACT, SekibanACT, TaimatuACT, Ladder, LadderUp, LadderDown;
@@ -53,7 +53,7 @@ public class ItemUi : MonoBehaviour
 				else
 				{
 					ActionbtnA.SetActive(false);
-					ItemSwitcging();
+					ItemSwitching();
 				}
 					break;
 
@@ -99,7 +99,7 @@ public class ItemUi : MonoBehaviour
 					break;
 				case "Sekiban":
 					Item0sprite.SetActive(true); Item0sprite.GetComponent<Image>().sprite = Sekibanimg;
-					if (SekibanSwitch)
+					if (player.GetComponent<Player>().MoveWall)
 					{
 						ActionbtnB.SetActive(true);
 						ActionbtnB.GetComponent<Image>().sprite = SekibanACT;
@@ -163,7 +163,7 @@ public class ItemUi : MonoBehaviour
 		Debug.Log("dada");
 		MoveWall.SetActive(false);
 	}
-	public void ItemSwitcging()
+	public void ItemSwitching()
 	{
 		switch (Item0st)    //Item0stに入ってる文字からItemのsprite変更とActionのspriteの変更
 		{
@@ -185,7 +185,7 @@ public class ItemUi : MonoBehaviour
 				break;
 			case "Sekiban":
 				Item0sprite.SetActive(true); Item0sprite.GetComponent<Image>().sprite = Sekibanimg;
-				if (SekibanSwitch)
+				if (player.GetComponent<Player>().MoveWall)
 				{
 					ActionbtnB.SetActive(true);
 					ActionbtnB.GetComponent<Image>().sprite = SekibanACT;
