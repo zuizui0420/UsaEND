@@ -169,11 +169,11 @@ public class Player : Photon.MonoBehaviour
 
 				isDead = false;
 
-				//ここで呼ばないと梯子で死んだときバグる
-				if (isClimb == true)
-				{
-					ClimbLadder();
-				}
+				//ここで呼ばないと梯子で死んだときバグる>>他の改善策を実装
+				//if (isClimb == true)
+				//{
+				//	ClimbLadder();
+				//}
 
 				GameObject.Find("GameResultUI").GetComponent<StageResultUI>().HideGameOverUI();
 
@@ -207,6 +207,7 @@ public class Player : Photon.MonoBehaviour
 						{
 							animaNom = 4;
 							speed = 0.02f;
+							Debug.Log("fall");
 						}
 
 						if (Input.GetKey("left") || ButtonControl.isLeft)
@@ -227,6 +228,10 @@ public class Player : Photon.MonoBehaviour
 						playerPos.y = Mathf.Lerp(playerPos.y, jumpTopPos, 0.1f);
 					}
 
+					if (isClimb == true)
+					{
+						ClimbLadder();
+					}
 
 					//アイテム使用
 					if (Input.GetKey(KeyCode.Alpha1) || ButtonControl.isActionB)
@@ -294,6 +299,11 @@ public class Player : Photon.MonoBehaviour
 				//他のスクリプトから読み出したときはここでDying()を実行(Dyingメソッドの処理が重なるため)
 				else if (isDying)
 				{
+					//梯子で止まっている時に死ぬとアニメーションが止まるのでここで動かす
+					if(playerAnimator.speed == 0)
+					{
+						playerAnimator.speed = 1;
+					}
 					
 					if (animaNom != 7)
 					{
@@ -492,7 +502,6 @@ public class Player : Photon.MonoBehaviour
 
 	void ClimbLadder()
 	{
-
 		isGround = true;//梯子のあたり判定を呼び出した時isGround=trueが読み込まれていない事があるのでここでも呼び出しておく
 
 		speed = 0.06f;

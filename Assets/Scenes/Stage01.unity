@@ -5308,7 +5308,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 337419099}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 26.13, y: -5.87, z: 0}
+  m_LocalPosition: {x: 26.13, y: -6.34, z: 0}
   m_LocalScale: {x: 1.5, y: 1.8334014, z: 0}
   m_Children: []
   m_Father: {fileID: 141156926}
@@ -26151,7 +26151,7 @@ Prefab:
     - target: {fileID: 114939148877828764, guid: a6d7653f4648ee643a0bd9e88507e3d6,
         type: 2}
       propertyPath: Needlex
-      value: 6.5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 114939148877828764, guid: a6d7653f4648ee643a0bd9e88507e3d6,
         type: 2}
@@ -35310,11 +35310,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4896683142156752, guid: 470e94124d0e7de4082d5583b0483b1a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -26.3
+      value: -26.77
       objectReference: {fileID: 0}
     - target: {fileID: 4896683142156752, guid: 470e94124d0e7de4082d5583b0483b1a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 24.6
+      value: 24.54
       objectReference: {fileID: 0}
     - target: {fileID: 4896683142156752, guid: 470e94124d0e7de4082d5583b0483b1a, type: 2}
       propertyPath: m_LocalPosition.z
