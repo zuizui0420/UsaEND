@@ -142,6 +142,14 @@ public class ItemUi : MonoBehaviour
 				Item1sprite.GetComponent<Image>().sprite = nullimg;
 			}
 		}
+		if (Item0st == " ")
+		{
+			Item0sprite.GetComponent<Image>().sprite = nullimg;
+		}
+		else if (Item1st == " ")
+		{
+			Item1sprite.GetComponent<Image>().sprite = nullimg;
+		}
 	}
 
 

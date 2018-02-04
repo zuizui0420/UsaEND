@@ -27,6 +27,7 @@ public class Movewall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		float posy;
         MoveWallPos = transform.position;
         relativePos.y = MoveWallPos.x - startPos.x;
         if (movewall == true)
@@ -35,15 +36,17 @@ public class Movewall : MonoBehaviour
             Invoke("interval",2f);
             if (Wallspritechange == true)
             {
-                if (gameObject.GetComponent<SpriteRenderer>().size == new Vector2(1, 0))
+				posy = gameObject.GetComponent<SpriteRenderer>().size.y;
+
+				if (0<=posy)
+				{
+					gameObject.GetComponent<SpriteRenderer>().size -= new Vector2(0, MoveWallMoveSpeed);
+                }
+                else
 				{
 					player.GetComponent<Player>().stpMove();
 					gameObject.SetActive(false);
-                }
-                else
-                {
-                    gameObject.GetComponent<SpriteRenderer>().size -= new Vector2(0, MoveWallMoveSpeed);
-                }
+				}
             }
         }
         transform.position = MoveWallPos;

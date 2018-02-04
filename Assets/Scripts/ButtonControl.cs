@@ -14,14 +14,16 @@ public class ButtonControl : MonoBehaviour {
 	//アクションボタンのリロードフラグ
 	public bool isActionRelode;
 
-	public static bool isRight { get; private set; }
-	public static bool isLeft { get; private set; }
-	public static bool isAction { get; private set; }
+	public static bool isRight { get; set; }
+	public static bool isLeft { get; set; }
+	public static bool isAction { get; set; }
 	public static bool isActionA { get;  set; }
 	public static bool isActionB { get;  set; }
-	public static bool isJump { get; private set; }
+	public static bool isJump { get; set; }
 	public static bool isSwitchItem {  get; set; }
 
+
+	bool isGround;
 
 	// Use this for initialization
 	void Start () {
@@ -29,11 +31,14 @@ public class ButtonControl : MonoBehaviour {
 		resultUI = GameObject.Find("GameResultUI");
 		reStartBtn = GameObject.Find("ReStartBtn");
 		isActionRelode = true;
+
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
+		isGround = player.GetComponent<Player>().isGround;
 	}
 
 	public void OnClickLeft()
@@ -94,11 +99,15 @@ public class ButtonControl : MonoBehaviour {
 	public void OnClickJump()
 	{
 		//Debug.Log("Jump click!");
-		isJump = true;
+		if (isGround)
+		{
+			isJump = true;
+		}
+
 	}
 	public void UpClickJump()
 	{
-		isJump = false;
+		//isJump = false;
 	}
 
 	public void OnClickItemSwitch()

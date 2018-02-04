@@ -125,11 +125,18 @@ public class Player : Photon.MonoBehaviour
 				break;
 		}
 
+		ButtonControl.isLeft = false;
+		ButtonControl.isRight = false;
+		ButtonControl.isJump = false;
+		ButtonControl.isActionA = false;
+		ButtonControl.isActionB = false;
+
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
+
 
 		//Debug.Log(noGroundPos - onGroundPos);
 
@@ -152,7 +159,6 @@ public class Player : Photon.MonoBehaviour
 		//}
 
 		animationTime = playerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-
 		playerPos = transform.position;
 
 		Animation(animaNom);//アニメーション再生
@@ -161,10 +167,14 @@ public class Player : Photon.MonoBehaviour
 		{
 			case PLAYER_STATE.ALIVE:
 
-
 				isDead = false;
 
-				
+				//ここで呼ばないと梯子で死んだときバグる
+				if (isClimb == true)
+				{
+					ClimbLadder();
+				}
+
 				GameObject.Find("GameResultUI").GetComponent<StageResultUI>().HideGameOverUI();
 
 				if (!isDying)
@@ -175,6 +185,7 @@ public class Player : Photon.MonoBehaviour
 						{
 							specialAction = false;
 							isJump = false;
+							ButtonControl.isJump = false;
 						}
 					}
 
@@ -216,11 +227,6 @@ public class Player : Photon.MonoBehaviour
 						playerPos.y = Mathf.Lerp(playerPos.y, jumpTopPos, 0.1f);
 					}
 
-
-					if (isClimb == true)
-					{
-						ClimbLadder();
-					}
 
 					//アイテム使用
 					if (Input.GetKey(KeyCode.Alpha1) || ButtonControl.isActionB)
@@ -288,17 +294,14 @@ public class Player : Photon.MonoBehaviour
 				//他のスクリプトから読み出したときはここでDying()を実行(Dyingメソッドの処理が重なるため)
 				else if (isDying)
 				{
+					
 					if (animaNom != 7)
 					{
 						Dying();
 						return;
-					}
-					
+					}			
 
 				}
-
-				
-
 				//ゴール後
 				if (isGoal == true)
 				{
@@ -447,7 +450,7 @@ public class Player : Photon.MonoBehaviour
 
 
 	//プレイヤー移動
-	int Move()
+	void Move()
 	{
 		if (specialAction == false && StopMove == 0)
 		{
@@ -485,11 +488,11 @@ public class Player : Photon.MonoBehaviour
 
 		}
 	
-		return 0;
 	}
 
 	void ClimbLadder()
 	{
+
 		isGround = true;//梯子のあたり判定を呼び出した時isGround=trueが読み込まれていない事があるのでここでも呼び出しておく
 
 		speed = 0.06f;
@@ -516,9 +519,17 @@ public class Player : Photon.MonoBehaviour
 			onGroundPos = player.gameObject.transform.position.y;
 			noGroundPos = player.gameObject.transform.position.y;
 		}		
-		else
+		else 
 		{
-			playerAnimator.speed = 0;
+			if (!isDying)
+			{
+				playerAnimator.speed = 0;
+			}
+
+			else if (isDying){
+				playerAnimator.speed = 1;
+				return;
+			}
 
 		}
 
@@ -541,19 +552,22 @@ public class Player : Photon.MonoBehaviour
 
 	public void Dying()
 	{
-		if (isDead == false)
-		{
-			animaNom = 5;
-			specialAction = true;
-			isDead = true;
-			i++;
-		}
+	
+			if (isDead == false)
+			{
+				animaNom = 5;
+				specialAction = true;
+				isDead = true;
+				i++;
+			}
+
+		return;
+
 	}
 
 	void Dead()
 	{
 		isDying = false;
-
 		playerState = PLAYER_STATE.DEAD;
 		DeadCount++;
 
@@ -590,7 +604,7 @@ public class Player : Photon.MonoBehaviour
 	}
 
 	//プレイヤーアニメーション
-	int Animation(int i)
+	void Animation(int i)
 	{
 		switch (i)
 		{
@@ -665,7 +679,6 @@ public class Player : Photon.MonoBehaviour
 
 		transform.rotation = playerRot;
 		
-		return 0;
 	}
 
 	public void GetEnergyUse()      //エナドリanimation

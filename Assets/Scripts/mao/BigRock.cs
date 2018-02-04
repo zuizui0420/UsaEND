@@ -88,7 +88,7 @@ public class BigRock : MonoBehaviour {
 
     public void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Wall"|| other.gameObject.tag == "Rock")
+        if (other.gameObject.tag == "Wall"|| other.gameObject.tag == "MoveWall")
         {
             if (WallHitReflectionGimmick)
             {

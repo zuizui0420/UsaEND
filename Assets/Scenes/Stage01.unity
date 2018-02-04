@@ -1322,6 +1322,11 @@ Prefab:
       propertyPath: m_TagString
       value: Stage
       objectReference: {fileID: 0}
+    - target: {fileID: 61205022978707888, guid: a6d7653f4648ee643a0bd9e88507e3d6,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a6d7653f4648ee643a0bd9e88507e3d6, type: 2}
   m_IsPrefabParent: 0
@@ -4533,7 +4538,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 293798362}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.41, y: -3.4200006, z: 0}
+  m_LocalPosition: {x: 11.41, y: -3.11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 141156926}
@@ -5303,7 +5308,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 337419099}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 26.13, y: -6.53, z: 0}
+  m_LocalPosition: {x: 26.13, y: -5.87, z: 0}
   m_LocalScale: {x: 1.5, y: 1.8334014, z: 0}
   m_Children: []
   m_Father: {fileID: 141156926}
@@ -5432,7 +5437,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300018, guid: 5536ad73b89d7634f9d39a671edf5b6e, type: 3}
+  m_Sprite: {fileID: 21300020, guid: 5536ad73b89d7634f9d39a671edf5b6e, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -10069,6 +10074,16 @@ Prefab:
       propertyPath: m_Name
       value: NeedleA
       objectReference: {fileID: 0}
+    - target: {fileID: 61699651240365918, guid: a6d7653f4648ee643a0bd9e88507e3d6,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 61205022978707888, guid: a6d7653f4648ee643a0bd9e88507e3d6,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a6d7653f4648ee643a0bd9e88507e3d6, type: 2}
   m_IsPrefabParent: 0
@@ -11623,7 +11638,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &624175363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11641,10 +11656,10 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 624175362}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -21314,6 +21329,11 @@ Prefab:
       propertyPath: m_TagString
       value: Stage
       objectReference: {fileID: 0}
+    - target: {fileID: 61205022978707888, guid: a6d7653f4648ee643a0bd9e88507e3d6,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a6d7653f4648ee643a0bd9e88507e3d6, type: 2}
   m_IsPrefabParent: 0
@@ -23110,7 +23130,7 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
-          m_CallState: 2
+          m_CallState: 0
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   - eventID: 3
@@ -23119,6 +23139,40 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 470280748}
           m_MethodName: UpClickJump
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 470280748}
+          m_MethodName: OnClickJump
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 0
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 470280748}
+          m_MethodName: OnClickJump
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -23828,7 +23882,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1136360193}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.41, y: -3.4300003, z: 0}
+  m_LocalPosition: {x: 4.41, y: -3.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 141156926}
@@ -25577,7 +25631,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1228422384}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 30.44, y: -0.59000015, z: 0}
+  m_LocalPosition: {x: 30.44, y: -0.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 141156926}
@@ -26050,11 +26104,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4802646359506878, guid: a6d7653f4648ee643a0bd9e88507e3d6, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 17.67
+      value: 17.57
       objectReference: {fileID: 0}
     - target: {fileID: 4802646359506878, guid: a6d7653f4648ee643a0bd9e88507e3d6, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: -1.95
       objectReference: {fileID: 0}
     - target: {fileID: 4802646359506878, guid: a6d7653f4648ee643a0bd9e88507e3d6, type: 2}
       propertyPath: m_LocalPosition.z
@@ -26087,12 +26141,12 @@ Prefab:
     - target: {fileID: 212240786739946022, guid: a6d7653f4648ee643a0bd9e88507e3d6,
         type: 2}
       propertyPath: m_Size.y
-      value: 4
+      value: 4.1
       objectReference: {fileID: 0}
     - target: {fileID: 212530934168067206, guid: a6d7653f4648ee643a0bd9e88507e3d6,
         type: 2}
       propertyPath: m_Size.y
-      value: 4
+      value: 4.1
       objectReference: {fileID: 0}
     - target: {fileID: 114939148877828764, guid: a6d7653f4648ee643a0bd9e88507e3d6,
         type: 2}
@@ -26116,12 +26170,31 @@ Prefab:
     - target: {fileID: 61699651240365918, guid: a6d7653f4648ee643a0bd9e88507e3d6,
         type: 2}
       propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 3
+      value: 4.1
       objectReference: {fileID: 0}
     - target: {fileID: 61205022978707888, guid: a6d7653f4648ee643a0bd9e88507e3d6,
         type: 2}
       propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 3
+      value: 4.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 61205022978707888, guid: a6d7653f4648ee643a0bd9e88507e3d6,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4422142124423930, guid: a6d7653f4648ee643a0bd9e88507e3d6, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212240786739946022, guid: a6d7653f4648ee643a0bd9e88507e3d6,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 61699651240365918, guid: a6d7653f4648ee643a0bd9e88507e3d6,
+        type: 2}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 4.177043
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a6d7653f4648ee643a0bd9e88507e3d6, type: 2}
@@ -35237,11 +35310,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4896683142156752, guid: 470e94124d0e7de4082d5583b0483b1a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -26.56
+      value: -26.3
       objectReference: {fileID: 0}
     - target: {fileID: 4896683142156752, guid: 470e94124d0e7de4082d5583b0483b1a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 24.4
+      value: 24.6
       objectReference: {fileID: 0}
     - target: {fileID: 4896683142156752, guid: 470e94124d0e7de4082d5583b0483b1a, type: 2}
       propertyPath: m_LocalPosition.z
@@ -37059,7 +37132,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4676029996001048, guid: 01dd6418c64d6af499ba55f7f35939d1, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 18.71
+      value: 18.74
       objectReference: {fileID: 0}
     - target: {fileID: 4676029996001048, guid: 01dd6418c64d6af499ba55f7f35939d1, type: 2}
       propertyPath: m_LocalPosition.z
@@ -37092,7 +37165,7 @@ Prefab:
       objectReference: {fileID: 654786188}
     - target: {fileID: 1987713220212854, guid: 01dd6418c64d6af499ba55f7f35939d1, type: 2}
       propertyPath: m_Name
-      value: Pickel (1)
+      value: Pickel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 01dd6418c64d6af499ba55f7f35939d1, type: 2}
@@ -38922,7 +38995,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1965558456}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 25.37, y: 4, z: 0}
+  m_LocalPosition: {x: 25.37, y: 4.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 487108255}
@@ -42360,7 +42433,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2143245963}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 27.45, y: 5.3099995, z: 0}
+  m_LocalPosition: {x: 27.45, y: 5.97, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 141156926}
