@@ -3,8 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class PhotonManager : Photon.MonoBehaviour
 {
+	public int test;
+	//string [] userName = new string[4];
+	string userName = "ユーザ0";
+	string userId = "user0";
+
+	[SerializeField]
+	//GameObject[] players = new GameObject[2];
+
+
+	//public PhotonPlayer photonPlayer;
+	public int actID = -1;
+	void Awake()
+	{
+		
+		//シーン間を引き継ぐ
+		DontDestroyOnLoad(this);
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -14,10 +32,11 @@ public class PhotonManager : Photon.MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 		
+	
 	}
 
 	//ロビー接続
-	void ConnectPhoton()
+	public void ConnectPhoton()
 	{
 		PhotonNetwork.ConnectUsingSettings("v1.0");
 	}
@@ -26,6 +45,10 @@ public class PhotonManager : Photon.MonoBehaviour
 	void OnJoinedLobby()
 	{
 		Debug.Log("PhotonManager OnJoinedLobby");
+		//ボタンを押せるようにする
+		GameObject.Find("CreateRoomBtn").GetComponent<Button>().interactable = true;
+		GameObject.Find("EnterRoomBtn").GetComponent<Button>().interactable = true;
+		test = 1;
 	}
 
 	//ルーム一覧が取れると
@@ -53,9 +76,17 @@ public class PhotonManager : Photon.MonoBehaviour
 		//ルーム作成
 		public void CreateRoom()
 	{
-		string userName = "ユーザ1";
-		string userId = "user1";
+		//actID = 0;
+		GameObject.Find("MultiGameController").GetComponent<MultiGameControl>().actID++;
+		actID = GameObject.Find("MultiGameController").GetComponent<MultiGameControl>().actID;
+		//photonPlayer = new PhotonPlayer(false, actID, userName);
+
+	
+		//string userName = "ユーザ1";
+		//string userId = "user1";
+		//userName[0] = "ユーザ1";
 		PhotonNetwork.autoCleanUpPlayerObjects = false;
+
 		//カスタムプロパティ
 		ExitGames.Client.Photon.Hashtable customProp = new ExitGames.Client.Photon.Hashtable();
 		customProp.Add("userName", userName); //ユーザ名
@@ -71,11 +102,66 @@ public class PhotonManager : Photon.MonoBehaviour
 		roomOptions.isVisible = true; //ロビーから見えるようにする
 									  //userIdが名前のルームがなければ作って入室、あれば普通に入室する。
 		PhotonNetwork.JoinOrCreateRoom(userId, roomOptions, null);
+
+		GameObject.Find("CreateRoomBtn").GetComponent<Button>().interactable = false;
+		GameObject.Find("EnterRoomBtn").GetComponent<Button>().interactable = false;
+	}
+
+	public void JoinRoom()
+	{
+		PhotonNetwork.JoinRoom("user0");
+		//photonPlayer = new PhotonPlayer(false, actID, userName);
+		//GameObject.Find("MultiGameController").GetComponent<MultiGameControl>().actID++;
+		//actID = GameObject.Find("MultiGameController").GetComponent<MultiGameControl>().actID;
+		actID = 1;
+		
+
 	}
 
 	//ルームに入室した時に呼び出される
 	void OnJoinedRoom()
 	{
+		PhotonNetwork.Instantiate("Player" + actID, new Vector3(0, 0, 0), Quaternion.Euler(Vector3.zero), 0);
+
+		GameObject.Find("CreateRoomBtn").GetComponent<Button>().interactable = false;
+		GameObject.Find("EnterRoomBtn").GetComponent<Button>().interactable = false;
+
+		////ここでキャラクターなどのプレイヤー間で共有するGameObjectを作成すると良い
+		//for (int i = 0; i <= actID; i++)
+		//{
+		//	players[i] = PhotonNetwork.Instantiate("Player" + i, new Vector3(0, 0, 0), Quaternion.Euler(Vector3.zero), 0);
+		//}
+
+		//if(actID == 0)
+		//{
+		//	//ここでキャラクターなどのプレイヤー間で共有するGameObjectを作成すると良い
+		//	players[actID] = PhotonNetwork.Instantiate("Player" + actID, new Vector3(0, 0, 0), Quaternion.Euler(Vector3.zero), 0);
+		//}
+
+		//else if (actID != 0)
+		//{
+
+		//	//actID = GameObject.Find("MultiGameController").GetComponent<MultiGameControl>().actID++;
+		//	photonPlayer = new PhotonPlayer(false, actID, userName);
+		//	//ここでキャラクターなどのプレイヤー間で共有するGameObjectを作成すると良い
+		//	for (int i = 0; i < actID; i++)
+		//	{
+		//		players[i] = PhotonNetwork.Instantiate("Player" + i, new Vector3(0, 0, 0), Quaternion.Euler(Vector3.zero), 0);
+		//	}
+		//}
+
+
+
+
 		Debug.Log("PhotonManager OnJoinedRoom");
+		GameObject.Find("StatusText").GetComponent<Text>().text = "OnJoinedRoom";
+		if(actID==0)GameObject.Find("StartBtn").GetComponent<Button>().interactable = true;
+
+		
+	}
+
+	//CustomRoomPropertiesが変更された際に呼ばれます。
+	void OnPhotonCustomRoomPropertiesChanged()
+	{
 	}
 }

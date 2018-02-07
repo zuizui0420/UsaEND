@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 1dae9696c8d843e40a179f8ef4f9c13c
+timeCreated: 1517286188
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: yamafont
+  fontNames:
+  - yamafont
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

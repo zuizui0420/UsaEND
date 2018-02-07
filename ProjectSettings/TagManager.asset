@@ -5,6 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - Stage
+  - Wall
+  - Ladder
+  - Player0
+  - Player1
+  - Goal
+  - BreakWall
+  - Laser
+  - Rock
   layers:
   - Default
   - TransparentFX
@@ -14,12 +22,12 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Item
+  - ItemOver
+  - Player
+  - Laser
+  - Ladder
+  - Camera
   - 
   - 
   - 
